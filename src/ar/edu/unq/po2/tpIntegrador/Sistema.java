@@ -9,6 +9,10 @@ public class Sistema {
 		catalogo.add(item);
 	}
 	
+	private void quitarUnProducto(Item item) {
+		this.catalogo.remove(item);
+	}
+	
 	
 
 	
