@@ -5,16 +5,32 @@ public class Sistema {
 	
 	private Catalogo catalogo;
 	
-	private void agregarProducto(Item item) {
-		catalogo.add(item);
+	
+	public Sistema(Catalogo catalogo) {
+		this.catalogo = catalogo;
+	}
+
+
+	public void agregarItemDeCatalogo(IItem item) {
+		this.catalogo.agregarItem(item);
 	}
 	
-	private void quitarUnProducto(Item item) {
-		this.catalogo.remove(item);
+	public void sacarItemDeCatalogo(IItem item) {
+		this.catalogo.quitarItem(item);
 	}
 	
+	/*
 	
-
+	public void nuevoPedido{}
+	 
+	*/
 	
-
+	/* metodo para obtener el catalogo? 
+	 
+	public Catalogo getCatalogo() {
+		return this.catalogo;
+		
+	}
+	*/
+	
 }
