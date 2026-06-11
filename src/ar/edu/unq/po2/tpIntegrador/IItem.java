@@ -6,7 +6,7 @@ public interface IItem {
 	
 	public String getDescripcion();
 	
-	public Double getPrecioBaseCalculado();
+	public Double getPrecioBase();
 	
 
 }

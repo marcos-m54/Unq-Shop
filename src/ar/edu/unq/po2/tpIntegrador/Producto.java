@@ -96,7 +96,7 @@ public class Producto implements IItem {
 	}
 	
 	@Override
-	public Double getPrecioBaseCalculado() {
+	public Double getPrecioBase() {
 		return precio;
 	}
 
