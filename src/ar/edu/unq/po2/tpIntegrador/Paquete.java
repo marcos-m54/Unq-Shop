@@ -7,7 +7,7 @@ public class Paquete implements IItem {
 	public String nombre;
 	public String descripcion;
 	public int descuento;
-	public ArrayList<Producto> productos;
+	public ArrayList<Producto> productos = new ArrayList<Producto>();
 	
 	public Paquete(String nombre, String descripcion, int descuento, ArrayList<Producto> productos) {
 		this.nombre = nombre;
@@ -42,13 +42,21 @@ public class Paquete implements IItem {
 		this.descuento = descuento;
 	}
 	
-	
+	//VER
 	@Override
 	public Double getPrecioBaseCalculado() {
 		return this.productos.stream()
 									 .mapToDouble(p -> p.getPrecioBaseCalculado())
 									 .sum();
 	}
+	
+	//VER
+	public Double calculoDePeso() {
+		return this.productos.stream()
+									 .mapToDouble(p -> p.getPeso())
+									 .sum();
+	}
+	
 	
 	public Double precioFinal() {
 		return getPrecioBaseCalculado() - this.getDescuento(); //revisar

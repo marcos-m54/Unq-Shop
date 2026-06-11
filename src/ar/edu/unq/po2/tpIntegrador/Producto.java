@@ -1,5 +1,7 @@
 package ar.edu.unq.po2.tpIntegrador;
 
+import java.util.ArrayList;
+
 public class Producto implements IItem {
 	
 	private String SKU;
@@ -9,10 +11,12 @@ public class Producto implements IItem {
 	private int descuento;
 	private int stock;
 	private Double peso;
-	private String descripcion; //? 
+	private String descripcion;
+	private ArrayList<Atributo> atributos = new ArrayList<Atributo>();
+	private Categoria categoria;
 	
 	public Producto(String sKU, String nombre, String marca, Double precio, int descuento, int stock, Double peso,
-			String descripcion) {
+			String descripcion, ArrayList<Atributo> atributo) {
 		
 		this.SKU = sKU;
 		this.nombre = nombre;
@@ -22,6 +26,8 @@ public class Producto implements IItem {
 		this.stock = stock;
 		this.peso = peso;
 		this.descripcion = descripcion;
+		this.atributos = atributo;
+		
 	}
 	
 	public String getSKU() {
@@ -83,6 +89,12 @@ public class Producto implements IItem {
 		this.descripcion = descripcion;
 	}
 
+	
+	
+	public void agregarAtributo(String nombre, String descripcion) {
+		this.atributos.add(new Atributo(nombre, descripcion));
+	}
+	
 	@Override
 	public Double getPrecioBaseCalculado() {
 		return precio;
