@@ -29,7 +29,9 @@ class ItemTest {
 	
 	@Test
 	void calculosDePreciosFinalConDescuentoTest() {
-		fail("Not yet implemented");
+		assertEquals(celular.getPrecio(), 250000);
+		assertEquals(celular.getPrecioBaseCalculado(), 260300.00);
+	
 	}
 
 	

@@ -100,4 +100,26 @@ public class Producto implements IItem {
 		return precio;
 	}
 
+	public Double getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(Double precio) {
+		this.precio = precio;
+	}
+
+	public ArrayList<Atributo> getAtributos() {
+		return atributos;
+	}
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+	
+	
+
 }
