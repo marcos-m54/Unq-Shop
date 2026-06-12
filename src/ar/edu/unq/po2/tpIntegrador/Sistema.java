@@ -1,22 +1,18 @@
 package ar.edu.unq.po2.tpIntegrador;
 
+import java.util.ArrayList;
 
 public class Sistema {
 	
-	private Catalogo catalogo;
-	
-	
-	public Sistema(Catalogo catalogo) {
-		this.catalogo = catalogo;
-	}
+	private ArrayList<IItem> productos = new ArrayList<IItem>(); 
 
 
-	public void agregarItemDeCatalogo(IItem item) {
-		this.catalogo.agregarItem(item);
+	public void agregarProductoOPaquete(IItem item) {
+		productos.add(item);
 	}
 	
-	public void sacarItemDeCatalogo(IItem item) {
-		this.catalogo.quitarItem(item);
+	public void sacarProductoOPaquete(IItem item) {
+		productos.remove(item);
 	}
 	
 	/*
