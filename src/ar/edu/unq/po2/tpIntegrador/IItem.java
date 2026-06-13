@@ -6,7 +6,10 @@ public interface IItem {
 	
 	public String getDescripcion();
 	
+	public Double getPeso();
+	
 	public Double getPrecioBase();
 	
-
+	public Double precioFinal();
+	
 }

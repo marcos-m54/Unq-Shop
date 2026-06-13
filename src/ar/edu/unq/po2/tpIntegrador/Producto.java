@@ -2,12 +2,13 @@ package ar.edu.unq.po2.tpIntegrador;
 
 import java.util.ArrayList;
 
+
 public class Producto implements IItem {
 	
 	private String SKU;
 	private String nombre;
 	private String marca;
-	private Double precio;
+	private Double precioBase;
 	private int descuento;
 	private int stock;
 	private Double peso;
@@ -15,13 +16,13 @@ public class Producto implements IItem {
 	private ArrayList<Atributo> atributos = new ArrayList<Atributo>();
 	private Categoria categoria;
 	
-	public Producto(String sKU, String nombre, String marca, Double precio, int descuento, int stock, Double peso,
+	public Producto(String sKU, String nombre, String marca, Double precioBase, int descuento, int stock, Double peso,
 			String descripcion, ArrayList<Atributo> atributo) {
 		
 		this.SKU = sKU;
 		this.nombre = nombre;
 		this.marca = marca;
-		this.precio = precio;
+		this.precioBase = precioBase;
 		this.descuento = descuento;
 		this.stock = stock;
 		this.peso = peso;
@@ -70,7 +71,8 @@ public class Producto implements IItem {
 	public void setStock(int stock) {
 		this.stock = stock;
 	}
-
+	
+	@Override
 	public Double getPeso() {
 		return peso;
 	}
@@ -97,15 +99,16 @@ public class Producto implements IItem {
 	
 	@Override
 	public Double getPrecioBase() {
-		return precio;
+		return precioBase;
 	}
 
-	public Double getPrecio() {
-		return precio;
+	public void setPrecio(Double precioBase) {
+		this.precioBase = precioBase;
 	}
-
-	public void setPrecio(Double precio) {
-		this.precio = precio;
+	
+	@Override
+	public Double precioFinal() {
+		return this.getPrecioBase() - ( (this.getPrecioBase() * this.getDescuento() / 100 ) );
 	}
 
 	public ArrayList<Atributo> getAtributos() {
@@ -119,7 +122,6 @@ public class Producto implements IItem {
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
-	
-	
+
 
 }
