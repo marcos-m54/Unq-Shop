@@ -2,7 +2,6 @@ package ar.edu.unq.po2.tpIntegrador;
 
 import java.util.ArrayList;
 
-
 public class Producto implements IItem {
 	
 	private String SKU;
@@ -122,6 +121,5 @@ public class Producto implements IItem {
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
-
 
 }

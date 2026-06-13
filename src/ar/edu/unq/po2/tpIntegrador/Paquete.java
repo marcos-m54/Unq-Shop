@@ -71,7 +71,5 @@ public class Paquete implements IItem {
 		productos.remove(unItem);
 	}
 
-	
-
 
 }
