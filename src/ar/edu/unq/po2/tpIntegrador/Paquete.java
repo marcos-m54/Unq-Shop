@@ -70,6 +70,20 @@ public class Paquete implements IItem {
 	public void quitarItem(IItem unItem) {
 		productos.remove(unItem);
 	}
+	
+	//nuevo
+
+	@Override
+	public void decrementarStock() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void incrementarStock() {
+		// TODO Auto-generated method stub
+		
+	}
 
 
 }

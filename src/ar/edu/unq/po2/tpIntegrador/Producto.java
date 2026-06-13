@@ -121,5 +121,20 @@ public class Producto implements IItem {
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
+	
+	//nuevo
+	
+	@Override
+	public void decrementarStock() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void incrementarStock() {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

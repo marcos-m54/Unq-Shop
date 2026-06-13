@@ -11,5 +11,9 @@ public interface IItem {
 	public Double getPrecioBase();
 	
 	public Double precioFinal();
+
+	public void decrementarStock();
+
+	public void incrementarStock();
 	
 }
