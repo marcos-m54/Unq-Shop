@@ -4,12 +4,13 @@ import java.util.ArrayList;
 
 public class Paquete implements IItem {
 	
+
 	public String nombre;
 	public String descripcion;
 	public int descuento;
-	public ArrayList<Producto> productos = new ArrayList<Producto>();
+	public ArrayList<IItem> productos = new ArrayList<IItem>();
 	
-	public Paquete(String nombre, String descripcion, int descuento, ArrayList<Producto> productos) {
+	public Paquete(String nombre, String descripcion, int descuento, ArrayList<IItem> productos) {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.descuento = descuento;
@@ -42,35 +43,33 @@ public class Paquete implements IItem {
 		this.descuento = descuento;
 	}
 	
-	//VER
 	@Override
-	public Double getPrecioBaseCalculado() {
+	public Double getPrecioBase() {
 		return this.productos.stream()
-									 .mapToDouble(p -> p.getPrecioBaseCalculado())
+									 .mapToDouble(p -> p.getPrecioBase())
 									 .sum();
 	}
 	
-	//VER
-	public Double calculoDePeso() {
+	@Override
+	public Double getPeso() {
 		return this.productos.stream()
 									 .mapToDouble(p -> p.getPeso())
 									 .sum();
 	}
 	
-	
+	@Override
 	public Double precioFinal() {
-		return getPrecioBaseCalculado() - this.getDescuento(); //revisar
+		return this.getPrecioBase() * (1 - this.getDescuento()); 
+		
 	}
 	
-	public void agregarProducto(Producto producto) {
-		this.productos.add(producto);
+	public void agregarItem(IItem unItem) {
+		productos.add(unItem);
 	}
 	
-	public void quitarProducto(Producto producto) {
-		this.productos.remove(producto);
+	public void quitarItem(IItem unItem) {
+		productos.remove(unItem);
 	}
-	
-	
-	
+
 
 }
