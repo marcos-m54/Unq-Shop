@@ -1,5 +1,7 @@
 package ar.edu.unq.po2.tpIntegrador;
 
+import java.time.LocalDate;
+
 public class Enviado implements IEstado {
 	
 	private Pedido pedido;
@@ -28,14 +30,14 @@ public class Enviado implements IEstado {
 	
 	@Override
 	public void entregarPedido() {
-		// TODO Auto-generated method stub
+		pedido.setEstado(new Entregado(pedido));
 		
 	}
 
 	@Override
 	public void cancelarPedido() {
 		pedido.setEstado(new Cancelado(pedido));
-		pedido.reembolsarCostoItems();
+		pedido.registrarNotaDeCredito(new NotaDeCredito(pedido.getNombreUsuario(), LocalDate.now(), pedido.montoDeReembolsoDeItems()));
 
 	}
 
@@ -47,7 +49,6 @@ public class Enviado implements IEstado {
 
 	@Override
 	public void enviarPedido() {
-		pedido.setEstado(new Entregado(pedido));
 
 	}
 

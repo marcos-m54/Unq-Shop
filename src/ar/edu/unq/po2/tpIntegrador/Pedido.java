@@ -5,12 +5,14 @@ import java.util.ArrayList;
 public class Pedido {
 	
 	private IEstado estado;
-	private ArrayList<IItem> items;
+	private String nombreUsuario;
+	private ArrayList<IItem> items = new ArrayList<IItem>();
+	private ArrayList<NotaDeCredito> notasDeCredito = new ArrayList<NotaDeCredito>();
 	
 	public Pedido(IEstado estado) {
 		
 		this.estado = new Borrador(this);
-		this.items = new ArrayList<IItem>();
+
 	}
 	
 	public IEstado getEstado() {
@@ -21,16 +23,17 @@ public class Pedido {
 		this.estado = estado;
 	}
 
-	public ArrayList<IItem> getItems() {
-		return items;
-	}
 	
 	//revisar 
-	 void agregarItem(IItem item) {
-		this.items.add(item);
+	protected void agregarItem(IItem item) {
+		
+		if (item.getStock() > 0) {
+			this.items.add(item);
+		}
+
 	}
 	
-	 void quitarItem(IItem item) {
+	protected void quitarItem(IItem item) {
 		 this.items.remove(item);
 	}
 	 //
@@ -51,7 +54,8 @@ public class Pedido {
 		estado.enviarPedido();
 		
 	}
-	
+    
+	//ver despues
 	public void decrementarStockItems() {
 		
 		for (IItem item: items) {
@@ -66,17 +70,33 @@ public class Pedido {
 		}
 		
 	}
+	
+	//
 
-	public void reembolsarCostoItems() {
-		// TODO Auto-generated method stub
-		
+
+	public void registrarNotaDeCredito(NotaDeCredito notaDeCredito) {
+		notasDeCredito.add(notaDeCredito);
 	}
 
-	public void reembolsarCostoEnvio() {
-		// TODO Auto-generated method stub
+	public String getNombreUsuario() {
+		return nombreUsuario;
+	}
+
+	public void setNombreUsuario(String nombreUsuario) {
+		this.nombreUsuario = nombreUsuario;
+	}
+
+	public Double montoDeReembolsoDeItems() {
+
+		return items.stream().mapToDouble(i -> i.precioFinal()).sum();
 		
 	}
 	
+	
+
+
+
+
 	
 
 }

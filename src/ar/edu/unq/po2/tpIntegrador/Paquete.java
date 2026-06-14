@@ -85,5 +85,11 @@ public class Paquete implements IItem {
 		
 	}
 
+	@Override
+	public int getStock() {
+		return 0;
+	
+	}
+
 
 }

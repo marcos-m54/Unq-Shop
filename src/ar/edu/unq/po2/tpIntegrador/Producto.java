@@ -62,7 +62,9 @@ public class Producto implements IItem {
 	public void setDescuento(int descuento) {
 		this.descuento = descuento;
 	}
-
+	
+	
+	@Override
 	public int getStock() {
 		return stock;
 	}
@@ -126,13 +128,13 @@ public class Producto implements IItem {
 	
 	@Override
 	public void decrementarStock() {
-		// TODO Auto-generated method stub
+		stock-= 1;
 		
 	}
 
 	@Override
 	public void incrementarStock() {
-		// TODO Auto-generated method stub
+		stock+=1;
 		
 	}
 

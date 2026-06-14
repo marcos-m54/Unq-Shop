@@ -1,5 +1,7 @@
 package ar.edu.unq.po2.tpIntegrador;
 
+import java.time.LocalDate;
+
 public class EnPreparacion implements IEstado {
 	
 	private Pedido pedido;
@@ -40,8 +42,7 @@ public class EnPreparacion implements IEstado {
 	public void cancelarPedido() {
 		pedido.setEstado(new Cancelado(pedido));
 		pedido.incrementarStockItems();
-		pedido.reembolsarCostoItems();
-		pedido.reembolsarCostoEnvio();
+		pedido.registrarNotaDeCredito(new NotaDeCredito(pedido.getNombreUsuario(), LocalDate.now(), pedido.montoDeReembolsoDeItems()));
 
 	}
 
@@ -56,7 +57,7 @@ public class EnPreparacion implements IEstado {
 		pedido.setEstado(new Enviado(pedido));
 
 	}
-
+	
 	
 
 
