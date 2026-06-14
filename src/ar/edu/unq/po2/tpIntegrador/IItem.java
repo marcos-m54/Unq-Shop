@@ -12,4 +12,10 @@ public interface IItem {
 	
 	public Double precioFinal();
 	
+	public int getStock();
+
+	public void decrementarStock();
+
+	public void incrementarStock();
+	
 }
