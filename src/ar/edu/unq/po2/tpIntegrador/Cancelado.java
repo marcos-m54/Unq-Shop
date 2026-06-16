@@ -48,6 +48,8 @@ public class Cancelado implements IEstado {
 		
 	}
 	
+
+	
 	
 
 }

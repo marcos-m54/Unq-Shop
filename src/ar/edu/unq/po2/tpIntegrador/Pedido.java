@@ -5,15 +5,20 @@ import java.util.ArrayList;
 public class Pedido {
 	
 	private IEstado estado;
-	private String nombreUsuario;
+	//quizas haya que hacer una clase de usuario con sus respectivos datos
+	private Usuario usuario;
 	private ArrayList<IItem> items = new ArrayList<IItem>();
 	private ArrayList<NotaDeCredito> notasDeCredito = new ArrayList<NotaDeCredito>();
+	private IFormaDeEnvio formaDeEnvio;
 	
-	public Pedido(IEstado estado) {
-		
+	
+	
+	public Pedido(IEstado estado, Usuario usuario) {
+		super();
 		this.estado = new Borrador(this);
-
+		this.usuario = usuario;
 	}
+
 	
 	public IEstado getEstado() {
 		return estado;
@@ -78,24 +83,40 @@ public class Pedido {
 		notasDeCredito.add(notaDeCredito);
 	}
 
-	public String getNombreUsuario() {
-		return nombreUsuario;
-	}
-
-	public void setNombreUsuario(String nombreUsuario) {
-		this.nombreUsuario = nombreUsuario;
-	}
 
 	public Double montoDeReembolsoDeItems() {
 
 		return items.stream().mapToDouble(i -> i.precioFinal()).sum();
 		
 	}
+
+	public IFormaDeEnvio getFormaDeEnvio() {
+		return formaDeEnvio;
+	}
+
+	public void setFormaDeEnvio(IFormaDeEnvio formaDeEnvio) {
+		this.formaDeEnvio = formaDeEnvio;
+	}
+
+	public Float calcularValorDeEnvio(Pedido pedido) {
+		return this.getFormaDeEnvio().calcularValorDelEnvio(pedido);
+	}
 	
+	public Double pesoTotalDePedido() {
+		return this.items.stream().mapToDouble(i -> i.getPeso()).sum();
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 	
 
 
-
+	
 
 	
 
