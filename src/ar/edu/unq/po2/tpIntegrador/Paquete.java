@@ -59,7 +59,7 @@ public class Paquete implements IItem {
 	
 	@Override
 	public Double precioFinal() {
-		return this.getPrecioBase() * (1 - this.getDescuento()); 
+		return this.getPrecioBase() * (1 - this.getDescuento()/ 100.0);
 		
 	}
 	
