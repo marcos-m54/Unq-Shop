@@ -11,13 +11,13 @@ public class Borrador implements IEstado {
 
 	@Override
 	public void agregarItem(IItem item) {
-		pedido.agregarItem(item);
+		pedido.agregarItemACarrito(item);
 
 	}
 
 	@Override
 	public void quitarItem(IItem item) {
-		pedido.quitarItem(item);
+		pedido.quitarItemDeCarrito(item);
 
 	}
 

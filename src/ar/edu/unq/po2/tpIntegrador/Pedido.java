@@ -7,9 +7,10 @@ public class Pedido {
 	private IEstado estado;
 	//quizas haya que hacer una clase de usuario con sus respectivos datos
 	private Usuario usuario;
-	private ArrayList<IItem> items = new ArrayList<IItem>();
+	private ArrayList<IItem> carritoDeCompras = new ArrayList<IItem>();
 	private ArrayList<NotaDeCredito> notasDeCredito = new ArrayList<NotaDeCredito>();
 	private IFormaDeEnvio formaDeEnvio;
+	private MetodoDePago metodoDePago;
 	
 	
 	
@@ -30,16 +31,16 @@ public class Pedido {
 
 	
 	//revisar 
-	protected void agregarItem(IItem item) {
+	protected void agregarItemACarrito(IItem item) {
 		
 		if (item.getStock() > 0) {
-			this.items.add(item);
+			this.carritoDeCompras.add(item);
 		}
 
 	}
 	
-	protected void quitarItem(IItem item) {
-		 this.items.remove(item);
+	protected void quitarItemDeCarrito(IItem item) {
+		 this.carritoDeCompras.remove(item);
 	}
 	 //
 	
@@ -63,14 +64,14 @@ public class Pedido {
 	//ver despues
 	public void decrementarStockItems() {
 		
-		for (IItem item: items) {
+		for (IItem item: carritoDeCompras) {
 			item.decrementarStock();
 		}
 		
 	}
 
 	public void incrementarStockItems() {
-		for (IItem item: items) {
+		for (IItem item: carritoDeCompras) {
 			item.incrementarStock();
 		}
 		
@@ -86,7 +87,7 @@ public class Pedido {
 
 	public Double montoDeReembolsoDeItems() {
 
-		return items.stream().mapToDouble(i -> i.precioFinal()).sum();
+		return carritoDeCompras.stream().mapToDouble(i -> i.precioFinal()).sum();
 		
 	}
 
@@ -103,7 +104,7 @@ public class Pedido {
 	}
 	
 	public Double pesoTotalDePedido() {
-		return this.items.stream().mapToDouble(i -> i.getPeso()).sum();
+		return this.carritoDeCompras.stream().mapToDouble(i -> i.getPeso()).sum();
 	}
 
 	public Usuario getUsuario() {
@@ -114,10 +115,10 @@ public class Pedido {
 		this.usuario = usuario;
 	}
 	
-
-
+	public void realizarPago(MetodoDePago medioDePago) {
+		this.metodoDePago.procesarPago(this);
+	}
 	
 
-	
 
 }
