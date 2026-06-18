@@ -4,7 +4,6 @@ import java.time.LocalDate;
 
 public class TarjetaDeCredito extends MetodoDePago {
 	
-	
 	private int numeroTarjeta;
 	private int CVV;
 	private LocalDate fechaVencimiento;
@@ -12,7 +11,7 @@ public class TarjetaDeCredito extends MetodoDePago {
 
 	@Override
 	public void validarDatos(Pedido pedido) {
-		// TODO Auto-generated method stub
+
 
 	}
 
@@ -28,9 +27,8 @@ public class TarjetaDeCredito extends MetodoDePago {
 
 	}
 
-	@Override
 	public void notificarResultado(Pedido pedido) {
-		// TODO Auto-generated method stub
+
 
 	}
 

@@ -2,6 +2,11 @@ package ar.edu.unq.po2.tpIntegrador;
 
 public class BilleteraVirtual extends MetodoDePago {
 
+
+	private Double saldo;
+	private IvalidacionBilleteraVirtual validacion; 
+	
+
 	@Override
 	public void validarDatos(Pedido pedido) {
 		// TODO Auto-generated method stub
@@ -20,9 +25,8 @@ public class BilleteraVirtual extends MetodoDePago {
 
 	}
 
-	@Override
 	public void notificarResultado(Pedido pedido) {
-		// TODO Auto-generated method stub
+		validacion.crearNotificacionPush();
 
 	}
 

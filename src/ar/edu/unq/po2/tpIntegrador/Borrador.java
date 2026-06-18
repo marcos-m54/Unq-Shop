@@ -24,14 +24,12 @@ public class Borrador implements IEstado {
 	@Override
 	public void confirmarPedido() {
 		
-		pedido.setEstado(new Confirmado(pedido));
-		
-		//esto hago cuando no elijo un metodo de envio. Probarlo
-		
+		pedido.realizarPago();
+		pedido.setEstado(new Confirmado(pedido));		
+		//esto hago cuando no elijo un metodo de envio. Probarlo		
 		if (pedido.getFormaDeEnvio() == null) {
 			pedido.setFormaDeEnvio(new RetiroEnSucursal());
 		}
-
 		pedido.decrementarStockItems();
 
 	}

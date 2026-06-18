@@ -8,6 +8,7 @@ public abstract class MetodoDePago {
 		validarDatos(pedido);
 		reservarFondos(pedido);
 		ejecutarTransacción(pedido);
+		notificarResultado(pedido);
 	}
 	
 	public abstract void validarDatos(Pedido pedido);

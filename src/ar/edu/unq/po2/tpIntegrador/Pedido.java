@@ -13,7 +13,7 @@ public class Pedido {
 	private MetodoDePago metodoDePago;
 	//revisar
 	private Random codigoTransaccion;
-	
+	//
 	
 	
 	public Pedido(IEstado estado, Usuario usuario) {
@@ -117,7 +117,7 @@ public class Pedido {
 		this.usuario = usuario;
 	}
 	
-	public void realizarPago(MetodoDePago medioDePago) {
+	public void realizarPago() {
 		this.metodoDePago.procesarPago(this);
 	}
 	
@@ -125,6 +125,15 @@ public class Pedido {
 	public void registrarCodigoTransaccion(Random random) {
 		this.codigoTransaccion = random;
 		
+	}
+	
+	public MetodoDePago getMetodoDePago() {
+		return metodoDePago;
+	}
+
+
+	public void setMetodoDePago(MetodoDePago metodoDePago) {
+		this.metodoDePago = metodoDePago;
 	}
 	
 

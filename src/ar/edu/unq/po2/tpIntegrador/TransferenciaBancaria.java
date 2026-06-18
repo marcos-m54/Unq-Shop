@@ -1,6 +1,11 @@
 package ar.edu.unq.po2.tpIntegrador;
 
 public class TransferenciaBancaria extends MetodoDePago {
+	
+	private int CBUorCVU;
+	private String alias; 
+	
+	private IvalidacionTransferenciaBancaria validacion; 
 
 	@Override
 	public void validarDatos(Pedido pedido) {
@@ -20,7 +25,7 @@ public class TransferenciaBancaria extends MetodoDePago {
 
 	}
 
-	@Override
+	
 	public void notificarResultado(Pedido pedido) {
 		// TODO Auto-generated method stub
 
