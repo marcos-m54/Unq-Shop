@@ -13,10 +13,20 @@ public class Pedido {
 	
 	
 	
-	public Pedido(IEstado estado, Usuario usuario) {
+	public Pedido(Usuario usuario) {
 		super();
 		this.estado = new Borrador(this);
 		this.usuario = usuario;
+	}
+
+	
+	
+	public ArrayList<IItem> getItems() {
+		return items;
+	}
+
+	public ArrayList<NotaDeCredito> getNotasDeCredito() {
+		return notasDeCredito;
 	}
 
 	
