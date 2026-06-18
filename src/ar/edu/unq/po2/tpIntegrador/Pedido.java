@@ -1,16 +1,18 @@
 package ar.edu.unq.po2.tpIntegrador;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Pedido {
 	
 	private IEstado estado;
-	//quizas haya que hacer una clase de usuario con sus respectivos datos
 	private Usuario usuario;
 	private ArrayList<IItem> carritoDeCompras = new ArrayList<IItem>();
 	private ArrayList<NotaDeCredito> notasDeCredito = new ArrayList<NotaDeCredito>();
 	private IFormaDeEnvio formaDeEnvio;
 	private MetodoDePago metodoDePago;
+	//revisar
+	private Random codigoTransaccion;
 	
 	
 	
@@ -117,6 +119,12 @@ public class Pedido {
 	
 	public void realizarPago(MetodoDePago medioDePago) {
 		this.metodoDePago.procesarPago(this);
+	}
+	
+	//revisar
+	public void registrarCodigoTransaccion(Random random) {
+		this.codigoTransaccion = random;
+		
 	}
 	
 
