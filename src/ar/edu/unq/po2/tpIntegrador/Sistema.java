@@ -4,17 +4,17 @@ import java.util.ArrayList;
 
 public class Sistema {
 	
-	private ArrayList<IItem> productos = new ArrayList<IItem>(); 
+	private ArrayList<IItem> catalogo = new ArrayList<IItem>(); 
 	
 	private ArrayList<Sucursal> sucursales = new ArrayList<Sucursal>();
 
 
 	public void agregarItem(IItem item) {
-		productos.add(item);
+		catalogo.add(item);
 	}
 	
 	public void sacarItem(IItem item) {
-		productos.remove(item);
+		catalogo.remove(item);
 	}
 
 	public ArrayList<Sucursal> getSucursales() {
