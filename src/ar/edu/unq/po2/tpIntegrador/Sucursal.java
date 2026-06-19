@@ -1,15 +1,13 @@
 package ar.edu.unq.po2.tpIntegrador;
 
-import java.util.Map;
-
 public class Sucursal {
 	
 	private String nombre;
-	private Map<Producto, Integer> inventario;
+	private Deposito deposito;
 	
-	public Sucursal(String nombre, Map<Producto, Integer> inventario) {
-		this.setNombre(nombre);
-		this.inventario = inventario;
+	public Sucursal(String nombre, Deposito deposito) {
+		this.nombre = nombre;
+		this.deposito = deposito;
 	}
 	
 	public String getNombre() {
@@ -19,12 +17,13 @@ public class Sucursal {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	
-	public int stockDe(IItem item) {
-		return inventario.get(item);
-		 
+
+	public Deposito getDeposito() {
+		return deposito;
 	}
-	
-	
+
+	public void setDeposito(Deposito deposito) {
+		this.deposito = deposito;
+	}
 
 }

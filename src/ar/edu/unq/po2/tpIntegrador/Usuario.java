@@ -3,12 +3,13 @@ package ar.edu.unq.po2.tpIntegrador;
 public class Usuario {
 	
 	private String nombreUsuario;
-	private Direccion direccion;
-	
-	public Usuario(String nombreUsuario, Direccion direccion) {
-		super();
+	private String email;
+	private String direccion;
+
+	public Usuario(String nombreUsuario, String email, String direccion) {
 		this.nombreUsuario = nombreUsuario;
-		this.direccion = direccion;
+		this.setEmail(email);
+		this.setDireccion(direccion);
 	}
 	public String getNombreUsuario() {
 		return nombreUsuario;
@@ -16,11 +17,17 @@ public class Usuario {
 	public void setNombreUsuario(String nombreUsuario) {
 		this.nombreUsuario = nombreUsuario;
 	}
-	public Direccion getDireccion() {
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getDireccion() {
 		return direccion;
 	}
-	public void setDireccion(Direccion direccion) {
+	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
-	
+
 }

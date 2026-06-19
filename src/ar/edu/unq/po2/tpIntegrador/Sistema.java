@@ -6,9 +6,7 @@ public class Sistema {
 	
 	private ArrayList<IItem> productos = new ArrayList<IItem>(); 
 	
-	//que el sistema tenga una lista de depositos
-	
-	private ArrayList<Deposito> depositos = new ArrayList<Deposito>();
+	private ArrayList<Sucursal> sucursales = new ArrayList<Sucursal>();
 
 
 	public void agregarItem(IItem item) {
@@ -19,14 +17,15 @@ public class Sistema {
 		productos.remove(item);
 	}
 
-	
-	public void setDepositos(ArrayList<Deposito> depositos) {
-		this.depositos = depositos;
+	public ArrayList<Sucursal> getSucursales() {
+		return sucursales;
 	}
-	
-	public ArrayList<Deposito> getDepositos() {
-		return depositos;
+
+	public void setSucursal(Sucursal sucursal) {
+		this.sucursales.add(sucursal);
 	}
+
+	
 	
 	/*
 	
@@ -34,12 +33,6 @@ public class Sistema {
 	 
 	*/
 	
-	/* metodo para obtener el catalogo? 
-	 
-	public Catalogo getCatalogo() {
-		return this.catalogo;
-		
-	}
-	*/
+
 	
 }
