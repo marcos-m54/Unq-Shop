@@ -5,11 +5,16 @@ public class Usuario {
 	private String nombreUsuario;
 	private Direccion direccion;
 	
+	public Usuario() {
+		super();
+	}
+	
 	public Usuario(String nombreUsuario, Direccion direccion) {
 		super();
 		this.nombreUsuario = nombreUsuario;
 		this.direccion = direccion;
 	}
+	
 	public String getNombreUsuario() {
 		return nombreUsuario;
 	}

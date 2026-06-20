@@ -12,6 +12,12 @@ public class Pedido {
 	private IFormaDeEnvio formaDeEnvio;
 	
 	
+	public Pedido(Usuario usuario, ArrayList<IItem> productosOPaquetes) {
+		super();
+		this.estado = new Borrador(this);
+		this.usuario = usuario;
+		this.items = productosOPaquetes;
+	}
 	
 	public Pedido(Usuario usuario) {
 		super();
@@ -19,8 +25,6 @@ public class Pedido {
 		this.usuario = usuario;
 	}
 
-	
-	
 	public ArrayList<IItem> getItems() {
 		return items;
 	}
