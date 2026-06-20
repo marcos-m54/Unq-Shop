@@ -17,7 +17,7 @@ public class Pedido {
 		super();
 		this.estado = new Borrador(this);
 		this.usuario = usuario;
-		this.items = productosOPaquetes;
+		this.carritoDeCompras = productosOPaquetes;
 	}
 
 	
@@ -28,7 +28,7 @@ public class Pedido {
 	}
 
 	public ArrayList<IItem> getItems() {
-		return items;
+		return carritoDeCompras;
 	}
 
 	public ArrayList<NotaDeCredito> getNotasDeCredito() {

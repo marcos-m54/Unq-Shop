@@ -59,8 +59,8 @@ class PedidoTest {
 		when(tvDe200PulgadasSamsung.getStock()).thenReturn(5);
 		when(arrocera.getStock()).thenReturn(0);
 		
-		pedidoTest.agregarItem(auricularGueimer);
-		pedidoTest.agregarItem(tvDe200PulgadasSamsung);		
+		pedidoTest.agregarItemACarrito(auricularGueimer);
+		pedidoTest.agregarItemACarrito(tvDe200PulgadasSamsung);		
 
 		InOrder orden = inOrder(spyItems);
 		orden.verify(spyItems).add(auricularGueimer);
@@ -75,7 +75,7 @@ class PedidoTest {
 		//cuando intenta agregar la arrocera que esta fuera de stock, 
 		//no se agrega a la lista del carrito
 		
-		pedidoTest.agregarItem(arrocera);
+		pedidoTest.agregarItemACarrito(arrocera);
 		assertEquals(pedidoTest.getItems().size(),2);
 			
 		
