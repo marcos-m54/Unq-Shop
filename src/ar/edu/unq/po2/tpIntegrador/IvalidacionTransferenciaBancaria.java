@@ -4,6 +4,6 @@ public interface IvalidacionTransferenciaBancaria {
 	
 	public boolean sonDatosValidos (TransferenciaBancaria transferencia);
 	
-	public void ejecutarTransferencia();
+	public void ejecutarTransferencia(TransferenciaBancaria transferencia);
 
 }

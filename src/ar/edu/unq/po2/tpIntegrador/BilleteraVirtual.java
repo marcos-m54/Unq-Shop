@@ -9,24 +9,24 @@ public class BilleteraVirtual extends MetodoDePago {
 
 	@Override
 	public void validarDatos(Pedido pedido) {
-		// TODO Auto-generated method stub
+		validacion.tieneSaldoSuficiente(this);
 
 	}
 
 	@Override
 	public void reservarFondos(Pedido pedido) {
-		// TODO Auto-generated method stub
+		validacion.bloquearSaldo(this);
 
 	}
 
 	@Override
 	public void ejecutarTransacción(Pedido pedido) {
-		// TODO Auto-generated method stub
+		validacion.acreditarSaldo(this);
 
 	}
 
 	public void notificarResultado(Pedido pedido) {
-		validacion.crearNotificacionPush();
+		validacion.crearNotificacionPush(this);
 
 	}
 

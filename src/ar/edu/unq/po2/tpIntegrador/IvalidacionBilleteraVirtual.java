@@ -4,11 +4,11 @@ public interface IvalidacionBilleteraVirtual {
 	
 	public boolean tieneSaldoSuficiente(BilleteraVirtual billeteraVirtual);
 	
-	public void bloquearSaldo();
+	public void bloquearSaldo(BilleteraVirtual billeteraVirtual);
 	
-	public void acreditarSaldo();
+	public void acreditarSaldo(BilleteraVirtual billeteraVirtual);
 	
-	public void crearNotificacionPush();
+	public void crearNotificacionPush(BilleteraVirtual billeteraVirtual);
 	
 	
 

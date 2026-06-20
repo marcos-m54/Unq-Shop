@@ -11,10 +11,7 @@ public class Pedido {
 	private ArrayList<NotaDeCredito> notasDeCredito = new ArrayList<NotaDeCredito>();
 	private IFormaDeEnvio formaDeEnvio;
 	private MetodoDePago metodoDePago;
-	//revisar
-	private Random codigoTransaccion;
-	//
-	
+
 	
 	public Pedido(IEstado estado, Usuario usuario) {
 		super();
@@ -121,11 +118,6 @@ public class Pedido {
 		this.metodoDePago.procesarPago(this);
 	}
 	
-	//revisar
-	public void registrarCodigoTransaccion(Random random) {
-		this.codigoTransaccion = random;
-		
-	}
 	
 	public MetodoDePago getMetodoDePago() {
 		return metodoDePago;

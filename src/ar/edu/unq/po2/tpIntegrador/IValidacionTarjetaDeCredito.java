@@ -5,8 +5,8 @@ public interface IValidacionTarjetaDeCredito {
 	
 	public boolean esValida(TarjetaDeCredito tarjeta);
 	
-	public boolean tienePreAutorizacion(Usuario usuario);
+	public boolean tienePreAutorizacion(TarjetaDeCredito tarjeta);
 	
-	public void ejecutarTransferenciaInmediata();
+	public void ejecutarTransferenciaInmediata(TarjetaDeCredito tarjeta);
 	
 }

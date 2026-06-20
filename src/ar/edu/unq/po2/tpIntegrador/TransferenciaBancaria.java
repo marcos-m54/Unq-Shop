@@ -4,12 +4,11 @@ public class TransferenciaBancaria extends MetodoDePago {
 	
 	private int CBUorCVU;
 	private String alias; 
-	
 	private IvalidacionTransferenciaBancaria validacion; 
 
 	@Override
 	public void validarDatos(Pedido pedido) {
-		// TODO Auto-generated method stub
+		validacion.sonDatosValidos(this);
 
 	}
 
@@ -21,7 +20,7 @@ public class TransferenciaBancaria extends MetodoDePago {
 
 	@Override
 	public void ejecutarTransacción(Pedido pedido) {
-		// TODO Auto-generated method stub
+		validacion.ejecutarTransferencia(this);
 
 	}
 

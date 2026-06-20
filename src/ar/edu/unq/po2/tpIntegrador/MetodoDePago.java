@@ -17,7 +17,6 @@ public abstract class MetodoDePago {
 	
 	//metodo hook
 	public void notificarResultado(Pedido pedido) {
-		pedido.registrarCodigoTransaccion(new Random());
 		
 	} 
 
