@@ -11,27 +11,25 @@ public class Borrador implements IEstado {
 
 	@Override
 	public void agregarItem(IItem item) {
-		pedido.agregarItem(item);
+		pedido.agregarItemACarrito(item);
 
 	}
 
 	@Override
 	public void quitarItem(IItem item) {
-		pedido.quitarItem(item);
+		pedido.quitarItemDeCarrito(item);
 
 	}
 
 	@Override
 	public void confirmarPedido() {
 		
-		pedido.setEstado(new Confirmado(pedido));
-		
-		//esto hago cuando no elijo un metodo de envio. Probarlo
-		
+		pedido.realizarPago();
+		pedido.setEstado(new Confirmado(pedido));		
+		//esto hago cuando no elijo un metodo de envio. Probarlo		
 		if (pedido.getFormaDeEnvio() == null) {
 			pedido.setFormaDeEnvio(new RetiroEnSucursal());
 		}
-
 		pedido.decrementarStockItems();
 
 	}
