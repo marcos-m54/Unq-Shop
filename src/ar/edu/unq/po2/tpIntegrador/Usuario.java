@@ -3,9 +3,18 @@ package ar.edu.unq.po2.tpIntegrador;
 public class Usuario {
 	
 	private String nombreUsuario;
+	private Direccion direccion;
+  private MedioDePago formaDePago;
+	
+	public Usuario() {
+		super();
+	}
+  
+	public Usuario(String nombreUsuario, Direccion direccion) {
+		super();
 	private String email;
 	private String direccion;
-	private MedioDePago formaDePago;
+	
 
 	public Usuario(String nombreUsuario, String email, String direccion) {
 		this.nombreUsuario = nombreUsuario;
