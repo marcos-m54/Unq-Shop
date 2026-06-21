@@ -39,7 +39,7 @@ public class Enviado implements IEstado {
 	@Override
 	public void cancelarPedido() {
 		pedido.setEstado(new Cancelado(pedido));
-		pedido.registrarNotaDeCredito(new NotaDeCredito(pedido.getNombreUsuario(), LocalDate.now(), pedido.montoDeReembolsoDeItems()));
+		pedido.registrarNotaDeCredito(new NotaDeCredito(pedido.getUsuario().getNombreUsuario(), LocalDate.now(), pedido.montoTotal()));
 
 	}
 

@@ -33,7 +33,7 @@ public class Pedido {
 	
 	public void setEstado(IEstado estado) {
 		this.estado = estado;
-		notificador.notificarASuscriptores(estado);
+		notificador.notificarASuscriptores(this);
 	}
 
 	
@@ -90,9 +90,13 @@ public class Pedido {
 	public void registrarNotaDeCredito(NotaDeCredito notaDeCredito) {
 		notasDeCredito.add(notaDeCredito);
 	}
+	
+	public Double montoTotalPedidoMasEnvio() {
+		return this.montoTotal() + calcularValorDeEnvio(this);
+	}
 
 
-	public Double montoDeReembolsoDeItems() {
+	public Double montoTotal() {
 
 		return carritoDeCompras.stream().mapToDouble(i -> i.precioFinal()).sum();
 		

@@ -3,7 +3,7 @@ package ar.edu.unq.po2.tpIntegrador.creacionDeProductos;
 import java.util.ArrayList;
 
 public class Sistema {
-	
+		
 	private ArrayList<IItem> catalogo = new ArrayList<IItem>(); 
 	
 	private ArrayList<Sucursal> sucursales = new ArrayList<Sucursal>();
@@ -25,7 +25,7 @@ public class Sistema {
 		this.sucursales.add(sucursal);
 	}
 
-	
+
 	
 	/*
 	

@@ -9,20 +9,20 @@ public class Notificador {
 	
 	private IEstado estadoPrincipal;
 	
-	private ArrayList<ISuscriptor> suscriptores = new ArrayList<ISuscriptor>();
+	private ArrayList<ISuscriptora> suscriptores = new ArrayList<ISuscriptor>();
 	
-	public void suscribir (ISuscriptor suscriptor) {
+	public void suscribir (ISuscriptora suscriptor) {
 		suscriptores.add(suscriptor);
 	}
 	
-	public void desuscribir (ISuscriptor suscriptor) {
+	public void desuscribir (ISuscriptora suscriptor) {
 		suscriptores.remove(suscriptor);
 	}
 	
-	public void notificarASuscriptores(IEstado estado) {
+	public void notificarASuscriptores(Pedido pedido) {
 		
-		for (ISuscriptor suscriptor: suscriptores) {
-			suscriptor.actualizar(estado);
+		for (ISuscriptora suscriptor: suscriptores) {
+			suscriptor.actualizar(pedido);
 		}
 	}
 	
