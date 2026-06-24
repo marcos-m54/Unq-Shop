@@ -20,10 +20,25 @@ public class Pedido {
 	private Notificador notificador;
 
 	
-	public Pedido(IEstado estado, Usuario usuario) {
+	public Pedido(Usuario usuario, ArrayList<IItem> items) {
 		super();
 		this.estado = new Borrador(this);
 		this.usuario = usuario;
+		this.carritoDeCompras = items;
+	}
+	
+	public Pedido(Usuario usuario) {
+		super();
+		this.estado = new Borrador(this);
+		this.usuario = usuario;
+	}
+	
+	public ArrayList<IItem> getItems() {
+		return carritoDeCompras;
+	}
+
+	public ArrayList<NotaDeCredito> getNotasDeCredito() {
+		return notasDeCredito;
 	}
 
 	

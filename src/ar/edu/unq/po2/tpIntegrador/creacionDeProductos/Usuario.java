@@ -7,7 +7,7 @@ public class Usuario {
 	private String nombreUsuario;
 	private String email;
 	private String direccion;
-	private MedioDePago formaDePago;
+	//private MedioDePago formaDePago;
 
 	public Usuario(String nombreUsuario, String email, String direccion) {
 		this.nombreUsuario = nombreUsuario;
@@ -38,10 +38,11 @@ public class Usuario {
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
-
+	/*
 	public MetodoDePago getFormaDePago() {
 		return formaDePago;
 	}
+	*/
 
 	public void setFormaDePago(MetodoDePago formaDePago) {
 		this.formaDePago = formaDePago;
