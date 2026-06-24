@@ -1,16 +1,13 @@
+package ar.edu.unq.po2.tpIntegrador.creacionDeProductos;
 
-package ar.edu.unq.po2.tpIntegrador;
+import ar.edu.unq.po2.tpIntegrador.pago.MetodoDePago;
 
 public class Usuario {
 	
 	private String nombreUsuario;
-	private String direccion;
 	private String email;
-//	private MedioDePago formaDePago;
-	
-	public Usuario() {
-		super();
-	}	
+	private String direccion;
+	//private MedioDePago formaDePago;
 
 	public Usuario(String nombreUsuario, String email, String direccion) {
 		this.nombreUsuario = nombreUsuario;
@@ -41,13 +38,14 @@ public class Usuario {
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
-/*
+	/*
 	public MetodoDePago getFormaDePago() {
 		return formaDePago;
 	}
+	*/
 
 	public void setFormaDePago(MetodoDePago formaDePago) {
 		this.formaDePago = formaDePago;
-	}*/
+	}
 
 }

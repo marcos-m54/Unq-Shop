@@ -1,8 +1,13 @@
-
-package ar.edu.unq.po2.tpIntegrador;
+package ar.edu.unq.po2.tpIntegrador.state;
 
 import java.util.ArrayList;
 import java.util.Random;
+
+import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.IItem;
+import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.Usuario;
+import ar.edu.unq.po2.tpIntegrador.envio.IFormaDeEnvio;
+import ar.edu.unq.po2.tpIntegrador.notificaciones.Notificador;
+import ar.edu.unq.po2.tpIntegrador.pago.MetodoDePago;
 
 public class Pedido {
 	
@@ -12,22 +17,22 @@ public class Pedido {
 	private ArrayList<NotaDeCredito> notasDeCredito = new ArrayList<NotaDeCredito>();
 	private IFormaDeEnvio formaDeEnvio;
 	private MetodoDePago metodoDePago;
+	private Notificador notificador;
 
 	
-	public Pedido(Usuario usuario, ArrayList<IItem> productosOPaquetes) {
+	public Pedido(Usuario usuario, ArrayList<IItem> items) {
 		super();
 		this.estado = new Borrador(this);
 		this.usuario = usuario;
-		this.carritoDeCompras = productosOPaquetes;
+		this.carritoDeCompras = items;
 	}
-
 	
 	public Pedido(Usuario usuario) {
 		super();
 		this.estado = new Borrador(this);
 		this.usuario = usuario;
 	}
-
+	
 	public ArrayList<IItem> getItems() {
 		return carritoDeCompras;
 	}
@@ -43,6 +48,7 @@ public class Pedido {
 	
 	public void setEstado(IEstado estado) {
 		this.estado = estado;
+		notificador.notificarASuscriptores(this);
 	}
 
 	
@@ -99,9 +105,13 @@ public class Pedido {
 	public void registrarNotaDeCredito(NotaDeCredito notaDeCredito) {
 		notasDeCredito.add(notaDeCredito);
 	}
+	
+	public Double montoTotalPedidoMasEnvio() {
+		return this.montoTotal() + calcularValorDeEnvio(this);
+	}
 
 
-	public Double montoDeReembolsoDeItems() {
+	public Double montoTotal() {
 
 		return carritoDeCompras.stream().mapToDouble(i -> i.precioFinal()).sum();
 		

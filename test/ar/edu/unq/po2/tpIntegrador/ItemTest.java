@@ -9,6 +9,10 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.Atributo;
+import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.Categoria;
+import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.Producto;
+
 class ItemTest {
 	
 	Producto celular;

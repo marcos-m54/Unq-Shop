@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.Paquete;
+import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.Producto;
+
 class PaqueteTest {
 
     Producto celular;
