@@ -75,21 +75,31 @@ public class Paquete implements IItem {
 
 	@Override
 	public void decrementarStock() {
-		// TODO Auto-generated method stub
+		if (this.hayStockDeTodosLosItems()) {
+			this.productos.stream().forEach(producto -> producto.decrementarStock());
+		}
 		
 	}
 
 	@Override
 	public void incrementarStock() {
-		// TODO Auto-generated method stub
+		productos.stream().forEach(producto -> producto.incrementarStock());
 		
+	}
+	
+	public boolean hayStockDeTodosLosItems() {
+		return this.productos.stream().allMatch(producto -> producto.getStock() > 0);
 	}
 
 	@Override
 	public int getStock() {
-		return 0;
+		 if (this.hayStockDeTodosLosItems()) {
+			return 1;
+		 }
+			else return 0;
+		}
 	
-	}
+	
 
 
 }

@@ -1,7 +1,6 @@
 package ar.edu.unq.po2.tpIntegrador.state;
 
 import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.IItem;
-import ar.edu.unq.po2.tpIntegrador.envio.RetiroEnSucursal;
 
 public class Borrador implements IEstado {
 	
@@ -26,16 +25,14 @@ public class Borrador implements IEstado {
 
 	@Override
 	public void confirmarPedido() {
-		
+		if (pedido.getFormaDeEnvio() != null) {
+			
 		pedido.realizarPago();
 		pedido.setEstado(new Confirmado(pedido));
-		
-		//esto hago cuando no elijo un metodo de envio. Probarlo		
-		if (pedido.getFormaDeEnvio() == null) {
-			pedido.setFormaDeEnvio(new RetiroEnSucursal());
-		}
 		pedido.decrementarStockItems();
-
+				
+		}
+	
 	}
 
 	@Override
