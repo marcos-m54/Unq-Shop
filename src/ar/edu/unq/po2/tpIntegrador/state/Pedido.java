@@ -125,7 +125,7 @@ public class Pedido {
 		this.formaDeEnvio = formaDeEnvio;
 	}
 
-	public Float calcularValorDeEnvio(Pedido pedido) {
+	public Double calcularValorDeEnvio(Pedido pedido) {
 		return this.getFormaDeEnvio().calcularValorDelEnvio(pedido);
 	}
 	
