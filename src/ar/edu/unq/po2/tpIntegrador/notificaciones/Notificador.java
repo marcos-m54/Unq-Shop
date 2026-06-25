@@ -9,7 +9,7 @@ public class Notificador {
 	
 	private IEstado estadoPrincipal;
 	
-	private ArrayList<ISuscriptora> suscriptores = new ArrayList<ISuscriptor>();
+	private ArrayList<ISuscriptora> suscriptores = new ArrayList<ISuscriptora>();
 	
 	public void suscribir (ISuscriptora suscriptor) {
 		suscriptores.add(suscriptor);

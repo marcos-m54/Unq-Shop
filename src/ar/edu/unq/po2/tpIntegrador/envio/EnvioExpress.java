@@ -39,7 +39,7 @@ public class EnvioExpress implements IFormaDeEnvio {
 	@Override
 	public Double calcularValorDelEnvio(Pedido pedido) {
 		//cambiar el nombre al metodo para que sea mas general
-		return ((pedido.montoDeReembolsoDeItems() * this.getPorcentaje()) / 100) + this.getCargoBase();
+		return ((pedido.montoTotal() * this.getPorcentaje()) / 100) + this.getCargoBase();
 	}
 
 }
