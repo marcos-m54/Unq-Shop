@@ -1,8 +1,14 @@
-package ar.edu.unq.po2.tpIntegrador;
+package ar.edu.unq.po2.tpIntegrador.state;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
 import org.mockito.InOrder;
+
+import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.IItem;
+import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.Producto;
+import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.Usuario;
+
 import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
