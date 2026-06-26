@@ -18,6 +18,15 @@ public class TarjetaDeCredito extends MetodoDePago {
 		this.api = api;
 	}
 
+	// Set y Get
+	public IValidacionTarjetaDeCredito getValidacion() {
+		return validacion;
+	}
+
+	public void setValidacion(IValidacionTarjetaDeCredito validacion) {
+		this.validacion = validacion;
+	}
+	
 	@Override
 	public void validarDatos(Pedido pedido) {
 		api.esValida(this);

@@ -16,6 +16,15 @@ public class Paquete implements IItem {
 		this.descuento = descuento;
 		this.productos = productos;
 	}
+	
+	/*
+	private Paquete(Builder builder) {
+		this.nombre = builder.nombre;
+		this.descripcion = builder.descripcion;
+		this.descuento = builder.descuento;
+		this.productos = builder.productos;
+	}
+	*/
 
 	@Override
 	public String getNombre() {
@@ -73,21 +82,37 @@ public class Paquete implements IItem {
 	
 	//nuevo
 
+
+	@Override
+	public void incrementarStock() {
+		productos.stream().forEach(producto -> producto.incrementarStock());
+	}
+	
+	@Override
+	public void decrementarStock() {
+	    this.productos.stream().forEach(producto -> producto.decrementarStock());
+	}
+	
+	@Override
+	public int getStock() {
+	    return this.productos.stream()
+	                            .mapToInt(p -> p.getStock())
+	                            .min()
+	                            .orElse(0);
+	}
+	
+	/* 
+	
+	 * Dejo comentado lo viejo por las dudas
+	
 	@Override
 	public void decrementarStock() {
 		if (this.hayStockDeTodosLosItems()) {
 			this.productos.stream().forEach(producto -> producto.decrementarStock());
 		}
-		
 	}
 
-	@Override
-	public void incrementarStock() {
-		productos.stream().forEach(producto -> producto.incrementarStock());
-		
-	}
-	
-	public boolean hayStockDeTodosLosItems() {
+	 public boolean hayStockDeTodosLosItems() {
 		return this.productos.stream().allMatch(producto -> producto.getStock() > 0);
 	}
 
@@ -97,9 +122,40 @@ public class Paquete implements IItem {
 			return 1;
 		 }
 			else return 0;
+		} 
+	*/
+	
+	/*
+	 public static class Builder {
+
+		private String nombre;
+
+		private String descripcion = "";
+		private int descuento = 0;
+		private ArrayList<IItem> productos = new ArrayList<>();
+
+		public Builder(String nombre) {
+			this.nombre = nombre;
 		}
-	
-	
 
+		public Builder descripcion(String descripcion) {
+			this.descripcion = descripcion;
+			return this;
+		}
 
+		public Builder descuento(int descuento) {
+			this.descuento = descuento;
+			return this;
+		}
+
+		public Builder agregarItem(IItem item) {
+			this.productos.add(item);
+			return this;
+		}
+
+		public Paquete build() {
+			return new Paquete(this);
+		}
+	} 
+	*/
 }

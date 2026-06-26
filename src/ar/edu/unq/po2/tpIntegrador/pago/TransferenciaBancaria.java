@@ -15,6 +15,15 @@ public class TransferenciaBancaria extends MetodoDePago {
 	}
 
 
+	// Set y Get
+	public IvalidacionTransferenciaBancaria getValidacion() {
+		return validacion;
+	}
+
+	public void setValidacion(IvalidacionTransferenciaBancaria validacion) {
+		this.validacion = validacion;
+	}
+	
 	@Override
 	public void validarDatos(Pedido pedido) {
 		api.sonDatosValidos(this);
@@ -55,5 +64,4 @@ public class TransferenciaBancaria extends MetodoDePago {
 	public void setAlias(String alias) {
 		this.alias = alias;
 	}
-
 }

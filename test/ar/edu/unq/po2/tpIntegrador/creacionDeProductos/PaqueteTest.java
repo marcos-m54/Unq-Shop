@@ -13,6 +13,7 @@ class PaqueteTest {
 	    Producto freidoraAire;
 	    Producto hornoElectrico;
 	    Producto televisor;
+	    
 	    Paquete packHogarTech;
 	    Paquete kitHomeOffice;
 	    Paquete comboSinDescuento;
@@ -35,6 +36,59 @@ class PaqueteTest {
 	        kitHomeOffice.agregarItem(packHogarTech);
 	        kitHomeOffice.agregarItem(hornoElectrico);
 	        
+	        /*
+		     celular = new Producto.Builder("MOTO-G86-256", "Moto G86")
+					.marca("Motorola")
+					.precioBase(700000.0)
+					.descuento(10)
+					.stock(5)
+					.peso(186.0)
+					.descripcion("Celular gama media")
+					.build();
+	
+			freidoraAire = new Producto.Builder("Atma-Fre-0002", "FR246ABP")
+					.marca("Atma")
+					.precioBase(190000.0)
+					.descuento(10)
+					.stock(10)
+					.peso(5100.0)
+					.descripcion("Freidora Atma con visor de 6 litros")
+					.build();
+	
+			hornoElectrico = new Producto.Builder("Atma-Hor-0003", "HGAB4523PI")
+					.marca("Atma")
+					.precioBase(230000.0)
+					.descuento(30)
+					.stock(5)
+					.peso(7500.0)
+					.descripcion("Horno electrico Atma de 45 litros")
+					.build();
+	
+			televisor = new Producto.Builder("Sams-xxx-0001", "Samsung Crystal")
+					.marca("Samsung")
+					.precioBase(900000.0)
+					.descuento(0)
+					.stock(2)
+					.peso(8300.0)
+					.descripcion("Samsung Crystal 50")
+					.build();
+	
+			// packHogarTech: celular (700.000) + freidora (190.000) = 890.000 con 15% descuento
+			packHogarTech = new Paquete.Builder("Pack Hogar Tech")
+					.descripcion("Celular y freidora")
+					.descuento(15)
+					.agregarItem(celular)
+					.agregarItem(freidoraAire)
+					.build();
+	
+			// kitHomeOffice: packHogarTech (890.000) + horno (230.000) = 1.120.000 con 10% descuento
+			kitHomeOffice = new Paquete.Builder("Kit Home Office")
+					.descripcion("Pack + Horno")
+					.descuento(10)
+					.agregarItem(packHogarTech)
+					.agregarItem(hornoElectrico)
+					.build();
+	        */
 	    }
 	        
 	        @Test
@@ -67,6 +121,19 @@ class PaqueteTest {
 	            comboSinDescuento.agregarItem(celular);
 	            assertEquals(comboSinDescuento.getPrecioBase(), comboSinDescuento.precioFinal());
 	        }
+	        
+	        /*
+	        @Test
+			void paqueteSinDescuentoPrecioFinalIgualBase() {
+				Paquete comboSinDescuento = new Paquete.Builder("Solo celular")
+						.descripcion("Sin descuento")
+						.descuento(0)
+						.agregarItem(celular)
+						.build();
+		
+				assertEquals(comboSinDescuento.getPrecioBase(), comboSinDescuento.precioFinal());
+			}
+	        */
 
 	        @Test
 	        void paquetePesoEsSumaDeItems() {
@@ -85,6 +152,16 @@ class PaqueteTest {
 	            packHogarTech.quitarItem(freidoraAire); // -190000
 	            assertEquals(700000.0, packHogarTech.getPrecioBase());
 	        }
+	        
+	        /*
+	         @Test
+			void paqueteSeCreaVacioSiNoSeAgreganItems() {
+				Paquete paqueteVacio = new Paquete.Builder("Paquete Vacio").build();
+		
+				assertEquals(0.0, paqueteVacio.getPrecioBase());
+				assertEquals(0.0, paqueteVacio.getPeso());
+			}
+	        */
 
 	        // Nota Yami: estos no se si son medios meh para poner 
 	        
