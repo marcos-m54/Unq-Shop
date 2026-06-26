@@ -1,18 +1,19 @@
 package ar.edu.unq.po2.tpIntegrador.pago;
 
-import java.util.Random;
-
 import ar.edu.unq.po2.tpIntegrador.state.Pedido;
 
 public class TransferenciaBancaria extends MetodoDePago {
 	
-	private int CBUorCVU;
+	private String cbuOrCvu;
 	private String alias; 
 	private IApiTransferenciaBancaria api; 
 	
-	public TransferenciaBancaria(int cBUorCVU) {
-		setCBUorCVU(cBUorCVU);
+	public TransferenciaBancaria(String cbuorcvu, String alias, IApiTransferenciaBancaria api) {
+		this.cbuOrCvu = cbuorcvu;
+		this.alias = alias;
+		this.api = api;
 	}
+
 
 	@Override
 	public void validarDatos(Pedido pedido) {
@@ -22,8 +23,7 @@ public class TransferenciaBancaria extends MetodoDePago {
 
 	@Override
 	public void reservarFondos(Pedido pedido) {
-		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
@@ -34,17 +34,18 @@ public class TransferenciaBancaria extends MetodoDePago {
 
 	
 	public void notificarResultado(Pedido pedido) {
-		
+		String nroOperacionBanco = String.valueOf(new java.util.Random().nextInt(900000000) + 100000000);
+		pedido.registrarComprobante(new ComprobanteCBU(this.getCbuOrCvu(), nroOperacionBanco, pedido.montoTotal()));
 	}
 	
 	//getters y setters
 
-	public int getCBUorCVU() {
-		return CBUorCVU;
+	public String getCbuOrCvu() {
+		return cbuOrCvu;
 	}
 
-	public void setCBUorCVU(int cBUorCVU) {
-		CBUorCVU = cBUorCVU;
+	public void setCbuOrCvu(String cBUorCVU) {
+		cbuOrCvu = cBUorCVU;
 	}
 
 	public String getAlias() {

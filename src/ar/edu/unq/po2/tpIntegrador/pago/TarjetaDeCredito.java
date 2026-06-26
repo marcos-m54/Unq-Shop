@@ -39,7 +39,7 @@ public class TarjetaDeCredito extends MetodoDePago {
 
 	public void notificarResultado(Pedido pedido) {
 		
-		pedido.registrarComprobante(new CuponDePago(this.obtenerMascaraCupon(), pedido.montoTotal()));
+		pedido.registrarComprobante(new CuponDePago(pedido.montoTotal(), this.obtenerMascaraCupon()));
 		
 	}
 	
