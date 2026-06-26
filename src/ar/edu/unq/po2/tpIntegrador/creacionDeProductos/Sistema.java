@@ -25,6 +25,10 @@ public class Sistema {
 		this.sucursales.add(sucursal);
 	}
 
+	
+	public Boolean hayStockDeItemEnSucursales(IItem item){
+		return this.getSucursales().hayStockDe(item);
+	}
 
 	
 	/*

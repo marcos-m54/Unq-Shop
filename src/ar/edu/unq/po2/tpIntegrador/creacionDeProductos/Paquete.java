@@ -98,6 +98,12 @@ public class Paquete implements IItem {
 		 }
 			else return 0;
 		}
+
+	@Override
+	public Categoria getCategoria() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 
