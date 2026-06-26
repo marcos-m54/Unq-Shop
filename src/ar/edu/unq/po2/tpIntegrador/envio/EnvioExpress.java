@@ -42,4 +42,11 @@ public class EnvioExpress implements IFormaDeEnvio {
 		return ((pedido.montoTotal() * this.getPorcentaje()) / 100) + this.getCargoBase();
 	}
 
+
+	@Override
+	public int estimacionDiasDeEnvio(Pedido pedido) {
+		
+		return 1;
+	}
+
 }

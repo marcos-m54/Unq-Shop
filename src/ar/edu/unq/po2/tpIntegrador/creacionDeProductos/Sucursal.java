@@ -1,5 +1,7 @@
 package ar.edu.unq.po2.tpIntegrador.creacionDeProductos;
 
+import ar.edu.unq.po2.tpIntegrador.state.Pedido;
+
 public class Sucursal {
 	
 	private String nombre;
@@ -25,5 +27,16 @@ public class Sucursal {
 	public void setDeposito(Deposito deposito) {
 		this.deposito = deposito;
 	}
+	
+	public boolean hayStockDe(IItem item) {
+		return this.deposito.getStockDe(item) > 0;
+	}
+	
+	public boolean hayStockDeItemsDePedido (Pedido pedido) {
+		return pedido.getItems()
+				.stream()
+	            .allMatch(item -> this.hayStockDe(item));
+	}
+	
 
 }

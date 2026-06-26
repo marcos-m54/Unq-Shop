@@ -6,4 +6,6 @@ public interface IFormaDeEnvio {
 
 	public Double calcularValorDelEnvio(Pedido pedido);
 	
+	public int estimacionDiasDeEnvio(Pedido pedido);
+	
 }
