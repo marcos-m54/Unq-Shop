@@ -16,12 +16,12 @@ public class TransferenciaBancaria extends MetodoDePago {
 
 
 	// Set y Get
-	public IvalidacionTransferenciaBancaria getValidacion() {
-		return validacion;
+	public IApiTransferenciaBancaria getValidacion() {
+		return api;
 	}
 
-	public void setValidacion(IvalidacionTransferenciaBancaria validacion) {
-		this.validacion = validacion;
+	public void setValidacion(IApiTransferenciaBancaria api) {
+		this.api = api;
 	}
 	
 	@Override

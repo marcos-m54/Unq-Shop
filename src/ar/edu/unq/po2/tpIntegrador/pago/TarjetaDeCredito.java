@@ -11,6 +11,7 @@ public class TarjetaDeCredito extends MetodoDePago {
 	private LocalDate fechaVencimiento;
 	private IApiTarjetaDeCredito api;
 	
+
 	public TarjetaDeCredito(int numeroTarjeta, int cVV, LocalDate fechaVencimiento, IApiTarjetaDeCredito api) {
 		this.setNumeroTarjeta(numeroTarjeta);
 		this.setCVV(cVV);
@@ -18,15 +19,7 @@ public class TarjetaDeCredito extends MetodoDePago {
 		this.api = api;
 	}
 
-	// Set y Get
-	public IValidacionTarjetaDeCredito getValidacion() {
-		return validacion;
-	}
 
-	public void setValidacion(IValidacionTarjetaDeCredito validacion) {
-		this.validacion = validacion;
-	}
-	
 	@Override
 	public void validarDatos(Pedido pedido) {
 		api.esValida(this);
@@ -76,6 +69,14 @@ public class TarjetaDeCredito extends MetodoDePago {
 
 	public void setFechaVencimiento(LocalDate fechaVencimiento) {
 		this.fechaVencimiento = fechaVencimiento;
+	}
+	
+	public IApiTarjetaDeCredito getApi() {
+		return api;
+	}
+
+	public void setApi(IApiTarjetaDeCredito api) {
+		this.api = api;
 	}
 	
 	//
