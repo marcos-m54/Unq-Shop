@@ -6,30 +6,47 @@ public class BilleteraVirtual extends MetodoDePago {
 
 
 	private Double saldo;
-	private IvalidacionBilleteraVirtual validacion; 
+	private IApiBilleteraVirtual api; 
+	
+	public BilleteraVirtual(Double saldo, IApiBilleteraVirtual api) {
+		this.setSaldo(saldo);
+		this.api = api;
+	}
 	
 
 	@Override
 	public void validarDatos(Pedido pedido) {
-		validacion.tieneSaldoSuficiente(this);
+		api.tieneSaldoSuficiente(this);
 
 	}
 
 	@Override
 	public void reservarFondos(Pedido pedido) {
-		validacion.bloquearSaldo(this);
+		api.bloquearSaldo(this);
 
 	}
 
 	@Override
 	public void ejecutarTransacción(Pedido pedido) {
-		validacion.acreditarSaldo(this);
+		api.acreditarSaldo(this);
 
 	}
 
 	public void notificarResultado(Pedido pedido) {
-		validacion.crearNotificacionPush(this);
+		api.crearNotificacionPush(this);
 
+	}
+	
+	//getters y setters
+
+
+	public Double getSaldo() {
+		return saldo;
+	}
+
+
+	public void setSaldo(Double saldo) {
+		this.saldo = saldo;
 	}
 
 }
