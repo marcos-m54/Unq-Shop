@@ -7,6 +7,7 @@ import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.IItem;
 import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.Usuario;
 import ar.edu.unq.po2.tpIntegrador.envio.IFormaDeEnvio;
 import ar.edu.unq.po2.tpIntegrador.notificaciones.Notificador;
+import ar.edu.unq.po2.tpIntegrador.pago.Comprobante;
 import ar.edu.unq.po2.tpIntegrador.pago.MetodoDePago;
 
 public class Pedido {
@@ -17,6 +18,7 @@ public class Pedido {
 	private ArrayList<NotaDeCredito> notasDeCredito = new ArrayList<NotaDeCredito>();
 	private IFormaDeEnvio formaDeEnvio;
 	private MetodoDePago metodoDePago;
+	private Comprobante comprobanteDePago;
 	private Notificador notificador;
 
 	
@@ -153,6 +155,10 @@ public class Pedido {
 
 	public void setMetodoDePago(MetodoDePago metodoDePago) {
 		this.metodoDePago = metodoDePago;
+	}
+	
+	public void registrarComprobante(Comprobante comprobante) {
+		this.comprobanteDePago = comprobante;
 	}
 	
 

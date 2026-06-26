@@ -1,6 +1,6 @@
 package ar.edu.unq.po2.tpIntegrador.pago;
 
-public interface IvalidacionBilleteraVirtual {
+public interface IApiBilleteraVirtual {
 	
 	public boolean tieneSaldoSuficiente(BilleteraVirtual billeteraVirtual);
 	
