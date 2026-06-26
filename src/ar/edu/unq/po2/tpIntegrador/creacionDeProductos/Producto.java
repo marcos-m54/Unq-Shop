@@ -30,6 +30,21 @@ public class Producto implements IItem {
 		
 	}
 	
+	/*
+	 private Producto(Builder builder) {
+		this.SKU = builder.SKU;
+		this.nombre = builder.nombre;
+		this.marca = builder.marca;
+		this.precioBase = builder.precioBase;
+		this.descuento = builder.descuento;
+		this.stock = builder.stock;
+		this.peso = builder.peso;
+		this.descripcion = builder.descripcion;
+		this.categoria = builder.categoria;
+		this.atributos = builder.atributos;
+	} 
+	 */
+	
 	public String getSKU() {
 		return SKU;
 	}
@@ -109,7 +124,7 @@ public class Producto implements IItem {
 	
 	@Override
 	public Double precioFinal() {
-		return this.getPrecioBase() - ( (this.getPrecioBase() * this.getDescuento() / 100 ) );
+		return this.getPrecioBase() - ( (this.getPrecioBase() * this.getDescuento() / 100) );
 	}
 
 	public ArrayList<Atributo> getAtributos() {
@@ -138,5 +153,70 @@ public class Producto implements IItem {
 		
 	}
 
+	/*
+	public static class Builder {
 
+		// Enunciado: Sku y nombre son obligatorios
+		private String SKU;
+		private String nombre;
+
+		private String marca = "";
+		private Double precioBase = 0.0;
+		private int descuento = 0;
+		private int stock = 0;
+		private Double peso = 0.0;
+		private String descripcion = "";
+		private Categoria categoria;
+		private ArrayList<Atributo> atributos = new ArrayList<>();
+
+		public Builder(String sku, String nombre) {
+			this.SKU = sku;
+			this.nombre = nombre;
+		}
+
+		public Builder marca(String marca) {
+			this.marca = marca;
+			return this;
+		}
+
+		public Builder precioBase(Double precioBase) {
+			this.precioBase = precioBase;
+			return this;
+		}
+
+		public Builder descuento(int descuento) {
+			this.descuento = descuento;
+			return this;
+		}
+
+		public Builder stock(int stock) {
+			this.stock = stock;
+			return this;
+		}
+
+		public Builder peso(Double peso) {
+			this.peso = peso;
+			return this;
+		}
+
+		public Builder descripcion(String descripcion) {
+			this.descripcion = descripcion;
+			return this;
+		}
+
+		public Builder categoria(Categoria categoria) {
+			this.categoria = categoria;
+			return this;
+		}
+
+		public Builder atributo(String nombre, String descripcion) {
+			this.atributos.add(new Atributo(nombre, descripcion));
+			return this;
+		}
+
+		public Producto build() {
+			return new Producto(this);
+		}
+	} 
+	*/
 }

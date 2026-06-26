@@ -39,16 +39,76 @@ class ProductoTest {
 			hornoElectrico = new Producto("Atma-Hor-0003", "HGAB4523PI", "Atma", 230000.0, 30, 5, 7500.0, "Horno electrico Atma de 45 litros", new ArrayList<>());
 			bicicleta = new Producto("Nord-xxx-0004", "x1.0", "Nordic", 500000.0, 50, 20, 12000.0, "Mountain bick rodado 29", new ArrayList<>());
 			camiseta = new Producto("Adid-xxx-005", "Seleccion Argentina", "Adidas", 220000.0, 10, 5, 180.0, "Camiseta titular Seleccion Argentina", new ArrayList<>());
-			
-			//colorAzul = new Atributo("color", "azul");
-		
-		
+					
 			celular.setCategoria(tecnologia);
 	        televisor.setCategoria(tecnologia);
 	        freidoraAire.setCategoria(electrodomestico);
 	        hornoElectrico.setCategoria(electrodomestico);
 	        bicicleta.setCategoria(deportes);
 	        camiseta.setCategoria(indumentaria);
+	        
+	        /*
+	        // Sku Nombre
+			celular = new Producto.Builder("MOTO-G86-256", "Moto G86")
+					.marca("Motorola")
+					.precioBase(700000.0)
+					.descuento(10)
+					.stock(5)
+					.peso(186.0)
+					.descripcion("Celular gama media")
+					.categoria(tecnologia)
+					.build();
+	
+			televisor = new Producto.Builder("Sams-xxx-0001", "Samsung Crystal")
+					.marca("Samsung")
+					.precioBase(900000.0)
+					.descuento(0)
+					.stock(2)
+					.peso(8300.0)
+					.descripcion("Samsung Crystal 50")
+					.categoria(tecnologia)
+					.build();
+	
+			freidoraAire = new Producto.Builder("Atma-Fre-0002", "FR246ABP")
+					.marca("Atma")
+					.precioBase(190000.0)
+					.descuento(10)
+					.stock(10)
+					.peso(5100.0)
+					.descripcion("Freidora Atma con visor de 6 litros")
+					.categoria(electrodomestico)
+					.build();
+	
+			hornoElectrico = new Producto.Builder("Atma-Hor-0003", "HGAB4523PI")
+					.marca("Atma")
+					.precioBase(230000.0)
+					.descuento(30)
+					.stock(5)
+					.peso(7500.0)
+					.descripcion("Horno electrico Atma de 45 litros")
+					.categoria(electrodomestico)
+					.build();
+	
+			bicicleta = new Producto.Builder("Nord-xxx-0004", "x1.0")
+					.marca("Nordic")
+					.precioBase(500000.0)
+					.descuento(50)
+					.stock(20)
+					.peso(12000.0)
+					.descripcion("Mountain bike rodado 29")
+					.categoria(deportes)
+					.build();
+	
+			camiseta = new Producto.Builder("Adid-xxx-005", "Seleccion Argentina")
+					.marca("Adidas")
+					.precioBase(220000.0)
+					.descuento(10)
+					.stock(5)
+					.peso(180.0)
+					.descripcion("Camiseta titular Seleccion Argentina")
+					.categoria(indumentaria)
+					.build();
+	        */
 		}
 		
 		
@@ -71,13 +131,10 @@ class ProductoTest {
 		void productoConDescuento() {
 		    assertEquals(250000.0, bicicleta.precioFinal());
 		}
-
+		
 		@Test
-		void agregarAtributosDinamicosTest() {
-		//	televisor.agregarAtributo("color", "azul");
-		//	assertEquals(televisor.getAtributos(), List.of(colorAzul)); 
-			
-			// Nota de Yami: no supe usar List Of, investigue y funciona comparando equals. Supuestamente deberiamos agregarlo a nuestra clase para que funcione.
+		void productoSinAtributosInicialmente() {
+			assertTrue(celular.getAtributos().isEmpty());
 		}
 		
 		void agregarUnAtributoDinamico() {
@@ -85,10 +142,10 @@ class ProductoTest {
 		    
 		    Atributo primero = celular.getAtributos().get(0);
 		    
-		    assertEquals("color", primero.getNombre()); // Nota Yami: Opcion 1: con variable
-		    assertEquals("negro", celular.getAtributos().get(0).getDescripcion()); // Nota Yami: Opcion 2: todo en una linea
+		    assertEquals("color", primero.getNombre()); 
+		    assertEquals("azul", primero.getDescripcion());
 		}
-
+		
 		@Test
 		void agregarYControlarVariosAtributosDinamicos() {
 		    televisor.agregarAtributo("alto", "120cm");
@@ -102,5 +159,79 @@ class ProductoTest {
 		    celular.agregarAtributo("color", "negro");
 		    assertTrue(televisor.getAtributos().isEmpty());
 		}
+		
+		/*
+		@Test
+		void crearProductoConAtributosDesdeElBuilder() {
+			Producto monitor = new Producto.Builder("LG-MON-0099", "Monitor LG")
+					.marca("LG")
+					.precioBase(150000.0)
+					.atributo("alto", "45cm")
+					.atributo("ancho", "60cm")
+					.build();
+
+			assertEquals(2, monitor.getAtributos().size());
+			assertEquals("alto", monitor.getAtributos().get(0).getNombre());
+		}
+
+		@Test
+		void productoSeCreaConValoresPorDefectoSiNoSeEspecifican() {
+			Producto productoPrueba = new Producto.Builder("SKU-PRU-001", "Producto Prueba").build();
+
+			assertEquals("SKU-PRU-001", productoPrueba.getSKU());
+			assertEquals("Producto Prueba", productoPrueba.getNombre());
+			assertEquals(0.0, productoPrueba.getPrecioBase());
+			assertEquals(0, productoPrueba.getDescuento());
+			assertEquals(0, productoPrueba.getStock());
+			assertTrue(productoPrueba.getAtributos().isEmpty());
+		}
+
+		@Test
+		void productoGetNombre() {
+			assertEquals("Moto G86", celular.getNombre());
+		}
+
+		@Test
+		void productoGetSKU() {
+			assertEquals("MOTO-G86-256", celular.getSKU());
+		}
+
+		@Test
+		void productoGetMarca() {
+			assertEquals("Motorola", celular.getMarca());
+		}
+
+		@Test
+		void productoGetStock() {
+			assertEquals(5, celular.getStock());
+		}
+
+		@Test
+		void productoGetPeso() {
+			assertEquals(186.0, celular.getPeso());
+		}
+
+		@Test
+		void productoGetCategoria() {
+			assertEquals(tecnologia, celular.getCategoria());
+		}
+
+		@Test
+		void productoGetDescripcion() {
+			assertEquals("Celular gama media", celular.getDescripcion());
+		}
+
+		@Test
+		void incrementarStockSumaUnaUnidad() {
+			celular.incrementarStock(); // 5 + 1
+			assertEquals(6, celular.getStock());
+		}
+
+		@Test
+		void decrementarStockRestaUnaUnidad() {
+			celular.decrementarStock(); // 5 - 1
+			assertEquals(4, celular.getStock());
+		}
+		*/
 		
 	}
