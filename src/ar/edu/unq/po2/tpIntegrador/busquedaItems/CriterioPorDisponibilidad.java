@@ -5,14 +5,17 @@ import java.util.List;
 import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.IItem;
 import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.Sistema;
 
-public class CriterioPorDisponibilidad implements ICriterio {
+public class CriterioPorDisponibilidad extends Busqueda {
 	
-	//private Sistema eCommerce;
+		
+	public CriterioPorDisponibilidad(Sistema sistema) {
+		super(sistema);
+	}
 
 	@Override
-	public List<IItem> filtrar(List<IItem> items) {
+	public List<IItem> filtrar() {
 		
-		return items.stream().filter(item -> item.getStock() > 0).toList();
+		return super.filtrar().stream().filter(item -> item.getStock() > 0).toList();
 	}
 
 }

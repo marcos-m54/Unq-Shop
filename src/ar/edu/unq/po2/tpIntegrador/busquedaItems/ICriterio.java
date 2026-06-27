@@ -6,6 +6,6 @@ import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.IItem;
 
 public interface ICriterio {
 
-	public List<IItem> filtrar(List<IItem> items);
+	public List<IItem> filtrar();
 	
 }

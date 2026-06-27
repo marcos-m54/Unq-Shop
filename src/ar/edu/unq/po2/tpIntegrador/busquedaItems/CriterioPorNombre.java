@@ -3,19 +3,20 @@ package ar.edu.unq.po2.tpIntegrador.busquedaItems;
 import java.util.List;
 
 import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.IItem;
+import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.Sistema;
 
-public class CriterioPorNombre implements ICriterio {
+public class CriterioPorNombre extends Busqueda{
 	
 	private String nombre;
 
 	@Override
-	public List<IItem> filtrar(List<IItem> items) {
-		return items.stream().filter(item -> item.getNombre().contains(this.getNombre().toLowerCase())).toList();
+	public List<IItem> filtrar() {
+		return super.filtrar().stream().filter(item -> item.getNombre().contains(this.getNombre().toLowerCase())).toList();
 	}
 	
-	public CriterioPorNombre(String nombre) {
-		super();
-		this.nombre = nombre.toLowerCase();
+	public CriterioPorNombre(Sistema sistema, String nombre) {
+		super(sistema);
+		this.nombre = nombre;
 	}
 
 	public String getNombre() {
@@ -27,5 +28,4 @@ public class CriterioPorNombre implements ICriterio {
 	}
 	
 	
-
 }
