@@ -32,7 +32,7 @@ class ConfirmadoTest {
 		ArrayList<IItem> items = new ArrayList<>();
 		items.add(itemMock);
 		
-		IFormaDeEnvio envioMock = mock(IFormaDeEnvio.class);
+		envioMock = mock(IFormaDeEnvio.class);
 		when(envioMock.calcularValorDelEnvio(any())).thenReturn(200.0);
  
 		pedido = new Pedido(usuario, items);

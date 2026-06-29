@@ -165,6 +165,11 @@ public class Pedido {
 		this.comprobanteDePago = comprobante;
 	}
 	
+	// Nota Yami: agrego get para poder testear
+	public Comprobante getComprobanteDePago() {
+	    return comprobanteDePago;
+	}
+	
 
 
 }
