@@ -3,6 +3,8 @@ package ar.edu.unq.po2.tpIntegrador.pago;
 import org.junit.jupiter.api.Test;
 import static org.mockito.Mockito.*;
 
+import static org.junit.jupiter.api.Assertions.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -17,7 +19,7 @@ class TarjetaDeCreditoPagoTest {
 
 	Pedido pedido;
 	TarjetaDeCredito tarjeta;
-	IValidacionTarjetaDeCredito validacionMock; // Mockea la interfez
+	IApiTarjetaDeCredito validacionMock; // Mockea la interfez
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -28,12 +30,10 @@ class TarjetaDeCreditoPagoTest {
 		pedido = new Pedido(usuario, new ArrayList<IItem>());
 
 		// Le pido a Mockito "creame un objeto falso que cumpla con esta interfaz"
-		validacionMock = mock(IValidacionTarjetaDeCredito.class);
+		validacionMock = mock(IApiTarjetaDeCredito.class);
 		
 		// Creo la tarjeta real 
-		tarjeta = new TarjetaDeCredito();
-		// Conecto a mi objeto falso con la tarjeta, de esta forma validacion ya no es null.
-		tarjeta.setValidacion(validacionMock);
+		tarjeta = new TarjetaDeCredito(123456789, 123, LocalDate.of(2027, 12, 1), validacionMock);
 	}
 
 	@Test
@@ -94,6 +94,16 @@ class TarjetaDeCreditoPagoTest {
 		verify(validacionMock, never()).esValida(any());
 		verify(validacionMock, never()).tienePreAutorizacion(any());
 		verify(validacionMock, never()).ejecutarTransferenciaInmediata(any());
+	}
+	
+	@Test
+	void notificarResultadoRegistraUnComprobanteConDatosCorrectos() {
+	    tarjeta.notificarResultado(pedido);
+
+	    Comprobante comprobante = pedido.getComprobanteDePago();
+
+	    assertNotNull(comprobante);
+	    assertTrue(comprobante instanceof CuponDePago);
 	}
 	
 }
