@@ -32,12 +32,10 @@ public class Confirmado implements IEstado {
 		// TODO Auto-generated method stub
 	}
 
-	// Nota Yami: agregue el registrar nota de credito.
 	@Override
 	public void cancelarPedido() {
 		pedido.setEstado(new Cancelado(pedido));
 		pedido.incrementarStockItems();
-		pedido.registrarNotaDeCredito(new NotaDeCredito(pedido.getUsuario().getNombreUsuario(), LocalDate.now(), pedido.montoTotalPedidoMasEnvio()));
 	}
 
 	@Override

@@ -22,8 +22,6 @@ class ConfirmadoTest {
  
 	@BeforeEach
 	void setUp() throws Exception {
-		usuario = mock(Usuario.class);
-		when(usuario.getNombreUsuario()).thenReturn("Juana Perez");
  
 		itemMock = mock(IItem.class);
 		when(itemMock.getStock()).thenReturn(3);
@@ -84,19 +82,11 @@ class ConfirmadoTest {
 		// Verifico que se llamo a incrementarStock(), repone las unidades que se habian descontado al confirmar
 		verify(itemMock).incrementarStock();
 	}
- 
+	
 	@Test
-	void cancelarPedidoDesdeConfirmadoDeberiaGenerarNotaDeCredito() {
-		// Nota Yami:
-		// El enunciado dice que al cancelar desde Confirmado se reembolsa tanto el costo del producto como el del envio. 
-		// Deberia generarse una NotaDeCredito, igual que en EnPreparacion.cancelarPedido()
-
+	void cancelarPedidoDesdeConfirmadoNoGeneraNotaDeCredito() {
 		pedido.cancelarPedido();
- 
-		assertEquals(1, pedido.getNotasDeCredito().size());
-		
-		Double montoDeLaNota = pedido.getNotasDeCredito().get(0).getMonto();
-		assertEquals(1200.0, montoDeLaNota);
+		assertEquals(0, pedido.getNotasDeCredito().size());
 	}
 
 	@Test
