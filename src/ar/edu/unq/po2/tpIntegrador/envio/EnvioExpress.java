@@ -15,7 +15,6 @@ public class EnvioExpress implements IFormaDeEnvio {
 		this.porcentaje = porcentaje;
 	}
 
-
 	public Double getCargoBase() {
 		return cargoBase;
 	}
@@ -48,5 +47,4 @@ public class EnvioExpress implements IFormaDeEnvio {
 		
 		return 1;
 	}
-
 }
