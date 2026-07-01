@@ -1,6 +1,9 @@
 package ar.edu.unq.po2.tpIntegrador.state;
 
+import java.time.LocalDate;
+
 import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.IItem;
+import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.Venta;
 
 public class Borrador implements IEstado {
 	
@@ -29,6 +32,7 @@ public class Borrador implements IEstado {
 			
 		pedido.realizarPago();
 		pedido.setEstado(new Confirmado(pedido));
+		pedido.registrarVentaEnSistema(new Venta(LocalDate.now(), this.pedido));
 		pedido.decrementarStockItems();
 				
 		}

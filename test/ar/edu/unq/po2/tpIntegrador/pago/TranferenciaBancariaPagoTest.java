@@ -16,7 +16,7 @@ class TranferenciaBancariaPagoTest {
 
 	Pedido pedido;
 	TransferenciaBancaria transferencia;
-	IvalidacionTransferenciaBancaria validacionMock;
+	IApiTransferenciaBancaria validacionMock;
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -24,9 +24,9 @@ class TranferenciaBancariaPagoTest {
 		Usuario usuario = new Usuario("Juana Perez", "juana@mail.com", "Calle Falsa 123");
 		pedido = new Pedido(usuario, new ArrayList<IItem>());
 
-		validacionMock = mock(IvalidacionTransferenciaBancaria.class);
+		validacionMock = mock(IApiTransferenciaBancaria.class);
 
-		transferencia = new TransferenciaBancaria();
+		transferencia = new TransferenciaBancaria("0000657516878", "pepita", validacionMock);
 		transferencia.setValidacion(validacionMock);
 	}
 

@@ -16,7 +16,7 @@ class BilleteraVirtualPagoTest {
 
 	Pedido pedido;
 	BilleteraVirtual billetera;
-	IvalidacionBilleteraVirtual validacionMock;
+	IApiBilleteraVirtual validacionMock;
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -24,10 +24,10 @@ class BilleteraVirtualPagoTest {
 		Usuario usuario = new Usuario("Juana Perez", "juana@mail.com", "Calle Falsa 123");
 		pedido = new Pedido(usuario, new ArrayList<IItem>());
 
-		validacionMock = mock(IvalidacionBilleteraVirtual.class);
+		validacionMock = mock(IApiBilleteraVirtual.class);
 
-		billetera = new BilleteraVirtual();
-		billetera.setValidacion(validacionMock);
+		billetera = new BilleteraVirtual(10000.00, validacionMock);
+		billetera.setApi(validacionMock);
 	}
 
 	@Test

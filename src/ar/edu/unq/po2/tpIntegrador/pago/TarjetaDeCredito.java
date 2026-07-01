@@ -12,7 +12,7 @@ public class TarjetaDeCredito extends MetodoDePago {
 	private IApiTarjetaDeCredito api;
 	
 
-	public TarjetaDeCredito(int numeroTarjeta, int cVV, LocalDate fechaVencimiento, IApiTarjetaDeCredito api) {
+	public TarjetaDeCredito(long numeroTarjeta, int cVV, LocalDate fechaVencimiento, IApiTarjetaDeCredito api) {
 		this.setNumeroTarjeta(numeroTarjeta);
 		this.setCVV(cVV);
 		this.setFechaVencimiento(fechaVencimiento);
@@ -51,7 +51,7 @@ public class TarjetaDeCredito extends MetodoDePago {
 		return numeroTarjeta;
 	}
 
-	public void setNumeroTarjeta(int numeroTarjeta) {
+	public void setNumeroTarjeta(long numeroTarjeta) {
 		this.numeroTarjeta = numeroTarjeta;
 	}
 

@@ -3,6 +3,8 @@ package ar.edu.unq.po2.tpIntegrador.pago;
 import org.junit.jupiter.api.Test;
 import static org.mockito.Mockito.*;
 
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -17,7 +19,7 @@ class TarjetaDeCreditoPagoTest {
 
 	Pedido pedido;
 	TarjetaDeCredito tarjeta;
-	IValidacionTarjetaDeCredito validacionMock; // Mockea la interfez
+	IApiTarjetaDeCredito validacionMock; // Mockea la interfez
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -28,12 +30,12 @@ class TarjetaDeCreditoPagoTest {
 		pedido = new Pedido(usuario, new ArrayList<IItem>());
 
 		// Le pido a Mockito "creame un objeto falso que cumpla con esta interfaz"
-		validacionMock = mock(IValidacionTarjetaDeCredito.class);
+		validacionMock = mock(IApiTarjetaDeCredito.class);
 		
 		// Creo la tarjeta real 
-		tarjeta = new TarjetaDeCredito();
+		tarjeta = new TarjetaDeCredito(4111333322221111l, 789,LocalDate.of(1990, Month.OCTOBER, 15), validacionMock);
 		// Conecto a mi objeto falso con la tarjeta, de esta forma validacion ya no es null.
-		tarjeta.setValidacion(validacionMock);
+		tarjeta.setApi(validacionMock);
 	}
 
 	@Test

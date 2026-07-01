@@ -2,12 +2,11 @@ package ar.edu.unq.po2.tpIntegrador.notificaciones;
 
 import java.util.ArrayList;
 
-import ar.edu.unq.po2.tpIntegrador.state.IEstado;
 import ar.edu.unq.po2.tpIntegrador.state.Pedido;
 
 public class Notificador {
 	
-	private IEstado estadoPrincipal;
+	//private IEstado estadoPrincipal;
 	
 	private ArrayList<ISuscriptora> suscriptores = new ArrayList<ISuscriptora>();
 	
