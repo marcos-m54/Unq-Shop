@@ -4,8 +4,19 @@ public class CSVExportVisitor implements IVisitor {
 
 	@Override
 	public String visit(ReporteProductosMasVendidos reporte) {
-		// TODO Auto-generated method stub
-		return null;
+		StringBuilder sb = new StringBuilder();
+        
+        
+        sb.append("Producto,Cantidad Vendida,Precio Promedio\n");
+        
+        for (LineaReporteProducto linea : reporte.getLineas()) {
+            sb.append(linea.getNombreProducto()).append(",")
+              .append(linea.getCantidadVendida()).append(",")
+              .append(String.format("%.2f", linea.getPrecioPromedioCobrado()))
+              .append("\n");
+        }
+        
+        return sb.toString();
 	}
 
 }
