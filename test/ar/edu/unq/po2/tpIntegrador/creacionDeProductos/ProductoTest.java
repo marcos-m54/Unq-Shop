@@ -137,6 +137,7 @@ class ProductoTest {
 			assertTrue(celular.getAtributos().isEmpty());
 		}
 		
+		@Test
 		void agregarUnAtributoDinamico() {
 		    celular.agregarAtributo("color", "azul");
 		    
@@ -158,6 +159,52 @@ class ProductoTest {
 		void losAtributosSonPropioDeCadaProducto() {
 		    celular.agregarAtributo("color", "negro");
 		    assertTrue(televisor.getAtributos().isEmpty());
+		}
+		@Test
+		void productoGetNombre() {
+		    assertEquals("Moto G86", celular.getNombre());
+		}
+
+		@Test
+		void productoGetSKU() {
+		    assertEquals("MOTO-G86-256", celular.getSKU());
+		}
+
+		@Test
+		void productoGetMarca() {
+		    assertEquals("Motorola", celular.getMarca());
+		}
+
+		@Test
+		void productoGetStock() {
+		    assertEquals(5, celular.getStock());
+		}
+
+		@Test
+		void productoGetPeso() {
+		    assertEquals(186.0, celular.getPeso());
+		}
+
+		@Test
+		void productoGetCategoria() {
+		    assertEquals(tecnologia, celular.getCategoria());
+		}
+
+		@Test
+		void productoGetDescripcion() {
+		    assertEquals("Celular gama media", celular.getDescripcion());
+		}
+
+		@Test
+		void incrementarStockSumaUnaUnidad() {
+		    celular.incrementarStock(); // 5 + 1 = 6
+		    assertEquals(6, celular.getStock());
+		}
+
+		@Test
+		void decrementarStockRestaUnaUnidad() {
+		    celular.decrementarStock(); // 5 - 1 = 4
+		    assertEquals(4, celular.getStock());
 		}
 		
 		/*
