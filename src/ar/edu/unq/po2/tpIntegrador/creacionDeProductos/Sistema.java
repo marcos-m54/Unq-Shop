@@ -13,6 +13,11 @@ public class Sistema {
 	private ArrayList<IItem> catalogo = new ArrayList<IItem>(); 
 	
 	private ArrayList<Sucursal> sucursales = new ArrayList<Sucursal>();
+
+	// Nota Yami: agrego getter
+	public ArrayList<IItem> getCatalogo() {
+		return catalogo;
+	}
 	
 	private ArrayList<Venta> ventas = new ArrayList<Venta>();
 
