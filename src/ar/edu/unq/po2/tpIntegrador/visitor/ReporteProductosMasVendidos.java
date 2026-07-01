@@ -53,7 +53,7 @@ public class ReporteProductosMasVendidos implements IReporte {
         }
 
         // ordenar de mayor a menor, según la cantidad vendida
-        // función lambda de Java para comparar las cantidades en orden descendente
+        
         this.lineas.sort((linea1, linea2) -> Integer.compare(linea2.getCantidadVendida(), linea1.getCantidadVendida()));
     }
 	
