@@ -12,6 +12,7 @@ import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.Usuario;
 import ar.edu.unq.po2.tpIntegrador.envio.IFormaDeEnvio;
 import ar.edu.unq.po2.tpIntegrador.notificaciones.Notificador;
 import ar.edu.unq.po2.tpIntegrador.pago.MetodoDePago;
+import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.Sistema;
  
 class BorradorTest {
  
@@ -82,6 +83,7 @@ class BorradorTest {
  
 		pedido.setFormaDeEnvio(envioMock);
 		pedido.setMetodoDePago(pagoMock);
+		pedido.setSistema(mock(Sistema.class));
  
 		pedido.confirmarPedido();
  
