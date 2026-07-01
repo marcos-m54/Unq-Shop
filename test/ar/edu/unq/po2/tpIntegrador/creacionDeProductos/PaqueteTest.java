@@ -169,16 +169,54 @@ class PaqueteTest {
 	        void paqueteGetNombre() {
 	            assertEquals("Pack Hogar Tech", packHogarTech.getNombre());
 	        }
+	        
+	        @Test
+	        void paqueteSetNombreCambiaElNombre() {
+	            packHogarTech.setNombre("Pack Nuevo");
+	            assertEquals("Pack Nuevo", packHogarTech.getNombre());
+	        }
 
 	        @Test
 	        void paqueteGetDescripcion() {
 	            assertEquals("Celular y freidora", packHogarTech.getDescripcion());
+	        }
+	        
+	        @Test
+	        void paqueteSetDescripcionCambiaLaDescripcion() {
+	            packHogarTech.setDescripcion("Nueva descripcion");
+	            assertEquals("Nueva descripcion", packHogarTech.getDescripcion());
 	        }
 
 	        @Test
 	        void paqueteGetDescuento() {
 	            assertEquals(15, packHogarTech.getDescuento());
 	        }   
+
+	        @Test
+	        void paqueteSetDescuentoCambiaElDescuento() {
+	            packHogarTech.setDescuento(20);
+	            assertEquals(20, packHogarTech.getDescuento());
+	        }
+
+	        @Test
+	        void paqueteGetStockDevuelveElMinimoEntreItems() {
+	            // celular stock= 5, freidora stock= 10 --> minimo es 5
+	            assertEquals(5, packHogarTech.getStock());
+	        }
+
+	        @Test
+	        void paqueteIncrementarStockAfectaATodosLosItems() {
+	            packHogarTech.incrementarStock();
+	            assertEquals(6, celular.getStock());   // 5 + 1
+	            assertEquals(11, freidoraAire.getStock()); // 10 + 1
+	        }
+
+	        @Test
+	        void paqueteDecrementarStockAfectaATodosLosItems() {
+	            packHogarTech.decrementarStock();
+	            assertEquals(4, celular.getStock());  // 5 - 1
+	            assertEquals(9, freidoraAire.getStock()); // 10 - 1
+	        }
 	}
 	  
 
