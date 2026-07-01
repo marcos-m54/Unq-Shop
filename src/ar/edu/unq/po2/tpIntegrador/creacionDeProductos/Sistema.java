@@ -8,7 +8,11 @@ public class Sistema {
 	
 	private ArrayList<Sucursal> sucursales = new ArrayList<Sucursal>();
 
-
+	// Nota Yami: agrego getter
+	public ArrayList<IItem> getCatalogo() {
+		return catalogo;
+	}
+	
 	public void agregarItem(IItem item) {
 		catalogo.add(item);
 	}
