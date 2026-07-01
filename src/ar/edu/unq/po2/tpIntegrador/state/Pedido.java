@@ -55,7 +55,6 @@ public class Pedido {
 		return notasDeCredito;
 	}
 
-	
 	public IEstado getEstado() {
 		return estado;
 	}
@@ -163,6 +162,11 @@ public class Pedido {
 		this.metodoDePago = metodoDePago;
 	}
 	
+	// Nota Yami: agrego set 
+	public void setSistema(Sistema sistema) {
+	    this.sistema = sistema;
+	}
+	
 	public void registrarComprobante(Comprobante comprobante) {
 		this.comprobanteDePago = comprobante;
 	}
@@ -171,7 +175,8 @@ public class Pedido {
 
 	public void registrarVentaEnSistema(Venta venta) {
 		this.sistema.registrarVenta(venta);
-		
+	}
+	
 	// Nota Yami: agrego get para poder testear
 	public Comprobante getComprobanteDePago() {
 	    return comprobanteDePago;

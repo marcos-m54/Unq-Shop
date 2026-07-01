@@ -6,9 +6,6 @@ import ar.edu.unq.po2.tpIntegrador.state.Pedido;
 
 public class Notificador {
 	
-	// Nota Yami: esto nunca se usa 
-	private IEstado estadoPrincipal;
-	
 	private ArrayList<ISuscriptora> suscriptores = new ArrayList<ISuscriptora>();
 	
 	public void suscribir (ISuscriptora suscriptor) {
@@ -25,5 +22,4 @@ public class Notificador {
 			suscriptor.actualizar(pedido);
 		}
 	}
-	
 }
