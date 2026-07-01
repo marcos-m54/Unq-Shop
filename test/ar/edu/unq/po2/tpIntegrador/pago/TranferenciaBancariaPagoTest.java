@@ -4,6 +4,7 @@ import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
 
+import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InOrder;
@@ -26,8 +27,7 @@ class TranferenciaBancariaPagoTest {
 
 		validacionMock = mock(IApiTransferenciaBancaria.class);
 
-		transferencia = new TransferenciaBancaria("0000657516878", "pepita", validacionMock);
-		transferencia.setValidacion(validacionMock);
+		transferencia = new TransferenciaBancaria("UnCVU", "UnAlias", validacionMock);
 	}
 
 	@Test
@@ -71,5 +71,15 @@ class TranferenciaBancariaPagoTest {
 	void siNuncaSeProcesaElPagoNoSeLlamaNingunaValidacion() {
 		verify(validacionMock, never()).sonDatosValidos(any());
 		verify(validacionMock, never()).ejecutarTransferencia(any());
+	}
+	
+	@Test
+	void notificarResultadoRegistraUnComprobanteConDatosCorrectos() {
+	    transferencia.notificarResultado(pedido);
+
+	    Comprobante comprobante = pedido.getComprobanteDePago();
+
+	    assertNotNull(comprobante);
+	    assertTrue(comprobante instanceof ComprobanteCBU);
 	}
 }

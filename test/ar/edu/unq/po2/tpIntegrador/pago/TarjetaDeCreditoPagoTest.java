@@ -3,8 +3,8 @@ package ar.edu.unq.po2.tpIntegrador.pago;
 import org.junit.jupiter.api.Test;
 import static org.mockito.Mockito.*;
 
+import static org.junit.jupiter.api.Assertions.*;
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -33,9 +33,7 @@ class TarjetaDeCreditoPagoTest {
 		validacionMock = mock(IApiTarjetaDeCredito.class);
 		
 		// Creo la tarjeta real 
-		tarjeta = new TarjetaDeCredito(4111333322221111l, 789,LocalDate.of(1990, Month.OCTOBER, 15), validacionMock);
-		// Conecto a mi objeto falso con la tarjeta, de esta forma validacion ya no es null.
-		tarjeta.setApi(validacionMock);
+		tarjeta = new TarjetaDeCredito(123456789, 123, LocalDate.of(2027, 12, 1), validacionMock);
 	}
 
 	@Test
@@ -96,6 +94,16 @@ class TarjetaDeCreditoPagoTest {
 		verify(validacionMock, never()).esValida(any());
 		verify(validacionMock, never()).tienePreAutorizacion(any());
 		verify(validacionMock, never()).ejecutarTransferenciaInmediata(any());
+	}
+	
+	@Test
+	void notificarResultadoRegistraUnComprobanteConDatosCorrectos() {
+	    tarjeta.notificarResultado(pedido);
+
+	    Comprobante comprobante = pedido.getComprobanteDePago();
+
+	    assertNotNull(comprobante);
+	    assertTrue(comprobante instanceof CuponDePago);
 	}
 	
 }

@@ -39,6 +39,14 @@ public class Pedido {
 		this.usuario = usuario;
 	}
 	
+	public Notificador getNotificador() {
+	    return notificador;
+	}
+
+	public void setNotificador(Notificador notificador) {
+	    this.notificador = notificador;
+	}
+	
 	public ArrayList<IItem> getItems() {
 		return carritoDeCompras;
 	}
@@ -56,21 +64,17 @@ public class Pedido {
 		this.estado = estado;
 		notificador.notificarASuscriptores(this);
 	}
-
 	
-	//revisar 
-	protected void agregarItemACarrito(IItem item) {
+	public void agregarItemACarrito(IItem item) {
 		
 		if (item.getStock() > 0) {
 			this.carritoDeCompras.add(item);
 		}
-
 	}
 	
-	protected void quitarItemDeCarrito(IItem item) {
+	public void quitarItemDeCarrito(IItem item) {
 		 this.carritoDeCompras.remove(item);
 	}
-	 //
 	
 	public void confirmarPedido() {
 		estado.confirmarPedido();
@@ -85,8 +89,13 @@ public class Pedido {
 	}
 	
 	public void enviarPedido() {
-		estado.enviarPedido();
-		
+		estado.enviarPedido();	
+	}
+	
+	// Nota Yami: agrego entregarPedido() que faltaba
+	
+	public void entregarPedido() {
+	    estado.entregarPedido();
 	}
     
 	//ver despues
@@ -95,19 +104,14 @@ public class Pedido {
 		for (IItem item: carritoDeCompras) {
 			item.decrementarStock();
 		}
-		
 	}
 
 	public void incrementarStockItems() {
 		for (IItem item: carritoDeCompras) {
 			item.incrementarStock();
 		}
-		
 	}
 	
-	//
-
-
 	public void registrarNotaDeCredito(NotaDeCredito notaDeCredito) {
 		notasDeCredito.add(notaDeCredito);
 	}
@@ -116,11 +120,9 @@ public class Pedido {
 		return this.montoTotal() + calcularValorDeEnvio(this);
 	}
 
-
 	public Double montoTotal() {
 
-		return carritoDeCompras.stream().mapToDouble(i -> i.precioFinal()).sum();
-		
+		return carritoDeCompras.stream().mapToDouble(i -> i.precioFinal()).sum();	
 	}
 
 	public IFormaDeEnvio getFormaDeEnvio() {
@@ -170,6 +172,9 @@ public class Pedido {
 	public void registrarVentaEnSistema(Venta venta) {
 		this.sistema.registrarVenta(venta);
 		
+	// Nota Yami: agrego get para poder testear
+	public Comprobante getComprobanteDePago() {
+	    return comprobanteDePago;
 	}
 	
 

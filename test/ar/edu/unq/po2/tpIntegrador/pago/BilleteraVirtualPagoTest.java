@@ -26,8 +26,7 @@ class BilleteraVirtualPagoTest {
 
 		validacionMock = mock(IApiBilleteraVirtual.class);
 
-		billetera = new BilleteraVirtual(10000.00, validacionMock);
-		billetera.setApi(validacionMock);
+		billetera = new BilleteraVirtual(5000.0, validacionMock);
 	}
 
 	@Test

@@ -6,6 +6,11 @@ import ar.edu.unq.po2.tpIntegrador.state.Pedido;
 public class Fidelizacion implements ISuscriptora {
 	
 	private IMailSender mailsender;
+	
+	// Nota Yami: agrego constructor
+	public Fidelizacion(IMailSender mailsender) {
+	    this.mailsender = mailsender;
+	}
 
 	@Override
 	public void actualizar(Pedido pedido) {
@@ -14,7 +19,5 @@ public class Fidelizacion implements ISuscriptora {
 			
 			mailsender.enviarMail(direccionDestino, "¡DESCUENTO!", "Si compras en las proximas 24 horas, tenes un descuento del 5%");
 		}
-		
 	}
-
 }
