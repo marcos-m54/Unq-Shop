@@ -3,28 +3,23 @@ package ar.edu.unq.po2.tpIntegrador.busquedaItems;
 import java.util.List;
 
 import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.IItem;
-import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.Sistema;
 
-public class CriterioPrecioMax extends Busqueda{
+public class CriterioPrecioMax implements ICriterio{
 	
 	private Double precioMax;
 	
-	public CriterioPrecioMax(Sistema sistema, Double precioMax) {
-		super(sistema);
+	public CriterioPrecioMax(Double precioMax) {
+		super();
 		this.precioMax = precioMax;
 	}
 	
 	@Override
-	public List<IItem> filtrar() {
-		return super.filtrar().stream().filter(item -> item.precioFinal() <= this.getPrecioMax()).toList();
+	public List<IItem> filtrar(List <IItem> itemsDeCatalogo) {
+		return itemsDeCatalogo.stream().filter(item -> item.precioFinal() <= this.getPrecioMax()).toList();
 	}
 
 	public Double getPrecioMax() {
 		return precioMax;
-	}
-
-	public void setPrecioMax(Double precioMax) {
-		this.precioMax = precioMax;
 	}
 
 }

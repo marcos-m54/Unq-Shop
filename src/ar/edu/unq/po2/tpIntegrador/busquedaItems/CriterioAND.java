@@ -1,23 +1,23 @@
 package ar.edu.unq.po2.tpIntegrador.busquedaItems;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.IItem;
-import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.Sistema;
 
-public class CriterioAND extends Busqueda{
+public class CriterioAND implements ICriterio{
 	
-	private List<ICriterio> criterios;
+	private List<ICriterio> criterios = new ArrayList<ICriterio>();
 	
-	public CriterioAND(Sistema sistema, List<ICriterio> criterios) {
-		super(sistema);
+	public CriterioAND(List<ICriterio> criterios) {
+		super();
 		if (criterios.size() < 3) {
 			this.criterios = criterios;
 		}
 	}
 	
-	public CriterioAND(Sistema sistema) {
-		super(sistema);
+	public CriterioAND() {
+		super();
 	}
 	
 	public List<ICriterio> getCriterios() {
@@ -38,17 +38,16 @@ public class CriterioAND extends Busqueda{
 		criterios.remove(criterioBusqueda);
 	}	
 	
-	@Override
-	public List<IItem> filtrar() {
+	public List<IItem> filtrar(List<IItem> itemsDeCatalogo) {
 		
-		return this.interseccionItems();
+		return this.interseccionItems(itemsDeCatalogo);
 		
 	}
 	
-	public List<IItem> interseccionItems() {
+	public List<IItem> interseccionItems(List<IItem> itemsDeCatalogo) {
 		
-		List<IItem> criterioUno = this.criterios.get(0).filtrar();
-		List<IItem> criterioDos = this.criterios.get(1).filtrar();
+		List<IItem> criterioUno = this.criterios.get(0).filtrar(itemsDeCatalogo);
+		List<IItem> criterioDos = this.criterios.get(1).filtrar(itemsDeCatalogo);
 	
 		return criterioUno.stream().filter(item -> criterioDos.contains(item)).toList();
 	}

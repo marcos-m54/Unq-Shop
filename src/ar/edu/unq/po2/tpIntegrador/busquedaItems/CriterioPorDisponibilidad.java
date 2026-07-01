@@ -3,19 +3,17 @@ package ar.edu.unq.po2.tpIntegrador.busquedaItems;
 import java.util.List;
 
 import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.IItem;
-import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.Sistema;
 
-public class CriterioPorDisponibilidad extends Busqueda {
+public class CriterioPorDisponibilidad implements ICriterio {
 	
 		
-	public CriterioPorDisponibilidad(Sistema sistema) {
-		super(sistema);
+	public CriterioPorDisponibilidad() {
+		super();
 	}
 
-	@Override
-	public List<IItem> filtrar() {
+	public List<IItem> filtrar(List<IItem> itemsDeCatalogo) {
 		
-		return super.filtrar().stream().filter(item -> item.getStock() > 0).toList();
+		return itemsDeCatalogo.stream().filter(item -> item.getStock() > 0).toList();
 	}
 
 }

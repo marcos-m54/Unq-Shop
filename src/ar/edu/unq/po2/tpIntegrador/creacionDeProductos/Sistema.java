@@ -3,19 +3,21 @@ package ar.edu.unq.po2.tpIntegrador.creacionDeProductos;
 import java.util.ArrayList;
 import java.util.List;
 
-import ar.edu.unq.po2.tpIntegrador.busquedaItems.CriterioBusqueda;
 import ar.edu.unq.po2.tpIntegrador.busquedaItems.ICriterio;
 
 public class Sistema {
 		
 	private ArrayList<IItem> catalogo = new ArrayList<IItem>(); 
 	private ArrayList<Sucursal> sucursales = new ArrayList<Sucursal>();
-	private CriterioBusqueda busquedaCatalogo;
-	
-
 
 	public ArrayList<IItem> getCatalogo() {
 		return catalogo;
+	}
+
+	public Sistema(ArrayList<IItem> catalogo, ArrayList<Sucursal> sucursales) {
+		super();
+		this.catalogo = catalogo;
+		this.sucursales = sucursales;
 	}
 
 	public void setCatalogo(ArrayList<IItem> catalogo) {
@@ -38,8 +40,8 @@ public class Sistema {
 		this.sucursales.add(sucursal);
 	}
 	
-	public ArrayList<IItem> busqueda() {
-		return ;
+	public List<IItem> busqueda(ICriterio criterioDeBusqueda) {
+		return criterioDeBusqueda.filtrar(this.getCatalogo());
 	}
 	
 	/*

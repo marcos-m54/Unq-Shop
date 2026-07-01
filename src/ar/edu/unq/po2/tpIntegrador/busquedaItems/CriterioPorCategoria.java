@@ -4,14 +4,13 @@ import java.util.List;
 
 import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.Categoria;
 import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.IItem;
-import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.Sistema;
 
-public class CriterioPorCategoria extends Busqueda {
+public class CriterioPorCategoria implements ICriterio {
 	
 	private Categoria categoria;
 
-	public CriterioPorCategoria(Sistema sistema) {
-		super(sistema);
+	public CriterioPorCategoria() {
+		super();
 	}	
 	
 	public Categoria getCategoria() {
@@ -22,9 +21,8 @@ public class CriterioPorCategoria extends Busqueda {
 		this.categoria = categoria;
 	}
 
-	@Override
-	public List<IItem> filtrar() {
-		return super.filtrar().stream().filter(item -> item.getCategoria().equals(this.getCategoria())).toList();
+	public List<IItem> filtrar(List<IItem> itemsDeCatalogo) {
+		return itemsDeCatalogo.stream().filter(item -> item.getCategoria().equals(this.getCategoria())).toList();
 	}
 
 }

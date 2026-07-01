@@ -1,26 +1,24 @@
 package ar.edu.unq.po2.tpIntegrador.busquedaItems;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.IItem;
-import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.Sistema;
 
-public class CriterioOR extends Busqueda{
+public class CriterioOR implements ICriterio{
 	
-	private List<ICriterio> criterios;
+	private List<ICriterio> criterios = new ArrayList<ICriterio>();
 
-	public CriterioOR(Sistema sistema, List<ICriterio> criterios) {
-		super(sistema);
+	public CriterioOR(List<ICriterio> criterios) {
+		super();
 		if (criterios.size() < 3) {
 			this.criterios = criterios;
 		}
 	}
 	
-	public CriterioOR(Sistema sistema) {
-		super(sistema);
+	public CriterioOR() {
+		super();
 	}
-	
-	
 
 	public List<ICriterio> getCriterios() {
 		return criterios;
@@ -40,18 +38,17 @@ public class CriterioOR extends Busqueda{
 		criterios.remove(criterioBusqueda);
 	}	
 	
-	@Override
-	public List<IItem> filtrar() {
+	public List<IItem> filtrar(List<IItem> itemsDeCatalogo) {
 		
-		return this.unionDeCriterios();
+		return this.unionDeCriterios(itemsDeCatalogo);
 		
 	}
 	
 	
-	public List<IItem> unionDeCriterios() {
+	public List<IItem> unionDeCriterios(List<IItem> itemsDeCatalogo) {
 		
-		List<IItem> criterioUno = this.criterios.get(0).filtrar();
-		List<IItem> criterioDos = this.criterios.get(1).filtrar();
+		List<IItem> criterioUno = this.criterios.get(0).filtrar(itemsDeCatalogo);
+		List<IItem> criterioDos = this.criterios.get(1).filtrar(itemsDeCatalogo);
 		
 		criterioUno.addAll(criterioDos);
 		
