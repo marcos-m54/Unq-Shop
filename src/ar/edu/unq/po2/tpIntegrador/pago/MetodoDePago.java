@@ -17,7 +17,7 @@ public abstract class MetodoDePago {
 	
 	
 	public void notificarResultado(Pedido pedido) {
-		
+		System.out.println("Se registo una transacción.");
 	} 
 
 }
