@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 
 import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.IItem;
+import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.Sistema;
 import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.Usuario;
+import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.Venta;
 import ar.edu.unq.po2.tpIntegrador.envio.IFormaDeEnvio;
 import ar.edu.unq.po2.tpIntegrador.notificaciones.Notificador;
 import ar.edu.unq.po2.tpIntegrador.pago.Comprobante;
@@ -20,9 +22,9 @@ public class Pedido {
 	private MetodoDePago metodoDePago;
 	private Comprobante comprobanteDePago;
 	private Notificador notificador;
-	
-	// Nota Yami: Aca el atributo notificador está null porque no hay setter getter, por lo tanto los agregue, 
-	// xq si no cada vez que queria avisar a usuario que cambio el estado del pedido rompia por null
+	//visitor
+	private Sistema sistema;
+
 	
 	public Pedido(Usuario usuario, ArrayList<IItem> items) {
 		super();
@@ -165,6 +167,11 @@ public class Pedido {
 		this.comprobanteDePago = comprobante;
 	}
 	
+	//visitor
+
+	public void registrarVentaEnSistema(Venta venta) {
+		this.sistema.registrarVenta(venta);
+		
 	// Nota Yami: agrego get para poder testear
 	public Comprobante getComprobanteDePago() {
 	    return comprobanteDePago;
