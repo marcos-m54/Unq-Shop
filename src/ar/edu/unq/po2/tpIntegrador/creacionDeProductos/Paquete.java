@@ -16,15 +16,6 @@ public class Paquete implements IItem {
 		this.descuento = descuento;
 		this.productos = productos;
 	}
-	
-	/*
-	private Paquete(Builder builder) {
-		this.nombre = builder.nombre;
-		this.descripcion = builder.descripcion;
-		this.descuento = builder.descuento;
-		this.productos = builder.productos;
-	}
-	*/
 
 	@Override
 	public String getNombre() {
@@ -125,37 +116,4 @@ public class Paquete implements IItem {
 		} 
 	*/
 	
-	/*
-	 public static class Builder {
-
-		private String nombre;
-
-		private String descripcion = "";
-		private int descuento = 0;
-		private ArrayList<IItem> productos = new ArrayList<>();
-
-		public Builder(String nombre) {
-			this.nombre = nombre;
-		}
-
-		public Builder descripcion(String descripcion) {
-			this.descripcion = descripcion;
-			return this;
-		}
-
-		public Builder descuento(int descuento) {
-			this.descuento = descuento;
-			return this;
-		}
-
-		public Builder agregarItem(IItem item) {
-			this.productos.add(item);
-			return this;
-		}
-
-		public Paquete build() {
-			return new Paquete(this);
-		}
-	} 
-	*/
 }
