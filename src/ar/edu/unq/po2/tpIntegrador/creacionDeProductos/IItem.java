@@ -13,6 +13,8 @@ public interface IItem {
 	public Double precioFinal();
 	
 	public int getStock();
+	
+	public Categoria getCategoria();
 
 	public void decrementarStock();
 
