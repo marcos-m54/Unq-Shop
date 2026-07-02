@@ -7,6 +7,7 @@ import java.util.List;
 import ar.edu.unq.po2.tpIntegrador.busquedaItems.ICriterio;
 
 import ar.edu.unq.po2.tpIntegrador.visitor.IVisitor;
+import ar.edu.unq.po2.tpIntegrador.visitor.CSVExportVisitor;
 import ar.edu.unq.po2.tpIntegrador.visitor.IReporte;
 import ar.edu.unq.po2.tpIntegrador.visitor.ReporteProductosMasVendidos;
 
@@ -46,12 +47,17 @@ public class Sistema {
 		this.ventas.add(venta);
 		
 	}
+
+	public String exportarReporteProductosMasVendidos(LocalDate inicio, LocalDate fin, IVisitor formato) {
+		IReporte reporte = new ReporteProductosMasVendidos(this.ventas, inicio, fin);
+		
+		return reporte.aceptar(formato);
+		
+	}
 	
-	/*
-	
-	public void nuevoPedido{}
-	 
-	*/
+	public ArrayList<Venta> getVentas() {
+		return ventas;
+	}
 	
 
 	
