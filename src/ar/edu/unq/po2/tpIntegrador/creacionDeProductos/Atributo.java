@@ -25,5 +25,4 @@ public class Atributo {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 	}
-	
 }

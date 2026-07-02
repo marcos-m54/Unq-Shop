@@ -29,8 +29,4 @@ public class Venta {
 	public void setPedido(Pedido pedido) {
 		this.pedido = pedido;
 	}
-	
-
-	
-
 }

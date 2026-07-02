@@ -6,5 +6,4 @@ public interface ISuscriptora {
 	
 	public void actualizar(Pedido pedido);
 
-	
 }

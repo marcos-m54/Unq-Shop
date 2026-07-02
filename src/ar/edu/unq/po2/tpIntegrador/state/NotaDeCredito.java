@@ -40,8 +40,4 @@ public class NotaDeCredito {
 	public void setMonto(Double monto) {
 		this.monto = monto;
 	}
-	
-	
-	
-	
 }

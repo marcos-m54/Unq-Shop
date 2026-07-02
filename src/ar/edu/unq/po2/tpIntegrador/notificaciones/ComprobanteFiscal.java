@@ -19,8 +19,6 @@ public class ComprobanteFiscal {
 		this.montoTotal = montoTotal;
 	}
 
-
-
 	public int getNumeroDeComprobante() {
 		return numeroDeComprobante;
 	}
@@ -60,8 +58,4 @@ public class ComprobanteFiscal {
 	public void setTipoDeComprobante(String tipoDeComprobante) {
 		this.tipoDeComprobante = tipoDeComprobante;
 	}
-	
-	
-	
-
 }

@@ -48,6 +48,4 @@ public class Confirmado implements IEstado {
 		// TODO Auto-generated method stub
 	}
 
-
-
 }

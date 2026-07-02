@@ -14,8 +14,6 @@ public class TransferenciaBancaria extends MetodoDePago {
 		this.api = api;
 	}
 
-
-	// Set y Get
 	public IApiTransferenciaBancaria getValidacion() {
 		return api;
 	}
@@ -40,14 +38,11 @@ public class TransferenciaBancaria extends MetodoDePago {
 		api.ejecutarTransferencia(this);
 
 	}
-
 	
 	public void notificarResultado(Pedido pedido) {
 		String nroOperacionBanco = String.valueOf(new java.util.Random().nextInt(900000000) + 100000000);
 		pedido.registrarComprobante(new ComprobanteCBU(this.getCbuOrCvu(), nroOperacionBanco, pedido.montoTotal()));
 	}
-	
-	//getters y setters
 
 	public String getCbuOrCvu() {
 		return cbuOrCvu;
