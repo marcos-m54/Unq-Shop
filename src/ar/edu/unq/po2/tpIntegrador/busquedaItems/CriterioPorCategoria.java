@@ -9,16 +9,13 @@ public class CriterioPorCategoria implements ICriterio {
 	
 	private Categoria categoria;
 
-	public CriterioPorCategoria() {
+	public CriterioPorCategoria(Categoria categoria) {
 		super();
+		this.categoria = categoria;
 	}	
 	
 	public Categoria getCategoria() {
 		return categoria;
-	}
-
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
 	}
 
 	public List<IItem> filtrar(List<IItem> itemsDeCatalogo) {

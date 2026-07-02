@@ -2,8 +2,6 @@ package ar.edu.unq.po2.tpIntegrador.busquedaItems;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
-import org.mockito.InOrder;
-import org.mockito.Mock;
 
 import java.util.ArrayList;
 
