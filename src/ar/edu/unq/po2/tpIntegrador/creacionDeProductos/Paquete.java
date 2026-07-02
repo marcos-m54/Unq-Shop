@@ -4,16 +4,26 @@ import java.util.ArrayList;
 
 public class Paquete implements IItem {
 	
-	public String nombre;
-	public String descripcion;
-	public int descuento;
-	public ArrayList<IItem> productos = new ArrayList<IItem>();
+	private String nombre;
+	private String descripcion;
+	private int descuento;
+	private ArrayList<IItem> productos = new ArrayList<IItem>();
+	private Categoria categoria;
 	
 	public Paquete(String nombre, String descripcion, int descuento, ArrayList<IItem> productos) {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.descuento = descuento;
 		this.productos = productos;
+		this.categoria = null;
+	}
+	
+	public Paquete(String nombre, String descripcion, int descuento, ArrayList<IItem> productos, Categoria categoria) {
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.descuento = descuento;
+		this.productos = productos;
+		this.categoria = categoria;
 	}
 
 	@Override
@@ -86,38 +96,22 @@ public class Paquete implements IItem {
 	                            .min()
 	                            .orElse(0);
 	}
-<<<<<<< HEAD
 
 	@Override
 	public Categoria getCategoria() {
 		// TODO Auto-generated method stub
-		return null;
+		return categoria;
 	}
 	
-	/* 
 	
-	 * Dejo comentado lo viejo por las dudas
 	
+	/*
 	@Override
-	public void decrementarStock() {
-		if (this.hayStockDeTodosLosItems()) {
-			this.productos.stream().forEach(producto -> producto.decrementarStock());
-		}
+	public Categoria getCategoria() {
+	
+		return categoria;
 	}
-
-	 public boolean hayStockDeTodosLosItems() {
-		return this.productos.stream().allMatch(producto -> producto.getStock() > 0);
-	}
-
-	@Override
-	public int getStock() {
-		 if (this.hayStockDeTodosLosItems()) {
-			return 1;
-		 }
-			else return 0;
-		} 
+	
 	*/
 	
-=======
->>>>>>> branch 'main' of https://github.com/marcos-m54/Unq-Shop.git
 }

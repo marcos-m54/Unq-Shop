@@ -38,15 +38,7 @@ public class Sistema {
 		this.sucursales.add(sucursal);
 	}
 	
-	public void registrarVenta(Venta venta) {
-		this.ventas.add(venta);
-	}
 	
-	public String exportarReporteProductosMasVendidos(LocalDate inicio, LocalDate fin, IVisitor formato) {
-		IReporte reporte = new ReporteProductosMasVendidos(this.ventas, inicio, fin);
-		
-		return reporte.aceptar(formato);
-	}
 	
 	public ArrayList<Venta> getVentas() {
 		return ventas;
@@ -68,13 +60,4 @@ public class Sistema {
 		
 	}
 	
-<<<<<<< HEAD
-	public ArrayList<Venta> getVentas() {
-		return ventas;
-	}
-	
-
-	
-=======
->>>>>>> branch 'main' of https://github.com/marcos-m54/Unq-Shop.git
 }
