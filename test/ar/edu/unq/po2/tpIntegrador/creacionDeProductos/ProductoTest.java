@@ -20,8 +20,6 @@ class ProductoTest {
 	    Categoria electrodomestico;
 	    Categoria deportes;
 	    Categoria indumentaria;
-		
-		//Atributo colorAzul;
 
 		@BeforeEach
 		void setUp() throws Exception {
@@ -39,18 +37,15 @@ class ProductoTest {
 			hornoElectrico = new Producto("Atma-Hor-0003", "HGAB4523PI", "Atma", 230000.0, 30, 5, 7500.0, "Horno electrico Atma de 45 litros", new ArrayList<>());
 			bicicleta = new Producto("Nord-xxx-0004", "x1.0", "Nordic", 500000.0, 50, 20, 12000.0, "Mountain bick rodado 29", new ArrayList<>());
 			camiseta = new Producto("Adid-xxx-005", "Seleccion Argentina", "Adidas", 220000.0, 10, 5, 180.0, "Camiseta titular Seleccion Argentina", new ArrayList<>());
-			
-			//colorAzul = new Atributo("color", "azul");
-		
-		
+					
 			celular.setCategoria(tecnologia);
 	        televisor.setCategoria(tecnologia);
 	        freidoraAire.setCategoria(electrodomestico);
 	        hornoElectrico.setCategoria(electrodomestico);
 	        bicicleta.setCategoria(deportes);
 	        camiseta.setCategoria(indumentaria);
+	      
 		}
-		
 		
 		@Test
 		void productoPrecioBaseSinDescuento() {
@@ -71,24 +66,22 @@ class ProductoTest {
 		void productoConDescuento() {
 		    assertEquals(250000.0, bicicleta.precioFinal());
 		}
-
+		
 		@Test
-		void agregarAtributosDinamicosTest() {
-		//	televisor.agregarAtributo("color", "azul");
-		//	assertEquals(televisor.getAtributos(), List.of(colorAzul)); 
-			
-			// Nota de Yami: no supe usar List Of, investigue y funciona comparando equals. Supuestamente deberiamos agregarlo a nuestra clase para que funcione.
+		void productoSinAtributosInicialmente() {
+			assertTrue(celular.getAtributos().isEmpty());
 		}
 		
+		@Test
 		void agregarUnAtributoDinamico() {
 		    celular.agregarAtributo("color", "azul");
 		    
 		    Atributo primero = celular.getAtributos().get(0);
 		    
-		    assertEquals("color", primero.getNombre()); // Nota Yami: Opcion 1: con variable
-		    assertEquals("negro", celular.getAtributos().get(0).getDescripcion()); // Nota Yami: Opcion 2: todo en una linea
+		    assertEquals("color", primero.getNombre()); 
+		    assertEquals("azul", primero.getDescripcion());
 		}
-
+		
 		@Test
 		void agregarYControlarVariosAtributosDinamicos() {
 		    televisor.agregarAtributo("alto", "120cm");
@@ -102,5 +95,50 @@ class ProductoTest {
 		    celular.agregarAtributo("color", "negro");
 		    assertTrue(televisor.getAtributos().isEmpty());
 		}
-		
+		@Test
+		void productoGetNombre() {
+		    assertEquals("Moto G86", celular.getNombre());
+		}
+
+		@Test
+		void productoGetSKU() {
+		    assertEquals("MOTO-G86-256", celular.getSKU());
+		}
+
+		@Test
+		void productoGetMarca() {
+		    assertEquals("Motorola", celular.getMarca());
+		}
+
+		@Test
+		void productoGetStock() {
+		    assertEquals(5, celular.getStock());
+		}
+
+		@Test
+		void productoGetPeso() {
+		    assertEquals(186.0, celular.getPeso());
+		}
+
+		@Test
+		void productoGetCategoria() {
+		    assertEquals(tecnologia, celular.getCategoria());
+		}
+
+		@Test
+		void productoGetDescripcion() {
+		    assertEquals("Celular gama media", celular.getDescripcion());
+		}
+
+		@Test
+		void incrementarStockSumaUnaUnidad() {
+		    celular.incrementarStock(); // 5 + 1 = 6
+		    assertEquals(6, celular.getStock());
+		}
+
+		@Test
+		void decrementarStockRestaUnaUnidad() {
+		    celular.decrementarStock(); // 5 - 1 = 4
+		    assertEquals(4, celular.getStock());
+		}
 	}

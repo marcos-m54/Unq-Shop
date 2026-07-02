@@ -1,6 +1,4 @@
 package ar.edu.unq.po2.tpIntegrador.pago;
-import java.util.Random;
-
 import ar.edu.unq.po2.tpIntegrador.state.Pedido;
 
 
@@ -17,9 +15,9 @@ public abstract class MetodoDePago {
 	public abstract void reservarFondos(Pedido pedido);  
 	public abstract void ejecutarTransacción(Pedido pedido);
 	
-	//metodo hook
+	
 	public void notificarResultado(Pedido pedido) {
-		
+		System.out.println("Se registo una transacción.");
 	} 
 
 }

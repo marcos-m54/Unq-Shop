@@ -109,7 +109,7 @@ public class Producto implements IItem {
 	
 	@Override
 	public Double precioFinal() {
-		return this.getPrecioBase() - ( (this.getPrecioBase() * this.getDescuento() / 100 ) );
+		return this.getPrecioBase() - ( (this.getPrecioBase() * this.getDescuento() / 100) );
 	}
 
 	public ArrayList<Atributo> getAtributos() {
@@ -137,6 +137,4 @@ public class Producto implements IItem {
 		stock+=1;
 		
 	}
-
-
 }

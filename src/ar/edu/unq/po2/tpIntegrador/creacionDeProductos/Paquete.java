@@ -73,21 +73,37 @@ public class Paquete implements IItem {
 	
 	//nuevo
 
+
+	@Override
+	public void incrementarStock() {
+		productos.stream().forEach(producto -> producto.incrementarStock());
+	}
+	
+	@Override
+	public void decrementarStock() {
+	    this.productos.stream().forEach(producto -> producto.decrementarStock());
+	}
+	
+	@Override
+	public int getStock() {
+	    return this.productos.stream()
+	                            .mapToInt(p -> p.getStock())
+	                            .min()
+	                            .orElse(0);
+	}
+	
+	/* 
+	
+	 * Dejo comentado lo viejo por las dudas
+	
 	@Override
 	public void decrementarStock() {
 		if (this.hayStockDeTodosLosItems()) {
 			this.productos.stream().forEach(producto -> producto.decrementarStock());
 		}
-		
 	}
 
-	@Override
-	public void incrementarStock() {
-		productos.stream().forEach(producto -> producto.incrementarStock());
-		
-	}
-	
-	public boolean hayStockDeTodosLosItems() {
+	 public boolean hayStockDeTodosLosItems() {
 		return this.productos.stream().allMatch(producto -> producto.getStock() > 0);
 	}
 
@@ -97,15 +113,7 @@ public class Paquete implements IItem {
 			return 1;
 		 }
 			else return 0;
-		}
-
-	@Override
-	public Categoria getCategoria() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		} 
+	*/
 	
-	
-
-
 }

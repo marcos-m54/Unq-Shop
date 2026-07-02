@@ -19,25 +19,22 @@ public class EnPreparacion implements IEstado {
 	@Override
 	public void agregarItem(IItem item) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void quitarItem(IItem item) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void confirmarPedido() {
 		// TODO Auto-generated method stub
-
 	}
 	
 	@Override
 	public void entregarPedido() {
 		// TODO Auto-generated method stub
-		
+	
 	}
 
 	@Override
@@ -45,22 +42,15 @@ public class EnPreparacion implements IEstado {
 		pedido.setEstado(new Cancelado(pedido));
 		pedido.incrementarStockItems();
 		pedido.registrarNotaDeCredito(new NotaDeCredito(pedido.getUsuario().getNombreUsuario(), LocalDate.now(), pedido.montoTotalPedidoMasEnvio()));
-
 	}
 
 	@Override
 	public void prepararPedido() {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void enviarPedido() {
 		pedido.setEstado(new Enviado(pedido));
-
 	}
-	
-	
-
-
 }

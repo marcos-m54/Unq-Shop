@@ -6,33 +6,84 @@ import ar.edu.unq.po2.tpIntegrador.state.Pedido;
 
 public class TarjetaDeCredito extends MetodoDePago {
 	
-	private int numeroTarjeta;
+	private long numeroTarjeta;
 	private int CVV;
 	private LocalDate fechaVencimiento;
-	private IValidacionTarjetaDeCredito validacion;
+	private IApiTarjetaDeCredito api;
+	
+
+	public TarjetaDeCredito(long numeroTarjeta, int cVV, LocalDate fechaVencimiento, IApiTarjetaDeCredito api) {
+		this.setNumeroTarjeta(numeroTarjeta);
+		this.setCVV(cVV);
+		this.setFechaVencimiento(fechaVencimiento);
+		this.api = api;
+	}
+
 
 	@Override
 	public void validarDatos(Pedido pedido) {
-		validacion.esValida(this);
+		api.esValida(this);
 
 
 	}
 
 	@Override
 	public void reservarFondos(Pedido pedido) {
-		validacion.tienePreAutorizacion(this);
+		api.tienePreAutorizacion(this);
 
 	}
 
 	@Override
 	public void ejecutarTransacción(Pedido pedido) {
-		validacion.ejecutarTransferenciaInmediata(this);
+		api.ejecutarTransferenciaInmediata(this);
 
 	}
 
 	public void notificarResultado(Pedido pedido) {
-
-
+		
+		pedido.registrarComprobante(new CuponDePago(pedido.montoTotal(), this.obtenerMascaraCupon()));
+		
 	}
+	
+	//getters y setters
+
+	public long getNumeroTarjeta() {
+		return numeroTarjeta;
+	}
+
+	public void setNumeroTarjeta(long numeroTarjeta) {
+		this.numeroTarjeta = numeroTarjeta;
+	}
+
+	public int getCVV() {
+		return CVV;
+	}
+
+	public void setCVV(int cVV) {
+		CVV = cVV;
+	}
+
+	public LocalDate getFechaVencimiento() {
+		return fechaVencimiento;
+	}
+
+	public void setFechaVencimiento(LocalDate fechaVencimiento) {
+		this.fechaVencimiento = fechaVencimiento;
+	}
+	
+	public IApiTarjetaDeCredito getApi() {
+		return api;
+	}
+
+	public void setApi(IApiTarjetaDeCredito api) {
+		this.api = api;
+	}
+	
+	//
+	
+	 public String obtenerMascaraCupon() {
+	        long ultimosCuatro = this.numeroTarjeta % 10000;
+	        return "XXXX-XXXX-XXXX-" + String.format("%04d", ultimosCuatro);
+	    }
 
 }
