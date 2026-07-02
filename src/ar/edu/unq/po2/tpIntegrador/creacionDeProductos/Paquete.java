@@ -91,6 +91,12 @@ public class Paquete implements IItem {
 	                            .min()
 	                            .orElse(0);
 	}
+
+	@Override
+	public Categoria getCategoria() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	/* 
 	

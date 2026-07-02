@@ -41,6 +41,11 @@ public class Sistema {
 	public List<IItem> busqueda(ICriterio criterioDeBusqueda) {
 		return criterioDeBusqueda.filtrar(this.getCatalogo());
 	}
+
+	public void registrarVenta(Venta venta) {
+		this.ventas.add(venta);
+		
+	}
 	
 	/*
 	
