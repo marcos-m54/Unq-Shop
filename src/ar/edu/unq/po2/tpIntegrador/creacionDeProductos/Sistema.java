@@ -15,7 +15,6 @@ public class Sistema {
 	private ArrayList<IItem> catalogo = new ArrayList<IItem>(); 
 	private ArrayList<Sucursal> sucursales = new ArrayList<Sucursal>();
 
-	// Nota Yami: agrego getter
 	public ArrayList<IItem> getCatalogo() {
 		return catalogo;
 	}
@@ -38,16 +37,22 @@ public class Sistema {
 		this.sucursales.add(sucursal);
 	}
 	
+	public void registrarVenta(Venta venta) {
+		this.ventas.add(venta);
+	}
+	
+	public String exportarReporteProductosMasVendidos(LocalDate inicio, LocalDate fin, IVisitor formato) {
+		IReporte reporte = new ReporteProductosMasVendidos(this.ventas, inicio, fin);
+		
+		return reporte.aceptar(formato);
+	}
+	
+	public ArrayList<Venta> getVentas() {
+		return ventas;
+	}
+
 	public List<IItem> busqueda(ICriterio criterioDeBusqueda) {
 		return criterioDeBusqueda.filtrar(this.getCatalogo());
 	}
-	
-	/*
-	
-	public void nuevoPedido{}
-	 
-	*/
-	
-
 	
 }

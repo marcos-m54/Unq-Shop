@@ -9,7 +9,6 @@ public class NotificadorDeEmail implements ISuscriptora {
 	
 	private IMailSender mailsender;
 
-	// Nota Yami: agrego constructor
 	public NotificadorDeEmail(IMailSender mailsender) {
 	    this.mailsender = mailsender;
 	}

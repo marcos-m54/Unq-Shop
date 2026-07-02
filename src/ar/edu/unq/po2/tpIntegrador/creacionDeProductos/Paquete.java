@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class Paquete implements IItem {
 	
-
 	public String nombre;
 	public String descripcion;
 	public int descuento;
@@ -60,7 +59,6 @@ public class Paquete implements IItem {
 	@Override
 	public Double precioFinal() {
 		return this.getPrecioBase() * (1 - this.getDescuento()/ 100.0);
-		
 	}
 	
 	public void agregarItem(IItem unItem) {
@@ -71,9 +69,6 @@ public class Paquete implements IItem {
 		productos.remove(unItem);
 	}
 	
-	//nuevo
-
-
 	@Override
 	public void incrementarStock() {
 		productos.stream().forEach(producto -> producto.incrementarStock());
@@ -91,29 +86,4 @@ public class Paquete implements IItem {
 	                            .min()
 	                            .orElse(0);
 	}
-	
-	/* 
-	
-	 * Dejo comentado lo viejo por las dudas
-	
-	@Override
-	public void decrementarStock() {
-		if (this.hayStockDeTodosLosItems()) {
-			this.productos.stream().forEach(producto -> producto.decrementarStock());
-		}
-	}
-
-	 public boolean hayStockDeTodosLosItems() {
-		return this.productos.stream().allMatch(producto -> producto.getStock() > 0);
-	}
-
-	@Override
-	public int getStock() {
-		 if (this.hayStockDeTodosLosItems()) {
-			return 1;
-		 }
-			else return 0;
-		} 
-	*/
-	
 }

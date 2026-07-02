@@ -151,12 +151,6 @@ public class Pedido {
 	public void realizarPago() {
 		this.metodoDePago.procesarPago(this);
 	}
-	
-	
-	public MetodoDePago getMetodoDePago() {
-		return metodoDePago;
-	}
-
 
 	public void setMetodoDePago(MetodoDePago metodoDePago) {
 		this.metodoDePago = metodoDePago;

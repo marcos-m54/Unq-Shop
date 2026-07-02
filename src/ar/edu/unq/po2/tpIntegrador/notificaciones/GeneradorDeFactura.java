@@ -17,5 +17,3 @@ public class GeneradorDeFactura implements ISuscriptora {
 	}
 }
 
-// Nota Yami: El enunciado dice "crea el comprobante fiscal", no "registrarlo". A diferencia del cupon de pago y el comprobante CBU que si dicen
-//"generarlo y registrarlo", aca solo se crea el objeto. Me parece un dato interesante para dejarlo constatado.

@@ -7,7 +7,6 @@ public class Fidelizacion implements ISuscriptora {
 	
 	private IMailSender mailsender;
 	
-	// Nota Yami: agrego constructor
 	public Fidelizacion(IMailSender mailsender) {
 	    this.mailsender = mailsender;
 	}

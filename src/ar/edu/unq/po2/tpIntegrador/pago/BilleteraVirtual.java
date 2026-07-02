@@ -4,7 +4,6 @@ import ar.edu.unq.po2.tpIntegrador.state.Pedido;
 
 public class BilleteraVirtual extends MetodoDePago {
 
-
 	private Double saldo;
 	private IApiBilleteraVirtual api; 
 	
@@ -13,7 +12,6 @@ public class BilleteraVirtual extends MetodoDePago {
 		this.api = api;
 	}
 	
-
 	@Override
 	public void validarDatos(Pedido pedido) {
 		api.tieneSaldoSuficiente(this);
@@ -23,7 +21,6 @@ public class BilleteraVirtual extends MetodoDePago {
 	@Override
 	public void reservarFondos(Pedido pedido) {
 		api.bloquearSaldo(this);
-
 	}
 
 	@Override
@@ -36,9 +33,6 @@ public class BilleteraVirtual extends MetodoDePago {
 		api.crearNotificacionPush(this);
 
 	}
-	
-	//getters y setters
-
 
 	public Double getSaldo() {
 		return saldo;

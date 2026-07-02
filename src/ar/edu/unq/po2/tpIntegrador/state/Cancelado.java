@@ -42,9 +42,4 @@ public class Cancelado implements IEstado {
 	public void entregarPedido() {
 		// TODO Auto-generated method stub
 	}
-	
-
-	
-	
-
 }

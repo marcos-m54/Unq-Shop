@@ -7,7 +7,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class EnvioEstandar implements IFormaDeEnvio {
 	
 	private ICorreoArgentina correoArgentina;
-	// Nota Yami: Agregue constructor, setter y getter (uml)
+
 	public EnvioEstandar(ICorreoArgentina correoArgentina) {
 		super();
 	    this.correoArgentina = correoArgentina;

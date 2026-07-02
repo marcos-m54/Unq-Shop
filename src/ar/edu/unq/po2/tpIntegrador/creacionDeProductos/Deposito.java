@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class Deposito {
 	
-
 	private String nombre;
 	private ArrayList<IItem> items = new ArrayList<IItem>();
 	
@@ -32,5 +31,4 @@ public class Deposito {
 	public int getStockDe(IItem item) {
 		return item.getStock();
 	}
-
 }

@@ -37,6 +37,4 @@ public class Sucursal {
 				.stream()
 	            .allMatch(item -> this.hayStockDe(item));
 	}
-	
-
 }

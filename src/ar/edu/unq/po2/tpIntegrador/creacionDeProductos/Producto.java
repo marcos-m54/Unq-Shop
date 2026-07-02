@@ -34,10 +34,6 @@ public class Producto implements IItem {
 		return SKU;
 	}
 
-	public void setSKU(String sKU) {
-		SKU = sKU;
-	}
-	
 	@Override
 	public String getNombre() {
 		return this.nombre;
@@ -82,7 +78,6 @@ public class Producto implements IItem {
 		this.peso = peso;
 	}
 
-
 	@Override
 	public String getDescripcion() {
 		return descripcion;
@@ -91,8 +86,6 @@ public class Producto implements IItem {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-
-	
 	
 	public void agregarAtributo(String nombre, String descripcion) {
 		this.atributos.add(new Atributo(nombre, descripcion));
@@ -124,17 +117,13 @@ public class Producto implements IItem {
 		this.categoria = categoria;
 	}
 	
-	//nuevo
-	
 	@Override
 	public void decrementarStock() {
-		stock-= 1;
-		
+		stock-= 1;	
 	}
 
 	@Override
 	public void incrementarStock() {
-		stock+=1;
-		
+		stock+=1;	
 	}
 }
