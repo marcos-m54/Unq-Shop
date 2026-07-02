@@ -7,7 +7,6 @@ public class Usuario {
 	private String email;
 	private String direccion;
 
-
 	public Usuario(String nombreUsuario, String email, String direccion) {
 		this.nombreUsuario = nombreUsuario;
 		this.setEmail(email);
@@ -37,5 +36,4 @@ public class Usuario {
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
-	
 }

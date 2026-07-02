@@ -33,7 +33,4 @@ public abstract class Comprobante {
     protected String getFechaFormateada() {
         return fechaEmision.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
     }
-
-	
-
 }

@@ -2,7 +2,6 @@ package ar.edu.unq.po2.tpIntegrador.creacionDeProductos;
 
 public class Categoria {
 	
-
 	private String nombre;
 	private String descripcion;
 	
@@ -26,8 +25,4 @@ public class Categoria {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	
-	
-	
-
 }

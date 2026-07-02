@@ -7,7 +7,6 @@ public class RetiroEnSucursal implements IFormaDeEnvio {
 	
 	private Sucursal sucursal;
 	
-	// Nota Yami: Agregue constructor, setter y getter (uml)
 	public RetiroEnSucursal(Sucursal sucursal) {
 		super();
 	    this.sucursal = sucursal;

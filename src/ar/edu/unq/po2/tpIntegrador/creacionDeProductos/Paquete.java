@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class Paquete implements IItem {
 	
-
 	public String nombre;
 	public String descripcion;
 	public int descuento;
@@ -60,7 +59,6 @@ public class Paquete implements IItem {
 	@Override
 	public Double precioFinal() {
 		return this.getPrecioBase() * (1 - this.getDescuento()/ 100.0);
-		
 	}
 	
 	public void agregarItem(IItem unItem) {
@@ -71,9 +69,6 @@ public class Paquete implements IItem {
 		productos.remove(unItem);
 	}
 	
-	//nuevo
-
-
 	@Override
 	public void incrementarStock() {
 		productos.stream().forEach(producto -> producto.incrementarStock());
@@ -91,6 +86,7 @@ public class Paquete implements IItem {
 	                            .min()
 	                            .orElse(0);
 	}
+<<<<<<< HEAD
 
 	@Override
 	public Categoria getCategoria() {
@@ -122,4 +118,6 @@ public class Paquete implements IItem {
 		} 
 	*/
 	
+=======
+>>>>>>> branch 'main' of https://github.com/marcos-m54/Unq-Shop.git
 }
