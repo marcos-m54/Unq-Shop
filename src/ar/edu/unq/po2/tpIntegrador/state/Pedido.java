@@ -56,7 +56,8 @@ public class Pedido implements INotificador {
 	
 	public void setEstado(IEstado estado) {
 		this.estado = estado;
-		notificador.notificarASuscriptores(this);
+		//notificador.notificarASuscriptores(this);
+		this.notificar();
 	}
 	
 	public void agregarItemACarrito(IItem item) {

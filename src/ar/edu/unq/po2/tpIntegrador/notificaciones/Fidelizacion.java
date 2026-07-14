@@ -17,7 +17,7 @@ public class Fidelizacion implements IObservador {
 			
 				String direccionDestino = pedido.getUsuario().getEmail();
 				
-				mailsender.enviarMail(direccionDestino, "¡DESCUENTO!", "Si compras en las proximas 24 horas, tenes un descuento del 5%");
+				mailsender.enviarMail(direccionDestino, "Su pedido se ha cancelado. Oportunidad ¡DESCUENTO! si compra en las prox 24hs", "Si compras en las proximas 24 horas, tenes un descuento del 5%");
 					
 			}
 		

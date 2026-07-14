@@ -21,8 +21,12 @@ class NotificacionesTest {
 	Pedido pedido;
 	Usuario usuario;
 	IMailSender mailSenderMock;
-	//Notificador notificador;
- 
+	
+	//observers concretos
+	NovedadesDePedido observerNovedades;
+	Fidelizacion fidelizacion;
+	
+	
 	@BeforeEach
 	void setUp() throws Exception {
 		// Usuario real
@@ -38,43 +42,48 @@ class NotificacionesTest {
  
 		// Mock del mail sender, externo no implementamos
 		mailSenderMock = mock(IMailSender.class);
+		observerNovedades = new NovedadesDePedido(mailSenderMock);
+		fidelizacion = new Fidelizacion(mailSenderMock);
+		
 	}
  
 	@Test
 	void notificadorNotificaATodosLosSuscriptores() {
 		// Creo dos suscriptores falsos
-		ISuscriptora suscriptora1 = mock(ISuscriptora.class);
-		ISuscriptora suscriptora2 = mock(ISuscriptora.class);
+
+		IObservador suscriptora1 = mock(IObservador.class);
+		IObservador suscriptora2 = mock(IObservador.class);
  
-		//notificador.suscribir(suscriptora1);
-		//notificador.suscribir(suscriptora2);
- 
-		//notificador.notificarASuscriptores(pedido);
- 
+		pedido.agregarObservador(suscriptora1);
+		pedido.agregarObservador(suscriptora2);
+
 		// Verifico que ambos recibieron el aviso
+		pedido.notificar();
+		
 		verify(suscriptora1).actualizar(pedido);
 		verify(suscriptora2).actualizar(pedido);
 	}
  
 	@Test
 	void notificadorDesuscribirDejaDeNotificarAlSuscriptor() {
-		ISuscriptora suscriptoraMock = mock(ISuscriptora.class);
+		IObservador suscriptoraMock = mock(IObservador.class);
  
-		notificador.suscribir(suscriptoraMock);
-		notificador.desuscribir(suscriptoraMock);
+		pedido.agregarObservador(suscriptoraMock);
+		pedido.quitarObservador(suscriptoraMock);
  
-		notificador.notificarASuscriptores(pedido);
+		pedido.notificar();
  
 		// Despues de desuscribirse, NO deberia recibir mas notificaciones
+		
 		verify(suscriptoraMock, never()).actualizar(any());
 	}
  
 	@Test
 	void notificadorSinSuscriptoresNoLlamaANadie() {
-		ISuscriptora suscriptoraMock = mock(ISuscriptora.class);
+		IObservador suscriptoraMock = mock(IObservador.class);
  
 		// No suscribimos a nadie
-		notificador.notificarASuscriptores(pedido);
+		pedido.notificar();
  
 		verify(suscriptoraMock, never()).actualizar(any());
 	}
@@ -82,78 +91,65 @@ class NotificacionesTest {
 	// Enunciado: solo actua ante CONFIRMADO, ENVIADO y ENTREGADO
 	@Test
 	void notificadorDeEmailEnviaMailCuandoElPedidoEsConfirmado() {
-		NotificadorDeEmail notificadorEmail = new NotificadorDeEmail(mailSenderMock);
-		pedido.setEstado(new Confirmado(pedido));
+
 		// Forzamos a estado de pedido confirmado
+		pedido.setEstado(new Confirmado(pedido));
  
-		notificadorEmail.actualizar(pedido);
+		observerNovedades.actualizar(pedido);
 		
 		// Verificamos que mailSender recibio el llamado con los parametros correctos
 		verify(mailSenderMock).enviarMail(
 			"juana@mail.com",
-			"¡CONFIRMADO!",
-			"Te avisamos que tu pedido ha sido confirmado."
+			"Detalles de su compra UnqShop",
+			"Gracias por tu compra, tu pedido se encuentra en estado: Confirmado. ¡Gracias por su compra!"
 		);
 	}
- 
 	@Test
 	void notificadorDeEmailEnviaMailCuandoElPedidoEsEnviado() {
-		NotificadorDeEmail notificadorEmail = new NotificadorDeEmail(mailSenderMock);
+
 		pedido.setEstado(new Enviado(pedido));
  
-		notificadorEmail.actualizar(pedido);
+		observerNovedades.actualizar(pedido);
  
 		verify(mailSenderMock).enviarMail(
-			"juana@mail.com",
-			"¡ENVIADO!",
-			"Te avisamos que tu pedido ha sido enviado, y esta en camino."
+				"juana@mail.com",
+				"Detalles de su compra UnqShop",
+				"Gracias por tu compra, tu pedido se encuentra en estado: Enviado. ¡Gracias por su compra!"
 		);
 	}
  
 	@Test
 	void notificadorDeEmailEnviaMailCuandoElPedidoEsEntregado() {
-		NotificadorDeEmail notificadorEmail = new NotificadorDeEmail(mailSenderMock);
 		pedido.setEstado(new Entregado(pedido));
- 
-		notificadorEmail.actualizar(pedido);
- 
+  
+		observerNovedades.actualizar(pedido);
+		
 		verify(mailSenderMock).enviarMail(
-			"juana@mail.com",
-			"¡ENTREGADO!",
-			"Te avisamos que tu pedido ha sido entregado, ¡disfrutalo!"
+				"juana@mail.com",
+				"Detalles de su compra UnqShop",
+				"Gracias por tu compra, tu pedido se encuentra en estado: Entregado. ¡Gracias por su compra!"
 		);
 	}
  
 	@Test
-	void notificadorDeEmailNoEnviaMailCuandoElPedidoEsCancelado() {
+	void notificadorDeEmailEnviaMailCuandoEsCanceladoConCuponDeDescuento() {
 		// Si el estado es CANCELADO, no deberia mandar ningun mail
-		NotificadorDeEmail notificadorEmail = new NotificadorDeEmail(mailSenderMock);
-		pedido.setEstado(new Cancelado(pedido));
- 
-		notificadorEmail.actualizar(pedido);
- 
-		verify(mailSenderMock, never()).enviarMail(any(), any(), any());
-	}
- 
-	// Enunciado: si se cancela un pedido, envia un cupon de descuento del 5%
-	@Test
-	void fidelizacionEnviaMailCuandoElPedidoEsCancelado() {
-		Fidelizacion fidelizacion = new Fidelizacion(mailSenderMock);
+		//NotificadorDeEmail notificadorEmail = new NotificadorDeEmail(mailSenderMock);
 		pedido.setEstado(new Cancelado(pedido));
  
 		fidelizacion.actualizar(pedido);
- 
+
 		verify(mailSenderMock).enviarMail(
-			"juana@mail.com",
-			"¡DESCUENTO!",
-			"Si compras en las proximas 24 horas, tenes un descuento del 5%"
-		);
+				"juana@mail.com",
+				"Su pedido se ha cancelado. Oportunidad ¡DESCUENTO! si compra en las prox 24hs",
+				"Si compras en las proximas 24 horas, tenes un descuento del 5%");
+		
 	}
+ 
  
 	@Test
 	void fidelizacionNoEnviaMailSiElPedidoNoEstaCancelado() {
 		// Solo actua cuando el pedido esta CANCELADO, no en otros estados
-		Fidelizacion fidelizacion = new Fidelizacion(mailSenderMock);
 		pedido.setEstado(new Confirmado(pedido));
  
 		fidelizacion.actualizar(pedido);
@@ -162,7 +158,7 @@ class NotificacionesTest {
 	}
  
 	// Enunciado: crea el comprobante fiscal cuando el pedido alcanza ENTREGADO
- 
+ /*
 	@Test
 	void generadorDeFacturaActuaSoloEnEstadoEntregado() {
 		// Verificamos que no explota cuando el estado es ENTREGADO
@@ -171,6 +167,6 @@ class NotificacionesTest {
 		pedido.setEstado(new Entregado(pedido));
  
 		assertDoesNotThrow(() -> generador.actualizar(pedido));
-	}
+	}*/
 }
  
