@@ -44,4 +44,9 @@ public class Entregado implements IEstado {
 	public void entregarPedido() {
 		// TODO Auto-generated method stub
 	}
+
+	@Override
+	public String infoEstado() {
+		return "Entregado";
+	}
 }

@@ -53,4 +53,9 @@ public class EnPreparacion implements IEstado {
 	public void enviarPedido() {
 		pedido.setEstado(new Enviado(pedido));
 	}
+
+	@Override
+	public String infoEstado() {
+		return "En preparacion";
+	}
 }

@@ -29,6 +29,7 @@ public class Borrador implements IEstado {
 			
 		pedido.realizarPago();
 		pedido.setEstado(new Confirmado(pedido));
+		pedido.notificar();
 		pedido.registrarVentaEnSistema(new Venta(LocalDate.now(), this.pedido));
 		pedido.decrementarStockItems();
 		}
@@ -53,4 +54,11 @@ public class Borrador implements IEstado {
 	public void entregarPedido() {
 		// TODO Auto-generated method stub
 	}
+
+	@Override
+	public String infoEstado() {
+		return "Borrador";
+	}
+	
+	
 }

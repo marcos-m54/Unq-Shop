@@ -21,7 +21,7 @@ class NotificacionesTest {
 	Pedido pedido;
 	Usuario usuario;
 	IMailSender mailSenderMock;
-	Notificador notificador;
+	//Notificador notificador;
  
 	@BeforeEach
 	void setUp() throws Exception {
@@ -33,8 +33,8 @@ class NotificacionesTest {
 		// Pedido vacío, solo para tener un contexto de pedido real donde cambiar el estado
  
 		// Notificador real, vacío (sin suscriptores). Cada test agrega los suscriptores que necesita.
-		notificador = new Notificador();
-		pedido.setNotificador(notificador);
+		//notificador = new Notificador();
+		//pedido.setNotificador(notificador);
  
 		// Mock del mail sender, externo no implementamos
 		mailSenderMock = mock(IMailSender.class);
@@ -46,10 +46,10 @@ class NotificacionesTest {
 		ISuscriptora suscriptora1 = mock(ISuscriptora.class);
 		ISuscriptora suscriptora2 = mock(ISuscriptora.class);
  
-		notificador.suscribir(suscriptora1);
-		notificador.suscribir(suscriptora2);
+		//notificador.suscribir(suscriptora1);
+		//notificador.suscribir(suscriptora2);
  
-		notificador.notificarASuscriptores(pedido);
+		//notificador.notificarASuscriptores(pedido);
  
 		// Verifico que ambos recibieron el aviso
 		verify(suscriptora1).actualizar(pedido);

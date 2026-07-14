@@ -33,7 +33,6 @@ class EnvioTest {
 		items.add(itemMock);
  
 		pedido = new Pedido(usuario, items);
-		pedido.setNotificador(new Notificador());
 	}
  
 	// Envio Estandar

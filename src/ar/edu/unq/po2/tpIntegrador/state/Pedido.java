@@ -1,23 +1,26 @@
 package ar.edu.unq.po2.tpIntegrador.state;
 
 import java.util.ArrayList;
-
+import java.util.List;
 
 import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.IItem;
 import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.Sistema;
 import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.Usuario;
 import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.Venta;
 import ar.edu.unq.po2.tpIntegrador.envio.IFormaDeEnvio;
+import ar.edu.unq.po2.tpIntegrador.notificaciones.INotificador;
+import ar.edu.unq.po2.tpIntegrador.notificaciones.IObservador;
 import ar.edu.unq.po2.tpIntegrador.notificaciones.Notificador;
 import ar.edu.unq.po2.tpIntegrador.pago.Comprobante;
 import ar.edu.unq.po2.tpIntegrador.pago.MetodoDePago;
 
-public class Pedido {
+public class Pedido implements INotificador {
 	
 	private IEstado estado;
 	private Usuario usuario;
 	private ArrayList<IItem> carritoDeCompras = new ArrayList<IItem>();
 	private ArrayList<NotaDeCredito> notasDeCredito = new ArrayList<NotaDeCredito>();
+	private List<IObservador> observadores = new ArrayList<IObservador>();
 	private IFormaDeEnvio formaDeEnvio;
 	private MetodoDePago metodoDePago;
 	private Comprobante comprobanteDePago;
@@ -38,15 +41,7 @@ public class Pedido {
 		this.estado = new Borrador(this);
 		this.usuario = usuario;
 	}
-	
-	public Notificador getNotificador() {
-	    return notificador;
-	}
-
-	public void setNotificador(Notificador notificador) {
-	    this.notificador = notificador;
-	}
-	
+		
 	public ArrayList<IItem> getItems() {
 		return carritoDeCompras;
 	}
@@ -175,7 +170,30 @@ public class Pedido {
 	public Comprobante getComprobanteDePago() {
 	    return comprobanteDePago;
 	}
+
+	@Override
+	public void agregarObservador(IObservador observador) {
+		this.observadores.add(observador);
+	}
+
+	@Override
+	public void quitarObservador(IObservador observador) {
+		this.observadores.remove(observador);
+	}
+
+	@Override
+	public void notificar() {
+		this.observadores.stream().forEach(obs -> obs.actualizar(this));
+	}
+
+	public String getMailUsuario() {
+		return this.getUsuario().getEmail();
+	}
+
+
+	public String infoEstadoActual() {
+		return this.getEstado().infoEstado();
+	}
 	
-
-
+	
 }

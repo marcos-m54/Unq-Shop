@@ -12,4 +12,6 @@ public interface IEstado {
 	public void enviarPedido();
 	public void entregarPedido();
 	
+	public String infoEstado();
+	
 }

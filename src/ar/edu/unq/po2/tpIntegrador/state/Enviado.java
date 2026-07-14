@@ -47,4 +47,9 @@ public class Enviado implements IEstado {
 	@Override
 	public void enviarPedido() {
 	}
+
+	@Override
+	public String infoEstado() {
+		return "Enviado";
+	}
 }
