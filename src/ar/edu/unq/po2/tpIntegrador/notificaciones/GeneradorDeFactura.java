@@ -14,8 +14,8 @@ public class GeneradorDeFactura implements ISuscriptora {
 	public void actualizar(Pedido pedido) {
 		if(pedido.infoEstadoActual().equals("Entregado")) {
 			
-			email.enviarMail(pedido.getMailUsuario(), "Su factura de compra - Unq-Shop", null,new ComprobanteFiscal("A", 22, LocalDate.now(), "20-00000001",pedido.montoTotal()));
-		
+			email.enviarMail(pedido.getMailUsuario(), "Su factura de compra - Unq-Shop", null);
+		//new ComprobanteFiscal("A", 22, LocalDate.now(), "20-00000001",
 		}
 	}
 }
