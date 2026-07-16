@@ -28,13 +28,15 @@ public class CriterioOR implements ICriterio{
 		this.criterios = criterios;
 	}
 	
-	public void agregarCriterioBusqueda(ICriterio criterioBusqueda) {
+	@Override
+	public void agregarCriterio(ICriterio criterioBusqueda) {
 		if (criterios.size() < 3) {
 			criterios.add(criterioBusqueda);
 		}
 	}
 	
-	public void sacarCriterioBusqueda(ICriterio criterioBusqueda) {
+	@Override
+	public void sacarCriterio(ICriterio criterioBusqueda) {
 		criterios.remove(criterioBusqueda);
 	}	
 	
@@ -50,9 +52,17 @@ public class CriterioOR implements ICriterio{
 		List<IItem> criterioUno = this.criterios.get(0).filtrar(itemsDeCatalogo);
 		List<IItem> criterioDos = this.criterios.get(1).filtrar(itemsDeCatalogo);
 		
-		criterioUno.addAll(criterioDos);
-		
-		return criterioUno;
+	    List<IItem> resultadoUnion = new ArrayList<>(criterioUno);
+	    
+	    for (IItem item : criterioDos) {
+	        if (!resultadoUnion.contains(item)) {
+	            resultadoUnion.add(item);
+	        }
+	    }
+	    
+	    return resultadoUnion;
 	}
+		
+	
 	
 }
