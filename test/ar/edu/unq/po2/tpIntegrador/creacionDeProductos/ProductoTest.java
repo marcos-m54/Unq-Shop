@@ -31,12 +31,12 @@ class ProductoTest {
 	        indumentaria = new Categoria("Indumentaria", "Ropa y accesorios");
 	        
 			// Sku, Modelo, Marca, $, Descuento, Stock, Peso, Descripcion
-			celular = new Producto("MOTO-G86-256", "Moto G86", "Motorola", 700000.0, 10, 5, 186.0, "Celular gama media", new ArrayList<>());
-			televisor = new Producto("Sams-xxx-0001", "Samsung Crystal", "Samsung", 900000.0, 0, 2, 8300.0, "Samsung Crystal 50", new ArrayList<>());
-			freidoraAire = new Producto("Atma-Fre-0002", "FR246ABP", "Atma", 190000.0, 10, 10, 5100.0, "Frediora Atma con visor de 6 litros", new ArrayList<>());
-			hornoElectrico = new Producto("Atma-Hor-0003", "HGAB4523PI", "Atma", 230000.0, 30, 5, 7500.0, "Horno electrico Atma de 45 litros", new ArrayList<>());
-			bicicleta = new Producto("Nord-xxx-0004", "x1.0", "Nordic", 500000.0, 50, 20, 12000.0, "Mountain bick rodado 29", new ArrayList<>());
-			camiseta = new Producto("Adid-xxx-005", "Seleccion Argentina", "Adidas", 220000.0, 10, 5, 180.0, "Camiseta titular Seleccion Argentina", new ArrayList<>());
+			celular = new Producto("MOTO-G86-256", "Moto G86", "Motorola", 700000.0, 10, 186.0, "Celular gama media", new ArrayList<>());
+			televisor = new Producto("Sams-xxx-0001", "Samsung Crystal", "Samsung", 900000.0, 0, 8300.0, "Samsung Crystal 50", new ArrayList<>());
+			freidoraAire = new Producto("Atma-Fre-0002", "FR246ABP", "Atma", 190000.0, 10, 5100.0, "Frediora Atma con visor de 6 litros", new ArrayList<>());
+			hornoElectrico = new Producto("Atma-Hor-0003", "HGAB4523PI", "Atma", 230000.0, 30, 7500.0, "Horno electrico Atma de 45 litros", new ArrayList<>());
+			bicicleta = new Producto("Nord-xxx-0004", "x1.0", "Nordic", 500000.0, 50, 12000.0, "Mountain bick rodado 29", new ArrayList<>());
+			camiseta = new Producto("Adid-xxx-005", "Seleccion Argentina", "Adidas", 220000.0, 10, 180.0, "Camiseta titular Seleccion Argentina", new ArrayList<>());
 					
 			celular.setCategoria(tecnologia);
 	        televisor.setCategoria(tecnologia);
@@ -110,10 +110,11 @@ class ProductoTest {
 		    assertEquals("Motorola", celular.getMarca());
 		}
 
+		/*
 		@Test
 		void productoGetStock() {
 		    assertEquals(5, celular.getStock());
-		}
+		}*/
 
 		@Test
 		void productoGetPeso() {
@@ -129,7 +130,8 @@ class ProductoTest {
 		void productoGetDescripcion() {
 		    assertEquals("Celular gama media", celular.getDescripcion());
 		}
-
+		
+		/*
 		@Test
 		void incrementarStockSumaUnaUnidad() {
 		    celular.incrementarStock(); // 5 + 1 = 6
@@ -140,5 +142,8 @@ class ProductoTest {
 		void decrementarStockRestaUnaUnidad() {
 		    celular.decrementarStock(); // 5 - 1 = 4
 		    assertEquals(4, celular.getStock());
-		}
+		}*/
+		
+		// Nota Yami: estos tests ya no aplican porque el stock
+		// ahora vive en el Deposito, no en el Producto.
 	}

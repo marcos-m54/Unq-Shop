@@ -11,10 +11,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.IItem;
+import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.Sistema;
 
 class CriterioPorDisponibilidadTest {
 	
 	ICriterio busquedaDisponibilidad;
+	Sistema sistemaMock;
 	
 	IItem motorolaG5;
 	IItem bicicleta;
@@ -35,7 +37,8 @@ class CriterioPorDisponibilidadTest {
 		
 		itemsMock = spy(new ArrayList<IItem>());
 		
-		busquedaDisponibilidad = new CriterioPorDisponibilidad();
+		sistemaMock = mock(Sistema.class);
+		busquedaDisponibilidad = new CriterioPorDisponibilidad(sistemaMock);
 		
 		motorolaG5 = mock(IItem.class);
 		bicicleta = mock(IItem.class);
@@ -48,16 +51,16 @@ class CriterioPorDisponibilidadTest {
 		pantalonLevi = mock(IItem.class);
 		camisetaArg = mock(IItem.class);
 		
-		when(motorolaG5.getStock()).thenReturn(0);
-		when(bicicleta.getStock()).thenReturn(4);
-		when(freidora.getStock()).thenReturn(20);
-		when(remera.getStock()).thenReturn(2);
-		when(hornoElectrico.getStock()).thenReturn(4);
-		when(heladera.getStock()).thenReturn(1);
-		when(pelotaDeVoley.getStock()).thenReturn(20);
-		when(tvLed.getStock()).thenReturn(0);
-		when(pantalonLevi.getStock()).thenReturn(0);
-		when(camisetaArg.getStock()).thenReturn(0);
+		when(sistemaMock.hayStockDisponibleDe(motorolaG5)).thenReturn(false);
+		when(sistemaMock.hayStockDisponibleDe(bicicleta)).thenReturn(true);
+		when(sistemaMock.hayStockDisponibleDe(freidora)).thenReturn(true);
+		when(sistemaMock.hayStockDisponibleDe(remera)).thenReturn(true);
+		when(sistemaMock.hayStockDisponibleDe(hornoElectrico)).thenReturn(true);
+		when(sistemaMock.hayStockDisponibleDe(heladera)).thenReturn(true);
+		when(sistemaMock.hayStockDisponibleDe(pelotaDeVoley)).thenReturn(true);
+		when(sistemaMock.hayStockDisponibleDe(tvLed)).thenReturn(false);
+		when(sistemaMock.hayStockDisponibleDe(pantalonLevi)).thenReturn(false);
+		when(sistemaMock.hayStockDisponibleDe(camisetaArg)).thenReturn(false);
 
 		itemsMock.add(motorolaG5);
 		itemsMock.add(bicicleta);
@@ -69,15 +72,19 @@ class CriterioPorDisponibilidadTest {
 		itemsMock.add(tvLed);
 		itemsMock.add(pantalonLevi);
 		itemsMock.add(camisetaArg);		
-	
-		
-		
 	}
 
 	@Test
 	void itemsQueTienenStockTest() {
-		assertEquals(busquedaDisponibilidad.filtrar(itemsMock).size(),6);
+		assertEquals(6, busquedaDisponibilidad.filtrar(itemsMock).size());
 	}
+	
+	@Test
+	void siNingunItemTieneStockDisponibleDevuelveListaVacia() {
+		ArrayList<IItem> soloSinStock = new ArrayList<>();
+		soloSinStock.add(motorolaG5);
+		soloSinStock.add(tvLed);
 
-
+		assertTrue(busquedaDisponibilidad.filtrar(soloSinStock).isEmpty());
+	}
 }

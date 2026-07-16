@@ -30,7 +30,8 @@ public class ReporteProductosMasVendidos implements IReporte {
                 
                 for (IItem item : pedido.getItems()) { 
                     String nombre = item.getNombre(); 
-                    int cantidad = item.getStock(); 
+                   // int cantidad = item.getStock(); 
+                    int cantidad = 1;
                     double precio = item.precioFinal(); 
 
                     // Acumulador de las cantidades vendidas

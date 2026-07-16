@@ -21,10 +21,10 @@ class PaqueteTest {
 	    @BeforeEach
 	    void setUp() throws Exception {
 
-	        celular = new Producto("MOTO-G86-256", "Moto G86", "Motorola", 700000.0, 10, 5, 186.0, "Celular gama media", new ArrayList<>());
-	        freidoraAire = new Producto("ATMA-FRE-0002", "FR246ABP", "Atma", 190000.0, 10, 10, 5100.0, "Freidora Atma con visor de 6 litros", new ArrayList<>());
-	        hornoElectrico = new Producto("ATMA-HOR-0003", "HGAB4523PI", "Atma", 230000.0, 30, 5, 7500.0, "Horno electrico Atma de 45 litros", new ArrayList<>());
-	        televisor = new Producto("Sams-xxx-0001", "Samsung Crystal", "Samsung", 900000.0, 0, 2, 8300.0, "Samsung Crystal 50", new ArrayList<>());
+	        celular = new Producto("MOTO-G86-256", "Moto G86", "Motorola", 700000.0, 10, 186.0, "Celular gama media", new ArrayList<>());
+	        freidoraAire = new Producto("ATMA-FRE-0002", "FR246ABP", "Atma", 190000.0, 10, 5100.0, "Freidora Atma con visor de 6 litros", new ArrayList<>());
+	        hornoElectrico = new Producto("ATMA-HOR-0003", "HGAB4523PI", "Atma", 230000.0, 30, 7500.0, "Horno electrico Atma de 45 litros", new ArrayList<>());
+	        televisor = new Producto("Sams-xxx-0001", "Samsung Crystal", "Samsung", 900000.0, 0, 8300.0, "Samsung Crystal 50", new ArrayList<>());
 	        
 	        // packHogarTech celular y freidora con 15% descuento
 	        packHogarTech = new Paquete("Pack Hogar Tech", "Celular y freidora", 15, new ArrayList<>());
@@ -122,7 +122,7 @@ class PaqueteTest {
 	            assertEquals(20, packHogarTech.getDescuento());
 	        }
 
-	        @Test
+	       /* @Test
 	        void paqueteGetStockDevuelveElMinimoEntreItems() {
 	            // celular stock= 5, freidora stock= 10 --> minimo es 5
 	            assertEquals(5, packHogarTech.getStock());
@@ -140,7 +140,10 @@ class PaqueteTest {
 	            packHogarTech.decrementarStock();
 	            assertEquals(4, celular.getStock());  // 5 - 1
 	            assertEquals(9, freidoraAire.getStock()); // 10 - 1
-	        }
+	        }*/
+	        
+	     // Nota Yami: estos tests ya no aplican porque el stock ahora
+	     // vive en el Deposito, no en el Producto ni en el Paquete.
 	}
 	  
 

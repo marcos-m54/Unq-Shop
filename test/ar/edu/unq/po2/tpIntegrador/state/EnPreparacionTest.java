@@ -11,6 +11,8 @@ import org.junit.jupiter.api.Test;
 import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.IItem;
 import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.Usuario;
 import ar.edu.unq.po2.tpIntegrador.envio.IFormaDeEnvio;
+import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.Sistema;
+import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.Deposito;
 //import ar.edu.unq.po2.tpIntegrador.notificaciones.Notificador;
  
 class EnPreparacionTest {
@@ -19,14 +21,15 @@ class EnPreparacionTest {
 	Usuario usuario;
 	IItem itemMock;
 	IFormaDeEnvio envioMock;
- 
+	Sistema sistemaMock;
+	Deposito depositoMock;
+	
 	@BeforeEach
 	void setUp() throws Exception {
 		usuario = mock(Usuario.class);
 		when(usuario.getNombreUsuario()).thenReturn("Juana Perez");
  
 		itemMock = mock(IItem.class);
-		when(itemMock.getStock()).thenReturn(3);
 		when(itemMock.getPrecioBase()).thenReturn(1000.0);
 		when(itemMock.precioFinal()).thenReturn(1000.0);
  
@@ -39,6 +42,12 @@ class EnPreparacionTest {
 		pedido = new Pedido(usuario, items);
 	//	pedido.setNotificador(new Notificador());
 		pedido.setFormaDeEnvio(envioMock);
+		
+		// EnPreparacion.cancelarPedido() repone stock via sistema.getDepositoDelItem(item).incrementarStock(item)
+		sistemaMock = mock(Sistema.class);
+		depositoMock = mock(Deposito.class);
+		when(sistemaMock.getDepositoDelItem(itemMock)).thenReturn(depositoMock);
+		pedido.setSistema(sistemaMock);
  
 		pedido.setEstado(new EnPreparacion(pedido));
 	}
@@ -46,7 +55,6 @@ class EnPreparacionTest {
 	@Test
 	void enPreparacionNoSePuedenAgregarItems() {
 		IItem itemNuevoMock = mock(IItem.class);
-		when(itemNuevoMock.getStock()).thenReturn(10);
  
 		pedido.getEstado().agregarItem(itemNuevoMock);
  
@@ -82,7 +90,7 @@ class EnPreparacionTest {
 	void cancelarPedidoDesdeEnPreparacionReponeElStock() {
 		pedido.cancelarPedido();
  
-		verify(itemMock).incrementarStock();
+		verify(depositoMock).incrementarStock(itemMock);
 	}
  
 	@Test
