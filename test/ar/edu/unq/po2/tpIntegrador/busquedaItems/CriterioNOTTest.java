@@ -46,7 +46,7 @@ class CriterioNOTTest {
 		electrodomestico = mock(Categoria.class);
 		
 		
-		noDisponible = new CriterioNOT(new CriterioPorDisponibilidad());
+		noDisponible = new CriterioNOT(new CriterioPorDisponibilidad(sistema));
 		contieneMoto = new CriterioPorNombre("moto");
 		noContieneMotoONoestaDisponible = new CriterioOR();
 		
@@ -63,52 +63,62 @@ class CriterioNOTTest {
 		
 		when(motorolaG5.getNombre()).thenReturn("Motorola g5");
 		when(motorolaG5.precioFinal()).thenReturn(23000.00);
-		when(motorolaG5.getStock()).thenReturn(20);
+		//when(motorolaG5.getStock()).thenReturn(20);
+		when(sistema.hayStockDisponibleDe(motorolaG5)).thenReturn(true);
 		when(motorolaG5.getCategoria()).thenReturn(electrodomestico);
 		
 		when(samsungS20.getNombre()).thenReturn("Samsung S20");
 		when(samsungS20.precioFinal()).thenReturn(20000.00);
-		when(samsungS20.getStock()).thenReturn(1);
+		//when(samsungS20.getStock()).thenReturn(1);
+		when(sistema.hayStockDisponibleDe(samsungS20)).thenReturn(true);
 		when(samsungS20.getCategoria()).thenReturn(electrodomestico);
 
 		when(motorolaG20.getNombre()).thenReturn("Motorola G20");
 		when(motorolaG20.precioFinal()).thenReturn(45000.00);
-		when(motorolaG20.getStock()).thenReturn(15);
+		//when(motorolaG20.getStock()).thenReturn(15);
+		when(sistema.hayStockDisponibleDe(motorolaG20)).thenReturn(true);
 		when(motorolaG20.getCategoria()).thenReturn(electrodomestico);
 
 		when(motorolaG9999.getNombre()).thenReturn("Motorola G9999");
 		when(motorolaG9999.precioFinal()).thenReturn(25000.00);
-		when(motorolaG9999.getStock()).thenReturn(5);
+		//when(motorolaG9999.getStock()).thenReturn(5);
+		when(sistema.hayStockDisponibleDe(motorolaG9999)).thenReturn(true);
 		when(motorolaG9999.getCategoria()).thenReturn(electrodomestico);
 
 		when(iphone11.getNombre()).thenReturn("iphone 11");
 		when(iphone11.precioFinal()).thenReturn(120000.00);
-		when(iphone11.getStock()).thenReturn(8);
+		//when(iphone11.getStock()).thenReturn(8);
+		when(sistema.hayStockDisponibleDe(iphone11)).thenReturn(true);
 		when(iphone11.getCategoria()).thenReturn(electrodomestico);
 
 		when(iphone5c.getNombre()).thenReturn("iPhone 5c");
 		when(iphone5c.precioFinal()).thenReturn(15000.00);
-		when(iphone5c.getStock()).thenReturn(3);
+		//when(iphone5c.getStock()).thenReturn(3);
+		when(sistema.hayStockDisponibleDe(iphone5c)).thenReturn(true);
 		when(iphone5c.getCategoria()).thenReturn(electrodomestico);
 
 		when(samsungJ2.getNombre()).thenReturn("Samsung J2");
 		when(samsungJ2.precioFinal()).thenReturn(8000.00);
-		when(samsungJ2.getStock()).thenReturn(0);
+		//when(samsungJ2.getStock()).thenReturn(0);
+		when(sistema.hayStockDisponibleDe(samsungJ2)).thenReturn(false);
 		when(samsungJ2.getCategoria()).thenReturn(electrodomestico);
 
 		when(samsungJ7.getNombre()).thenReturn("Samsung J7");
 		when(samsungJ7.precioFinal()).thenReturn(12000.00);
-		when(samsungJ7.getStock()).thenReturn(10);
+		//when(samsungJ7.getStock()).thenReturn(10);
+		when(sistema.hayStockDisponibleDe(samsungJ7)).thenReturn(true);
 		when(samsungJ7.getCategoria()).thenReturn(electrodomestico);
 
 		when(samsungA30.getNombre()).thenReturn("Samsung A30");
 		when(samsungA30.precioFinal()).thenReturn(35000.00);
-		when(samsungA30.getStock()).thenReturn(12);
+		//when(samsungA30.getStock()).thenReturn(12);
+		when(sistema.hayStockDisponibleDe(samsungA30)).thenReturn(true);
 		when(samsungA30.getCategoria()).thenReturn(electrodomestico);
 
 		when(samsungA33.getNombre()).thenReturn("Samsung A33");
 		when(samsungA33.precioFinal()).thenReturn(55000.00);
-		when(samsungA33.getStock()).thenReturn(18);
+		//when(samsungA33.getStock()).thenReturn(18);
+		when(sistema.hayStockDisponibleDe(samsungA33)).thenReturn(true);
 		when(samsungA33.getCategoria()).thenReturn(electrodomestico);
 		
 
