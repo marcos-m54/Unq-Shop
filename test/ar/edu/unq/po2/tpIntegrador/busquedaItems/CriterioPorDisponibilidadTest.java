@@ -84,7 +84,36 @@ class CriterioPorDisponibilidadTest {
 		ArrayList<IItem> soloSinStock = new ArrayList<>();
 		soloSinStock.add(motorolaG5);
 		soloSinStock.add(tvLed);
+    
+	void noPuedoAgregarCriteriosDeBusquedaPorqueEsCriterioSimple() {
+		ICriterio criterioDisponibilidad = new CriterioPorDisponibilidad();
+	    ICriterio otroCriterio = mock(ICriterio.class);
+	    
+	    UnsupportedOperationException excepcionLanzada = assertThrows(
+	            UnsupportedOperationException.class, 
+	            () -> {
+	                criterioDisponibilidad.agregarCriterio(otroCriterio);
+	            }
+	     );
+	    
+	    assertEquals("No puede agregar, es un criterio simple", excepcionLanzada.getMessage());
+	}
 
+	@Test
+	void noPuedoSacarCriteriosDeBusquedaPorqueEsCriterioSimple() {
+	
+		ICriterio criterioDisponibilidad = new CriterioPorDisponibilidad();
+	    ICriterio otroCriterio = mock(ICriterio.class);
+	    
+	    UnsupportedOperationException excepcionLanzada = assertThrows(
+	            UnsupportedOperationException.class, 
+	            () -> {
+	            	criterioDisponibilidad.sacarCriterio(otroCriterio);
+	            }
+	     );
+	    
+	    assertEquals("No puede sacar, es un criterio simple", excepcionLanzada.getMessage());
+	}
 		assertTrue(busquedaDisponibilidad.filtrar(soloSinStock).isEmpty());
 	}
 }

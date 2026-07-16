@@ -23,4 +23,16 @@ public class CriterioPorDisponibilidad implements ICriterio {
 			    .toList();
 	}
 
+	@Override
+	public void agregarCriterio(ICriterio unCriterio) {
+		throw new UnsupportedOperationException("No puede agregar, es un criterio simple");
+		
+	}
+
+	@Override
+	public void sacarCriterio(ICriterio unCriterio) {
+		throw new UnsupportedOperationException("No puede sacar, es un criterio simple");
+		
+	}
+
 }

@@ -74,5 +74,37 @@ class CriterioPrecioMaxTest {
 	void itemsPrecioMaxIgualAVeinteMilTest() {
 		assertEquals(busquedaPrecioMax.filtrar(itemsMock).size(),4);
 	}
+	
+	@Test
+	void noPuedoAgregarCriteriosDeBusquedaPorqueEsCriterioSimple() {
+		ICriterio criterioPoPrecioMax = new CriterioPrecioMax(1.00);
+	    ICriterio otroCriterio = mock(ICriterio.class);
+	    
+	    UnsupportedOperationException excepcionLanzada = assertThrows(
+	            UnsupportedOperationException.class, 
+	            () -> {
+	            	criterioPoPrecioMax.agregarCriterio(otroCriterio);
+	            }
+	     );
+	    
+	    assertEquals("No puede agregar, es un criterio simple", excepcionLanzada.getMessage());
+	}
+	
+	
+	@Test
+	void noPuedoSacarCriteriosDeBusquedaPorqueEsCriterioSimple() {
+	
+		ICriterio criterioPoPrecioMax = new CriterioPrecioMax(1.00);
+		ICriterio otroCriterio = mock(ICriterio.class);
+	    
+	    UnsupportedOperationException excepcionLanzada = assertThrows(
+	            UnsupportedOperationException.class, 
+	            () -> {
+	            	criterioPoPrecioMax.sacarCriterio(otroCriterio);
+	            }
+	     );
+	    
+	    assertEquals("No puede sacar, es un criterio simple", excepcionLanzada.getMessage());
+	}
 
 }
