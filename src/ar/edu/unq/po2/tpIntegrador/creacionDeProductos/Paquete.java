@@ -17,14 +17,14 @@ public class Paquete implements IItem {
 		this.productos = productos;
 		this.categoria = null;
 	}
-	
+	/*
 	public Paquete(String nombre, String descripcion, int descuento, ArrayList<IItem> productos, Categoria categoria) {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.descuento = descuento;
 		this.productos = productos;
 		this.categoria = categoria;
-	}
+	}*/
 
 	@Override
 	public String getNombre() {
@@ -79,6 +79,7 @@ public class Paquete implements IItem {
 		productos.remove(unItem);
 	}
 	
+	/*
 	@Override
 	public void incrementarStock() {
 		productos.stream().forEach(producto -> producto.incrementarStock());
@@ -96,11 +97,16 @@ public class Paquete implements IItem {
 	                            .min()
 	                            .orElse(0);
 	}
+	*/
 
 	@Override
 	public Categoria getCategoria() {
 		// TODO Auto-generated method stub
 		return categoria;
+	}
+	
+	public ArrayList<IItem> getProductos() {
+	    return productos;
 	}
 	
 	

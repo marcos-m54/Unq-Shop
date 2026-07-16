@@ -38,8 +38,6 @@ public class Sistema {
 		this.sucursales.add(sucursal);
 	}
 	
-	
-	
 	public ArrayList<Venta> getVentas() {
 		return ventas;
 	}
@@ -58,6 +56,36 @@ public class Sistema {
 		
 		return reporte.aceptar(formato);
 		
+	}
+	
+	// Stock total de un item en todos los depositos del sistema
+	public int getStockTotalDe(IItem item) {
+	    return sucursales.stream()
+	        .mapToInt(s -> s.getDeposito().getStockDe(item))
+	        .sum();
+	}
+
+	// Si hay stock disponible en al menos una sucursal
+	public boolean hayStockDisponibleDe(IItem item) {
+
+	    if (item instanceof Paquete) {
+	        // Es un paquete -> chequear que TODOS sus items tengan stock
+	        Paquete paquete = (Paquete) item;  // "abrimos" el IItem como Paquete
+	        return paquete.getProductos().stream()
+	            .allMatch(p -> hayStockDisponibleDe(p)); // recursivo para cada item
+	    }
+	    // Es un producto -> buscar en los depositos
+	    return sucursales.stream()
+	        .anyMatch(s -> s.getDeposito().getStockDe(item) > 0);
+	}
+
+	// Obtener el deposito que tiene stock de un item
+	public Deposito getDepositoDelItem(IItem item) {
+	    return sucursales.stream()
+	        .map(s -> s.getDeposito())
+	        .filter(d -> d.getStockDe(item) > 0)
+	        .findFirst()
+	        .orElse(null);
 	}
 	
 }
