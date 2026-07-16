@@ -104,5 +104,39 @@ class CriterioPorCategoriaTest {
 	void busquedaDeItemsConCategoriaIndumentaria() {
 		assertEquals(busquedaIndumentaria.filtrar(itemsMock).size(), 3);
 	}
+	
+	@Test
+	void noPuedoAgregarCriteriosDeBusquedaPorqueEsCriterioSimple() {
+		ICriterio criterioCategoria = new CriterioPorCategoria(deportes);
+	    ICriterio otroCriterio = mock(ICriterio.class);
+	    
+	    UnsupportedOperationException excepcionLanzada = assertThrows(
+	            UnsupportedOperationException.class, 
+	            () -> {
+	                criterioCategoria.agregarCriterio(otroCriterio);
+	            }
+	     );
+	    
+	    assertEquals("No puede agregar, es un criterio simple", excepcionLanzada.getMessage());
+	}
+	
+	
+	@Test
+	void noPuedoSacarCriteriosDeBusquedaPorqueEsCriterioSimple() {
+	
+		ICriterio criterioCategoria = new CriterioPorCategoria(deportes);
+	    ICriterio otroCriterio = mock(ICriterio.class);
+	    
+	    UnsupportedOperationException excepcionLanzada = assertThrows(
+	            UnsupportedOperationException.class, 
+	            () -> {
+	            	criterioCategoria.sacarCriterio(otroCriterio);
+	            }
+	     );
+	    
+	    assertEquals("No puede sacar, es un criterio simple", excepcionLanzada.getMessage());
+	}
 
 }
+
+
