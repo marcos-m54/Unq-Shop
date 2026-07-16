@@ -1,11 +1,8 @@
 package ar.edu.unq.po2.tpIntegrador.busquedaItems;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -18,18 +15,13 @@ import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.Categoria;
 import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.IItem;
 import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.Sistema;
 
-class CriterioANDTest {
+class CriterioNOTTest {
 	
-	ICriterio criterioANDMotoG;
-	ICriterio criterioANDSamsung;
+	ICriterio noDisponible;
+	ICriterio noContieneMotoONoestaDisponible;
+	ICriterio contieneMoto;
 	
-	ICriterio busquedaNombreMoto;
-	ICriterio precioMaxMoto;
-	
-	ICriterio busquedaCategoriaSamsung;
-	ICriterio busquedaDisponibilidad;
-	ICriterio busquedaNombreSam;
-	
+		
 	IItem motorolaG5;
 	IItem samsungS20;
 	IItem motorolaG20;
@@ -45,7 +37,6 @@ class CriterioANDTest {
 	
 	Sistema sistema;
 	ArrayList<IItem> itemsMock;
-	
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -53,16 +44,11 @@ class CriterioANDTest {
 		itemsMock = spy(new ArrayList<IItem>());
 		sistema = mock(Sistema.class);
 		electrodomestico = mock(Categoria.class);
-
-		
-		busquedaCategoriaSamsung = new CriterioPorCategoria(electrodomestico);
-		busquedaDisponibilidad = new CriterioPorDisponibilidad();
-		busquedaNombreSam = new CriterioPorNombre("sam");
 		
 		
-		criterioANDMotoG = new CriterioAND();	
-		criterioANDSamsung = new CriterioAND();
-		
+		noDisponible = new CriterioNOT(new CriterioPorDisponibilidad());
+		contieneMoto = new CriterioPorNombre("moto");
+		noContieneMotoONoestaDisponible = new CriterioOR();
 		
 		motorolaG5 = mock(IItem.class);
 		samsungS20 = mock(IItem.class);
@@ -137,80 +123,54 @@ class CriterioANDTest {
 		itemsMock.add(samsungA30);
 		itemsMock.add(samsungA33);
 	
-
+		
 	}
 
 	@Test
-	void busquedaDeNombreMotoConPrecioMaxVeinticincoMil() {
+	void BusquedaQuenoContienePalabraMotoONoestaDisponible() {
 		
-		busquedaNombreMoto = new CriterioPorNombre("moto");
-		precioMaxMoto = new CriterioPrecioMax(25000.0);
+		ICriterio noContieneMoto = new CriterioNOT(contieneMoto);
+		noContieneMotoONoestaDisponible.agregarCriterio(noContieneMoto);
+		noContieneMotoONoestaDisponible.agregarCriterio(noDisponible);
 		
-		criterioANDMotoG.agregarCriterio(busquedaNombreMoto);
-		criterioANDMotoG.agregarCriterio(precioMaxMoto);	
+		List<IItem> resultado = noContieneMotoONoestaDisponible.filtrar(itemsMock);
 		
-		List<IItem> resultado = criterioANDMotoG.filtrar(itemsMock);
+		assertEquals(7, resultado.size());
+		assertEquals(List.of(samsungS20, iphone11, iphone5c, samsungJ2, samsungJ7, samsungA30, samsungA33), resultado);
 		
-		assertEquals(2, resultado.size());
-		assertEquals(List.of(motorolaG5,motorolaG9999), resultado);
-		
-	}
+		}
+	
 	
 	@Test
-	void busquedaSamsungOPrecioMax60MilYDisponible() {
-		
-		ICriterio precioMax60mil = new CriterioPrecioMax(60000.0);
-		ICriterio nombreSamsung = new CriterioPorNombre("samsung");
-		
-		ICriterio samsungOMenorA60Mil = new CriterioOR();
-
-		samsungOMenorA60Mil.agregarCriterio(precioMax60mil);
-		samsungOMenorA60Mil.agregarCriterio(nombreSamsung);
-		
-		criterioANDSamsung.agregarCriterio(busquedaDisponibilidad);
-		criterioANDSamsung.agregarCriterio(samsungOMenorA60Mil);
-		
-		List<IItem> resultado = criterioANDSamsung.filtrar(itemsMock); 
-		
-		assertEquals(8, resultado.size());
-		assertEquals(List.of(motorolaG5, samsungS20, motorolaG20, motorolaG9999, iphone5c, samsungJ7, samsungA30, samsungA33), resultado);
-		
+	void noPuedoAgregarCriteriosDeBusquedaPorqueEsCriterioSimple() {
+		ICriterio criterioNot = new CriterioNOT(contieneMoto);
+	    ICriterio otroCriterio = mock(ICriterio.class);
+	    
+	    UnsupportedOperationException excepcionLanzada = assertThrows(
+	            UnsupportedOperationException.class, 
+	            () -> {
+	                criterioNot.agregarCriterio(otroCriterio);
+	            }
+	     );
+	    
+	    assertEquals("No puede agregar, es un criterio simple", excepcionLanzada.getMessage());
 	}
 	
-	@Test
-	void noSePuedeFiltrarSiElCriterioNoEstaCompleto() {
-	    ICriterio filtro1 = mock(ICriterio.class);
-	    criterioANDMotoG.agregarCriterio(filtro1); 
-	    
-	    assertThrows(IndexOutOfBoundsException.class, () -> {
-	        criterioANDMotoG.filtrar(itemsMock);
-	    });
-	}
 	
 	@Test
-	void alSacarUnCriterioEsteDejaDeSerEjecutado() {
+	void noPuedoSacarCriteriosDeBusquedaPorqueEsCriterioSimple() {
 		
-	    ICriterio filtro1 = mock(ICriterio.class);
-	    ICriterio filtro2 = mock(ICriterio.class);
-	    ICriterio filtroNuevo = mock(ICriterio.class);
+		ICriterio criterioNot = new CriterioNOT(contieneMoto);
+	    ICriterio otroCriterio = mock(ICriterio.class);
 	    
-	    when(filtro1.filtrar(any())).thenReturn(new ArrayList<>());
-	    when(filtro2.filtrar(any())).thenReturn(new ArrayList<>());
-	    when(filtroNuevo.filtrar(any())).thenReturn(new ArrayList<>());
-
-	    criterioANDMotoG.agregarCriterio(filtro1);
-	    criterioANDMotoG.agregarCriterio(filtro2);
+	    UnsupportedOperationException excepcionLanzada = assertThrows(
+	            UnsupportedOperationException.class, 
+	            () -> {
+	            	criterioNot.sacarCriterio(otroCriterio);
+	            }
+	     );
 	    
-	    criterioANDMotoG.sacarCriterio(filtro2);
-	    criterioANDMotoG.agregarCriterio(filtroNuevo);
-	    
-	    criterioANDMotoG.filtrar(itemsMock);
-	    
-	    verify(filtro1).filtrar(itemsMock);      
-	    verify(filtroNuevo).filtrar(itemsMock); 
-	    
-	    verify(filtro2, never()).filtrar(any()); 
-	    
+	    assertEquals("No puede sacar, es un criterio simple", excepcionLanzada.getMessage());
 	}
 
 }

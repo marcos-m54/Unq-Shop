@@ -9,26 +9,7 @@ import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.IItem;
 public class CriterioAND implements ICriterio{
 	
 	private List<ICriterio> criterios = new ArrayList<ICriterio>();
-	
-	public CriterioAND(List<ICriterio> criterios) {
-		super();
-		if (criterios.size() < 3) {
-			this.criterios = criterios;
-		}
-	}
-	
-	public CriterioAND() {
-		super();
-	}
-	
-	public List<ICriterio> getCriterios() {
-		return criterios;
-	}
-
-	public void setCriterios(List<ICriterio> criterios) {
-		this.criterios = criterios;
-	}
-	
+		
 	@Override
 	public void agregarCriterio(ICriterio criterioBusqueda) {
 		if (criterios.size() < 3) {

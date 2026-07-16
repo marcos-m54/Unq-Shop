@@ -145,4 +145,37 @@ class CriterioPorNombreTest {
 		
 	}
 
+	@Test
+	void noPuedoAgregarCriteriosDeBusquedaPorqueEsCriterioSimple() {
+		ICriterio criterioPorNombre = new CriterioPorNombre("cosa");
+	    ICriterio otroCriterio = mock(ICriterio.class);
+	    
+	    UnsupportedOperationException excepcionLanzada = assertThrows(
+	            UnsupportedOperationException.class, 
+	            () -> {
+	                criterioPorNombre.agregarCriterio(otroCriterio);
+	            }
+	     );
+	    
+	    assertEquals("No puede agregar, es un criterio simple", excepcionLanzada.getMessage());
+	}
+	
+	
+	@Test
+	void noPuedoSacarCriteriosDeBusquedaPorqueEsCriterioSimple() {
+	
+		ICriterio criterioPorNombre = new CriterioPorNombre("cosa");	    
+		ICriterio otroCriterio = mock(ICriterio.class);
+	    
+	    UnsupportedOperationException excepcionLanzada = assertThrows(
+	            UnsupportedOperationException.class, 
+	            () -> {
+	            	criterioPorNombre.sacarCriterio(otroCriterio);
+	            }
+	     );
+	    
+	    assertEquals("No puede sacar, es un criterio simple", excepcionLanzada.getMessage());
+	}
+
+	
 }
