@@ -67,52 +67,62 @@ class CriterioORTest {
 		
 		when(xiaomiPocoF1.getNombre()).thenReturn("Xiaomi Poco F1");
 		when(xiaomiPocoF1.precioFinal()).thenReturn(25000.00);
-		when(xiaomiPocoF1.getStock()).thenReturn(0);
+		//when(xiaomiPocoF1.getStock()).thenReturn(0);
+		when(sistema.hayStockDisponibleDe(xiaomiPocoF1)).thenReturn(false);
 		when(xiaomiPocoF1.getCategoria()).thenReturn(electrodomestico);
 		
 		when(pelotaJabulani.getNombre()).thenReturn("Pelota Jabulani");
 		when(pelotaJabulani.precioFinal()).thenReturn(5000.00);
-		when(pelotaJabulani.getStock()).thenReturn(145);
+		//when(pelotaJabulani.getStock()).thenReturn(145);
+		when(sistema.hayStockDisponibleDe(pelotaJabulani)).thenReturn(true);
 		when(pelotaJabulani.getCategoria()).thenReturn(deporte);
 
 		when(camisetaDeMessi.getNombre()).thenReturn("Camiseta De Messi");
 		when(camisetaDeMessi.precioFinal()).thenReturn(999999.00);
-		when(camisetaDeMessi.getStock()).thenReturn(230);
+		//when(camisetaDeMessi.getStock()).thenReturn(230);
+		when(sistema.hayStockDisponibleDe(camisetaDeMessi)).thenReturn(true);
 		when(camisetaDeMessi.getCategoria()).thenReturn(deporte);
 
 		when(pantalonTerceraMarca.getNombre()).thenReturn("Pantalon de tercera marca");
 		when(pantalonTerceraMarca.precioFinal()).thenReturn(250.00);
-		when(pantalonTerceraMarca.getStock()).thenReturn(100);
+		//when(pantalonTerceraMarca.getStock()).thenReturn(100);
+		when(sistema.hayStockDisponibleDe(pantalonTerceraMarca)).thenReturn(true);
 		when(pantalonTerceraMarca.getCategoria()).thenReturn(indumentaria);
 
 		when(iphone24.getNombre()).thenReturn("iphone 24");
 		when(iphone24.precioFinal()).thenReturn(120000.00);
-		when(iphone24.getStock()).thenReturn(8);
+		//when(iphone24.getStock()).thenReturn(8);
+		when(sistema.hayStockDisponibleDe(iphone24)).thenReturn(true);
 		when(iphone24.getCategoria()).thenReturn(electrodomestico);
 
 		when(iphone2c.getNombre()).thenReturn("iPhone 2c");
 		when(iphone2c.precioFinal()).thenReturn(100000.00);
-		when(iphone2c.getStock()).thenReturn(0);
+		//when(iphone2c.getStock()).thenReturn(0);
+		when(sistema.hayStockDisponibleDe(iphone2c)).thenReturn(false);
 		when(iphone2c.getCategoria()).thenReturn(electrodomestico);
 
 		when(samsungTVQLED.getNombre()).thenReturn("Samsung TV QLED");
 		when(samsungTVQLED.precioFinal()).thenReturn(98000.00);
-		when(samsungTVQLED.getStock()).thenReturn(2);
+		//when(samsungTVQLED.getStock()).thenReturn(2);
+		when(sistema.hayStockDisponibleDe(samsungTVQLED)).thenReturn(true);
 		when(samsungTVQLED.getCategoria()).thenReturn(electrodomestico);
 
 		when(playstation7.getNombre()).thenReturn("Playstation 7");
 		when(playstation7.precioFinal()).thenReturn(122000.00);
-		when(playstation7.getStock()).thenReturn(10);
+		//when(playstation7.getStock()).thenReturn(10);
+		when(sistema.hayStockDisponibleDe(playstation7)).thenReturn(true);
 		when(playstation7.getCategoria()).thenReturn(electrodomestico);
 
 		when(steamMachine.getNombre()).thenReturn("Steam Machine");
 		when(steamMachine.precioFinal()).thenReturn(352000.00);
-		when(steamMachine.getStock()).thenReturn(12);
+		//when(steamMachine.getStock()).thenReturn(12);
+		when(sistema.hayStockDisponibleDe(steamMachine)).thenReturn(true);
 		when(steamMachine.getCategoria()).thenReturn(electrodomestico);
 
 		when(camisetaFerrari.getNombre()).thenReturn("Camiseta Ferrari");
 		when(camisetaFerrari.precioFinal()).thenReturn(55000.00);
-		when(camisetaFerrari.getStock()).thenReturn(18);
+		//when(camisetaFerrari.getStock()).thenReturn(18);
+		when(sistema.hayStockDisponibleDe(camisetaFerrari)).thenReturn(true);
 		when(camisetaFerrari.getCategoria()).thenReturn(indumentaria);
 		
 		itemsMock.add(xiaomiPocoF1);
@@ -147,7 +157,7 @@ class CriterioORTest {
 	@Test 
 	void noDisponibleONombreContieneIp() {
 		
-		ICriterio disponibilidad = new CriterioPorDisponibilidad();
+		ICriterio disponibilidad = new CriterioPorDisponibilidad(sistema);
 		ICriterio negacionDisponibilidad = new CriterioNOT(disponibilidad);
 		ICriterio nombreContieneIp = new CriterioPorNombre("ip");
 		
