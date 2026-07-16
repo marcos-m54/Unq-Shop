@@ -9,8 +9,9 @@ public class CriterioPorDisponibilidad implements ICriterio {
 	
 	private Sistema sistema;	
 		
-	public CriterioPorDisponibilidad() {
+	public CriterioPorDisponibilidad(Sistema sistema) {
 		super();
+		this.sistema = sistema;
 	}
 
 	public List<IItem> filtrar(List<IItem> itemsDeCatalogo) {

@@ -8,6 +8,7 @@ import org.mockito.InOrder;
 import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.IItem;
 import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.Producto;
 import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.Usuario;
+import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.Sistema;
 
 import static org.mockito.Mockito.*;
 
@@ -31,8 +32,7 @@ class PedidoTest {
 	Usuario camilaDeBanfield;
 	Usuario pedroDeLanus;
 	
-	
-	
+	Sistema sistemaMock;
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -51,6 +51,10 @@ class PedidoTest {
 		pedidoTest  = new Pedido(camilaDeBanfield, spyItems);
 		pedidoTestB = new Pedido(pedroDeLanus, spyItems);
 		
+		// La disponibilidad de stock ahora la resuelve el Sistema, no el item
+		sistemaMock = mock(Sistema.class);
+		pedidoTest.setSistema(sistemaMock);
+		pedidoTestB.setSistema(sistemaMock);
 		
 	}
 
@@ -61,9 +65,9 @@ class PedidoTest {
 		//Cuando se inicia el pedido, el estado inicial es BORRADOR
 		//Camila agrega el auricularGueimer y la TV
 		
-		when(auricularGueimer.getStock()).thenReturn(5);
-		when(tvDe200PulgadasSamsung.getStock()).thenReturn(5);
-		when(arrocera.getStock()).thenReturn(0);
+		when(sistemaMock.hayStockDisponibleDe(auricularGueimer)).thenReturn(true);
+		when(sistemaMock.hayStockDisponibleDe(tvDe200PulgadasSamsung)).thenReturn(true);
+		when(sistemaMock.hayStockDisponibleDe(arrocera)).thenReturn(false);
 		
 		pedidoTest.agregarItemACarrito(auricularGueimer);
 		pedidoTest.agregarItemACarrito(tvDe200PulgadasSamsung);		
@@ -75,21 +79,14 @@ class PedidoTest {
 		assertEquals(pedidoTest.getItems().contains(auricularGueimer), true);
 		assertEquals(pedidoTest.getItems().contains(tvDe200PulgadasSamsung), true);
 		
-		verify(auricularGueimer, atLeast(1)).getStock();	
-		verify(tvDe200PulgadasSamsung, atLeast(1)).getStock();	
+		verify(sistemaMock, atLeast(1)).hayStockDisponibleDe(auricularGueimer);
+		verify(sistemaMock, atLeast(1)).hayStockDisponibleDe(tvDe200PulgadasSamsung);
 		
 		//cuando intenta agregar la arrocera que esta fuera de stock, 
 		//no se agrega a la lista del carrito
 		
 		pedidoTest.agregarItemACarrito(arrocera);
 		assertEquals(pedidoTest.getItems().size(),2);
-			
-		
-		
-		
-		
-		
-		
 		
 	}
 

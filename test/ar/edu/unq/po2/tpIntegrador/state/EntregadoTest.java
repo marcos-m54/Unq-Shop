@@ -10,6 +10,8 @@ import org.junit.jupiter.api.Test;
  
 import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.IItem;
 import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.Usuario;
+import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.Sistema;
+import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.Deposito;
 //import ar.edu.unq.po2.tpIntegrador.notificaciones.Notificador;
  
 class EntregadoTest {
@@ -17,18 +19,26 @@ class EntregadoTest {
 	Pedido pedido;
 	Usuario usuario;
 	IItem itemMock;
- 
+	Sistema sistemaMock;
+	Deposito depositoMock;
+	
 	@BeforeEach
 	void setUp() throws Exception {
 		usuario = mock(Usuario.class);
 		itemMock = mock(IItem.class);
-		when(itemMock.getStock()).thenReturn(3);
  
 		ArrayList<IItem> items = new ArrayList<>();
 		items.add(itemMock);
  
 		pedido = new Pedido(usuario, items);
 	//	pedido.setNotificador(new Notificador());
+		
+		// Entregado es estado terminal: cancelarPedido() no hace nada.
+		// Igual dejo el mock listo para poder verificar que nunca se lo llame.
+		sistemaMock = mock(Sistema.class);
+		depositoMock = mock(Deposito.class);
+		when(sistemaMock.getDepositoDelItem(itemMock)).thenReturn(depositoMock);
+		pedido.setSistema(sistemaMock);
  
 		pedido.setEstado(new Entregado(pedido));
 	}
@@ -36,7 +46,6 @@ class EntregadoTest {
 	@Test
 	void enEntregadoNoSePuedenAgregarItems() {
 		IItem itemNuevoMock = mock(IItem.class);
-		when(itemNuevoMock.getStock()).thenReturn(10);
  
 		pedido.getEstado().agregarItem(itemNuevoMock);
  
@@ -89,7 +98,7 @@ class EntregadoTest {
 	@Test
 	void cancelarPedidoDesdeEntregadoNoModificaElStock() {
 		pedido.cancelarPedido();
-		verify(itemMock, never()).incrementarStock();
+		verify(depositoMock, never()).incrementarStock(itemMock);
 	}
 }
  

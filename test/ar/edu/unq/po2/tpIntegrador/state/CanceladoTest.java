@@ -22,7 +22,6 @@ class CanceladoTest {
 	void setUp() throws Exception {
 		usuario = mock(Usuario.class);
 		itemMock = mock(IItem.class);
-		when(itemMock.getStock()).thenReturn(3);
  
 		ArrayList<IItem> items = new ArrayList<>();
 		items.add(itemMock);
@@ -30,13 +29,12 @@ class CanceladoTest {
 		pedido = new Pedido(usuario, items);
 		//pedido.setNotificador(new Notificador());
  
-		//pedido.setEstado(new Cancelado(pedido));
+		pedido.setEstado(new Cancelado(pedido));
 	}
  
 	@Test
 	void enCanceladoNoSePuedenAgregarItems() {
 		IItem itemNuevoMock = mock(IItem.class);
-		when(itemNuevoMock.getStock()).thenReturn(10);
  
 		pedido.getEstado().agregarItem(itemNuevoMock);
  

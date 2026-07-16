@@ -9,6 +9,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
  
 import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.IItem;
+import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.Sistema;
+import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.Deposito;
 import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.Usuario;
 import ar.edu.unq.po2.tpIntegrador.envio.IFormaDeEnvio;
 //import ar.edu.unq.po2.tpIntegrador.notificaciones.Notificador;
@@ -19,12 +21,13 @@ class ConfirmadoTest {
 	Usuario usuario;
 	IItem itemMock;
 	IFormaDeEnvio envioMock;
+	Sistema sistemaMock;
+	Deposito depositoMock;
  
 	@BeforeEach
 	void setUp() throws Exception {
  
 		itemMock = mock(IItem.class);
-		when(itemMock.getStock()).thenReturn(3);
 		when(itemMock.precioFinal()).thenReturn(1000.0);
  
 		ArrayList<IItem> items = new ArrayList<>();
@@ -36,6 +39,12 @@ class ConfirmadoTest {
 		pedido = new Pedido(usuario, items);
 	//	pedido.setNotificador(new Notificador());
 		pedido.setFormaDeEnvio(envioMock);
+		
+		// Confirmado.cancelarPedido() repone stock via sistema.getDepositoDelItem(item).incrementarStock(item)
+		sistemaMock = mock(Sistema.class);
+		depositoMock = mock(Deposito.class);
+		when(sistemaMock.getDepositoDelItem(itemMock)).thenReturn(depositoMock);
+		pedido.setSistema(sistemaMock);
  
 		pedido.setEstado(new Confirmado(pedido));
 	}
@@ -43,8 +52,7 @@ class ConfirmadoTest {
 	@Test
 	void enConfirmadoNoSePuedenAgregarItems() {
 		IItem itemNuevoMock = mock(IItem.class);
-		when(itemNuevoMock.getStock()).thenReturn(10);
- 
+
 		pedido.getEstado().agregarItem(itemNuevoMock);
  
 		assertFalse(pedido.getItems().contains(itemNuevoMock));
@@ -79,8 +87,8 @@ class ConfirmadoTest {
 	void cancelarPedidoDesdeConfirmadoReponeElStock() {
 		pedido.cancelarPedido();
  
-		// Verifico que se llamo a incrementarStock(), repone las unidades que se habian descontado al confirmar
-		verify(itemMock).incrementarStock();
+		// Verifico que se llamo a incrementarStock() sobre el deposito del item, repone las unidades que se habian descontado al confirmar
+		verify(depositoMock).incrementarStock(itemMock);
 	}
 	
 	@Test

@@ -19,7 +19,8 @@ class BorradorTest {
 	Pedido pedido;
 	Usuario usuario;
 	IItem itemMock;
- 
+	Sistema sistemaMock;
+	
 	@BeforeEach
 	void setUp() throws Exception {
 		usuario = mock(Usuario.class);
@@ -28,6 +29,10 @@ class BorradorTest {
 		pedido = new Pedido(usuario, new ArrayList<IItem>());
 
 	//	pedido.setNotificador(new Notificador());
+		
+		// La disponibilidad de stock ahora la resuelve el Sistema, no el item
+		sistemaMock = mock(Sistema.class);
+		pedido.setSistema(sistemaMock);
 	}
  
 	@Test
@@ -35,35 +40,31 @@ class BorradorTest {
 		assertTrue(pedido.getEstado() instanceof Borrador);
 	}
  
-	// Nota Yami: quizas deberiamos tener, para una cuestion de proligidad un metodo public solicitarAgregarItem/solicitarQuitarItem en Pedido,
-	// para no tener que andar pidiendo el estado (getEstado())
-	// De esa forma podriamos hacer pedido.solicitarAgregarItem(itemMock) y que ahi adetro delegue al estado (estado.agregarItem)
- 
 	@Test
 	void enBorradorSePuedeAgregarUnItemConStock() {
-		when(itemMock.getStock()).thenReturn(5);
- 
+		when(sistemaMock.hayStockDisponibleDe(itemMock)).thenReturn(true);
+
 		pedido.getEstado().agregarItem(itemMock);
- 
+
 		assertTrue(pedido.getItems().contains(itemMock));
 	}
  
 	@Test
 	void enBorradorNoSeAgregaUnItemSinStock() {
-		when(itemMock.getStock()).thenReturn(0);
- 
+		when(sistemaMock.hayStockDisponibleDe(itemMock)).thenReturn(false);
+
 		pedido.getEstado().agregarItem(itemMock);
- 
+
 		assertFalse(pedido.getItems().contains(itemMock));
 	}
  
 	@Test
 	void enBorradorSePuedeQuitarUnItem() {
-		when(itemMock.getStock()).thenReturn(5);
+		when(sistemaMock.hayStockDisponibleDe(itemMock)).thenReturn(true);
 		pedido.getEstado().agregarItem(itemMock);
- 
+
 		pedido.getEstado().quitarItem(itemMock);
- 
+
 		assertFalse(pedido.getItems().contains(itemMock));
 	}
  
@@ -83,7 +84,6 @@ class BorradorTest {
  
 		pedido.setFormaDeEnvio(envioMock);
 		pedido.setMetodoDePago(pagoMock);
-		pedido.setSistema(mock(Sistema.class));
  
 		pedido.confirmarPedido();
  

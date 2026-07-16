@@ -25,7 +25,6 @@ class EnvioTest {
 		usuario = new Usuario("Juana Perez", "juana@mail.com", "Calle Falsa 123");
  
 		itemMock = mock(IItem.class);
-		when(itemMock.getStock()).thenReturn(5);
 		when(itemMock.getPeso()).thenReturn(2.0);        
 		when(itemMock.precioFinal()).thenReturn(1000.0); 
  
