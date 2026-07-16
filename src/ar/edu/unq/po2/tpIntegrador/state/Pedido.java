@@ -58,11 +58,18 @@ public class Pedido implements INotificador {
 		this.estado = estado;
 	}
 	
+	/*
 	public void agregarItemACarrito(IItem item) {
 		
 		if (item.getStock() > 0) {
 			this.carritoDeCompras.add(item);
 		}
+	}*/
+	
+	public void agregarItemACarrito(IItem item) {
+	    if (sistema.hayStockDisponibleDe(item)) {
+	        this.carritoDeCompras.add(item);
+	    }
 	}
 	
 	public void quitarItemDeCarrito(IItem item) {
@@ -91,7 +98,7 @@ public class Pedido implements INotificador {
 	    estado.entregarPedido();
 	}
     
-	//ver despues
+	/*
 	public void decrementarStockItems() {
 		
 		for (IItem item: carritoDeCompras) {
@@ -103,6 +110,19 @@ public class Pedido implements INotificador {
 		for (IItem item: carritoDeCompras) {
 			item.incrementarStock();
 		}
+	}
+	*/
+	
+	public void decrementarStockItems() {
+	    for (IItem item : carritoDeCompras) {
+	        sistema.getDepositoDelItem(item).decrementarStock(item);
+	    }
+	}
+
+	public void incrementarStockItems() {
+	    for (IItem item : carritoDeCompras) {
+	        sistema.getDepositoDelItem(item).incrementarStock(item);
+	    }
 	}
 	
 	public void registrarNotaDeCredito(NotaDeCredito notaDeCredito) {

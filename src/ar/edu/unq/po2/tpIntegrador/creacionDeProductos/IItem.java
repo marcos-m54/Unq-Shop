@@ -12,12 +12,13 @@ public interface IItem {
 	
 	public Double precioFinal();
 	
-	public int getStock();
+	// public int getStock();
 	
 	public Categoria getCategoria();
 
-	public void decrementarStock();
+	// public void decrementarStock();
 
-	public void incrementarStock();
+	// public void incrementarStock();
 	
+	// Stock: Estos metodos ya no tienen sentido porque ahora el stock vive en el deposito
 }

@@ -9,13 +9,13 @@ public class Producto implements IItem {
 	private String marca;
 	private Double precioBase;
 	private int descuento;
-	private int stock;
+	// private int stock;
 	private Double peso;
 	private String descripcion;
 	private ArrayList<Atributo> atributos = new ArrayList<Atributo>();
 	private Categoria categoria;
 	
-	public Producto(String sKU, String nombre, String marca, Double precioBase, int descuento, int stock, Double peso,
+	public Producto(String sKU, String nombre, String marca, Double precioBase, int descuento, /*int stock,*/ Double peso,
 			String descripcion, ArrayList<Atributo> atributo) {
 		
 		this.SKU = sKU;
@@ -23,7 +23,7 @@ public class Producto implements IItem {
 		this.marca = marca;
 		this.precioBase = precioBase;
 		this.descuento = descuento;
-		this.stock = stock;
+		//this.stock = stock;
 		this.peso = peso;
 		this.descripcion = descripcion;
 		this.atributos = atributo;
@@ -59,7 +59,7 @@ public class Producto implements IItem {
 		this.descuento = descuento;
 	}
 	
-	
+	/*
 	@Override
 	public int getStock() {
 		return stock;
@@ -68,6 +68,7 @@ public class Producto implements IItem {
 	public void setStock(int stock) {
 		this.stock = stock;
 	}
+	*/
 	
 	@Override
 	public Double getPeso() {
@@ -117,6 +118,7 @@ public class Producto implements IItem {
 		this.categoria = categoria;
 	}
 	
+	/*
 	@Override
 	public void decrementarStock() {
 		stock-= 1;	
@@ -126,4 +128,5 @@ public class Producto implements IItem {
 	public void incrementarStock() {
 		stock+=1;	
 	}
+	*/
 }
