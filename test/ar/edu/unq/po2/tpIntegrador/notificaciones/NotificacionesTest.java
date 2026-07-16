@@ -1,8 +1,9 @@
 package ar.edu.unq.po2.tpIntegrador.notificaciones;
  
-import static org.junit.jupiter.api.Assertions.*;
+//import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
- 
+
+//import java.time.LocalDate;
 import java.util.ArrayList;
  
 import org.junit.jupiter.api.BeforeEach;
@@ -21,60 +22,72 @@ class NotificacionesTest {
 	Pedido pedido;
 	Usuario usuario;
 	IMailSender mailSenderMock;
-	Notificador notificador;
- 
+	
+	NotificadorDeEmail observerNovedades;
+	Fidelizacion fidelizacion;
+	GeneradorDeFactura generador;
+
+	
 	@BeforeEach
 	void setUp() throws Exception {
-		// Usuario real
 		usuario = new Usuario("Juana Perez", "juana@mail.com", "Calle Falsa 123");
- 
 		ArrayList<IItem> items = new ArrayList<>();
 		pedido = new Pedido(usuario, items);
+		
 		// Pedido vacío, solo para tener un contexto de pedido real donde cambiar el estado
- 
-		// Notificador real, vacío (sin suscriptores). Cada test agrega los suscriptores que necesita.
-		notificador = new Notificador();
-		pedido.setNotificador(notificador);
- 
+ 		// Notificador real, vacío (sin suscriptores). Cada test agrega los suscriptores que necesita.
+		//notificador = new Notificador();
+		//pedido.setNotificador(notificador);
 		// Mock del mail sender, externo no implementamos
+		
 		mailSenderMock = mock(IMailSender.class);
+		
+		observerNovedades = new NotificadorDeEmail(mailSenderMock);
+		fidelizacion = new Fidelizacion(mailSenderMock);
+		generador = new GeneradorDeFactura(mailSenderMock);
+		
 	}
  
 	@Test
 	void notificadorNotificaATodosLosSuscriptores() {
+		
 		// Creo dos suscriptores falsos
-		ISuscriptora suscriptora1 = mock(ISuscriptora.class);
-		ISuscriptora suscriptora2 = mock(ISuscriptora.class);
+
+		IObservador suscriptora1 = mock(IObservador.class);
+		IObservador suscriptora2 = mock(IObservador.class);
  
-		notificador.suscribir(suscriptora1);
-		notificador.suscribir(suscriptora2);
- 
-		notificador.notificarASuscriptores(pedido);
- 
+		pedido.agregarObservador(suscriptora1);
+		pedido.agregarObservador(suscriptora2);
+
 		// Verifico que ambos recibieron el aviso
+		
+		pedido.notificar();
+		
 		verify(suscriptora1).actualizar(pedido);
 		verify(suscriptora2).actualizar(pedido);
 	}
  
 	@Test
 	void notificadorDesuscribirDejaDeNotificarAlSuscriptor() {
-		ISuscriptora suscriptoraMock = mock(ISuscriptora.class);
+		IObservador suscriptoraMock = mock(IObservador.class);
  
-		notificador.suscribir(suscriptoraMock);
-		notificador.desuscribir(suscriptoraMock);
+		pedido.agregarObservador(suscriptoraMock);
+		pedido.quitarObservador(suscriptoraMock);
  
-		notificador.notificarASuscriptores(pedido);
+		pedido.notificar();
  
 		// Despues de desuscribirse, NO deberia recibir mas notificaciones
+		
 		verify(suscriptoraMock, never()).actualizar(any());
 	}
  
 	@Test
 	void notificadorSinSuscriptoresNoLlamaANadie() {
-		ISuscriptora suscriptoraMock = mock(ISuscriptora.class);
+		
+		IObservador suscriptoraMock = mock(IObservador.class);
  
 		// No suscribimos a nadie
-		notificador.notificarASuscriptores(pedido);
+		pedido.notificar();
  
 		verify(suscriptoraMock, never()).actualizar(any());
 	}
@@ -82,95 +95,93 @@ class NotificacionesTest {
 	// Enunciado: solo actua ante CONFIRMADO, ENVIADO y ENTREGADO
 	@Test
 	void notificadorDeEmailEnviaMailCuandoElPedidoEsConfirmado() {
-		NotificadorDeEmail notificadorEmail = new NotificadorDeEmail(mailSenderMock);
-		pedido.setEstado(new Confirmado(pedido));
+
 		// Forzamos a estado de pedido confirmado
+		pedido.setEstado(new Confirmado(pedido));
  
-		notificadorEmail.actualizar(pedido);
+		//observerNovedades.actualizar(pedido);
+		
+		pedido.agregarObservador(observerNovedades);
+		pedido.notificar();
 		
 		// Verificamos que mailSender recibio el llamado con los parametros correctos
 		verify(mailSenderMock).enviarMail(
 			"juana@mail.com",
-			"¡CONFIRMADO!",
-			"Te avisamos que tu pedido ha sido confirmado."
+			"Detalles de su compra UnqShop",
+			"Gracias por tu compra, tu pedido se encuentra en estado: Confirmado. ¡Gracias por su compra!"
 		);
 	}
- 
 	@Test
 	void notificadorDeEmailEnviaMailCuandoElPedidoEsEnviado() {
-		NotificadorDeEmail notificadorEmail = new NotificadorDeEmail(mailSenderMock);
+
 		pedido.setEstado(new Enviado(pedido));
- 
-		notificadorEmail.actualizar(pedido);
- 
+		pedido.agregarObservador(observerNovedades);
+		pedido.notificar();
+		
+		
 		verify(mailSenderMock).enviarMail(
-			"juana@mail.com",
-			"¡ENVIADO!",
-			"Te avisamos que tu pedido ha sido enviado, y esta en camino."
+				"juana@mail.com",
+				"Detalles de su compra UnqShop",
+				"Gracias por tu compra, tu pedido se encuentra en estado: Enviado. ¡Gracias por su compra!"
 		);
 	}
  
 	@Test
 	void notificadorDeEmailEnviaMailCuandoElPedidoEsEntregado() {
-		NotificadorDeEmail notificadorEmail = new NotificadorDeEmail(mailSenderMock);
+		
 		pedido.setEstado(new Entregado(pedido));
- 
-		notificadorEmail.actualizar(pedido);
- 
+		pedido.agregarObservador(observerNovedades);
+		pedido.notificar();
+		
 		verify(mailSenderMock).enviarMail(
-			"juana@mail.com",
-			"¡ENTREGADO!",
-			"Te avisamos que tu pedido ha sido entregado, ¡disfrutalo!"
+				"juana@mail.com",
+				"Detalles de su compra UnqShop",
+				"Gracias por tu compra, tu pedido se encuentra en estado: Entregado. ¡Gracias por su compra!"
 		);
 	}
  
 	@Test
-	void notificadorDeEmailNoEnviaMailCuandoElPedidoEsCancelado() {
+	void notificadorDeEmailEnviaMailCuandoEsCanceladoConCuponDeDescuento() {
 		// Si el estado es CANCELADO, no deberia mandar ningun mail
-		NotificadorDeEmail notificadorEmail = new NotificadorDeEmail(mailSenderMock);
+		//NotificadorDeEmail notificadorEmail = new NotificadorDeEmail(mailSenderMock);
+		
 		pedido.setEstado(new Cancelado(pedido));
- 
-		notificadorEmail.actualizar(pedido);
- 
-		verify(mailSenderMock, never()).enviarMail(any(), any(), any());
-	}
- 
-	// Enunciado: si se cancela un pedido, envia un cupon de descuento del 5%
-	@Test
-	void fidelizacionEnviaMailCuandoElPedidoEsCancelado() {
-		Fidelizacion fidelizacion = new Fidelizacion(mailSenderMock);
-		pedido.setEstado(new Cancelado(pedido));
- 
-		fidelizacion.actualizar(pedido);
- 
+		pedido.agregarObservador(fidelizacion);
+		pedido.notificar();
+
 		verify(mailSenderMock).enviarMail(
-			"juana@mail.com",
-			"¡DESCUENTO!",
-			"Si compras en las proximas 24 horas, tenes un descuento del 5%"
-		);
+				eq("juana@mail.com"),
+				eq("Su pedido se ha cancelado. Oportunidad ¡DESCUENTO! si compra en las prox 24hs"),
+				eq("Si compras en las proximas 24 horas, tenes un descuento del 5%"),
+				any(CuponDescuento.class));
+		
 	}
+ 
  
 	@Test
 	void fidelizacionNoEnviaMailSiElPedidoNoEstaCancelado() {
 		// Solo actua cuando el pedido esta CANCELADO, no en otros estados
-		Fidelizacion fidelizacion = new Fidelizacion(mailSenderMock);
+		
 		pedido.setEstado(new Confirmado(pedido));
- 
-		fidelizacion.actualizar(pedido);
- 
+		pedido.agregarObservador(fidelizacion);
+		pedido.notificar();
+		
 		verify(mailSenderMock, never()).enviarMail(any(), any(), any());
 	}
  
-	// Enunciado: crea el comprobante fiscal cuando el pedido alcanza ENTREGADO
- 
 	@Test
-	void generadorDeFacturaActuaSoloEnEstadoEntregado() {
-		// Verificamos que no explota cuando el estado es ENTREGADO
-		// Nota Yami: como no se guarda el comprobante no puedo hacer mucho mas test. Solo que no rompe
-		GeneradorDeFactura generador = new GeneradorDeFactura();
+	void envioDeFacturaAlLLegarAEstadoEntregado() {
+
+		pedido.agregarObservador(generador);
 		pedido.setEstado(new Entregado(pedido));
- 
-		assertDoesNotThrow(() -> generador.actualizar(pedido));
+		pedido.notificar();
+		
+		verify(mailSenderMock).enviarMail(
+				eq("juana@mail.com"),
+				eq("Su factura de compra - Unq-Shop"),
+				eq("Gracias por tu compra, se adjunta en el mail tu factura de compra. ¡Que lo disfrutes!"),
+				any(ComprobanteFiscal.class));		
 	}
+	
 }
  

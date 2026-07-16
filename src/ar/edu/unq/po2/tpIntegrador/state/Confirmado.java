@@ -1,7 +1,5 @@
 package ar.edu.unq.po2.tpIntegrador.state;
 
-import java.time.LocalDate;
-
 import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.IItem;
 
 public class Confirmado implements IEstado {
@@ -35,6 +33,7 @@ public class Confirmado implements IEstado {
 	@Override
 	public void cancelarPedido() {
 		pedido.setEstado(new Cancelado(pedido));
+		pedido.notificar();
 		pedido.incrementarStockItems();
 	}
 
@@ -46,6 +45,11 @@ public class Confirmado implements IEstado {
 	@Override
 	public void enviarPedido() {
 		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public String infoEstado() {
+		return "Confirmado";
 	}
 
 }

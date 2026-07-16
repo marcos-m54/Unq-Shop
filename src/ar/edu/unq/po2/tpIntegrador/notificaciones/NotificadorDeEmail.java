@@ -1,33 +1,43 @@
 package ar.edu.unq.po2.tpIntegrador.notificaciones;
 
 import ar.edu.unq.po2.tpIntegrador.state.Pedido;
-import ar.edu.unq.po2.tpIntegrador.state.Confirmado;
-import ar.edu.unq.po2.tpIntegrador.state.Entregado;
-import ar.edu.unq.po2.tpIntegrador.state.Enviado;
 
-public class NotificadorDeEmail implements ISuscriptora {
+public class NotificadorDeEmail implements IObservador {
+
+	private IMailSender mail;
 	
-	private IMailSender mailsender;
-
-	public NotificadorDeEmail(IMailSender mailsender) {
-	    this.mailsender = mailsender;
-	}
-
 	@Override
 	public void actualizar(Pedido pedido) {
 		
-		String direccionDestino = pedido.getUsuario().getEmail();
-		
-		if (pedido.getEstado() instanceof Confirmado) {
-			mailsender.enviarMail(direccionDestino, "¡CONFIRMADO!", "Te avisamos que tu pedido ha sido confirmado.");
-		}
-		
-		else if (pedido.getEstado() instanceof Enviado) {
-			mailsender.enviarMail(direccionDestino, "¡ENVIADO!", "Te avisamos que tu pedido ha sido enviado, y esta en camino.");
-		}
-		
-		else if (pedido.getEstado() instanceof Entregado) {
-			mailsender.enviarMail(direccionDestino, "¡ENTREGADO!", "Te avisamos que tu pedido ha sido entregado, ¡disfrutalo!");
+		if(this.esEstadoValido(pedido)) {
+			mail.enviarMail(pedido.getMailUsuario(), 
+							"Detalles de su compra UnqShop", 
+							"Gracias por tu compra, tu pedido se encuentra en estado: "+ pedido.infoEstadoActual() + ". ¡Gracias por su compra!");
 		}
 	}
+
+	public IMailSender getMail() {
+		return mail;
+	}
+
+	public void setMail(IMailSender mail) {
+		this.mail = mail;
+	}
+
+	public NotificadorDeEmail(IMailSender mail) {
+		super();
+		this.mail = mail;
+	}
+	
+	public boolean esEstadoValido(Pedido pedido) {
+		
+		return  pedido.infoEstadoActual().equals("Confirmado") ||
+				
+				pedido.infoEstadoActual().equals("Enviado") || 
+				
+				pedido.infoEstadoActual().equals("Entregado"); 
+	}
+	
+	
+
 }

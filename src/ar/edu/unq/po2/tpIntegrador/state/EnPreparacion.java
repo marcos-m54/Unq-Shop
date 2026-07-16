@@ -42,6 +42,7 @@ public class EnPreparacion implements IEstado {
 		pedido.setEstado(new Cancelado(pedido));
 		pedido.incrementarStockItems();
 		pedido.registrarNotaDeCredito(new NotaDeCredito(pedido.getUsuario().getNombreUsuario(), LocalDate.now(), pedido.montoTotalPedidoMasEnvio()));
+		pedido.notificar();
 	}
 
 	@Override
@@ -52,5 +53,11 @@ public class EnPreparacion implements IEstado {
 	@Override
 	public void enviarPedido() {
 		pedido.setEstado(new Enviado(pedido));
+		pedido.notificar();
+	}
+
+	@Override
+	public String infoEstado() {
+		return "En preparacion";
 	}
 }

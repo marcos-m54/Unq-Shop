@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.IItem;
 import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.Usuario;
 import ar.edu.unq.po2.tpIntegrador.envio.IFormaDeEnvio;
-import ar.edu.unq.po2.tpIntegrador.notificaciones.Notificador;
+//import ar.edu.unq.po2.tpIntegrador.notificaciones.Notificador;
  
 class EnPreparacionTest {
  
@@ -37,7 +37,7 @@ class EnPreparacionTest {
 		when(envioMock.calcularValorDelEnvio(any())).thenReturn(200.0);
  
 		pedido = new Pedido(usuario, items);
-		pedido.setNotificador(new Notificador());
+	//	pedido.setNotificador(new Notificador());
 		pedido.setFormaDeEnvio(envioMock);
  
 		pedido.setEstado(new EnPreparacion(pedido));

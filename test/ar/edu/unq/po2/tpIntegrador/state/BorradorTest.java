@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.IItem;
 import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.Usuario;
 import ar.edu.unq.po2.tpIntegrador.envio.IFormaDeEnvio;
-import ar.edu.unq.po2.tpIntegrador.notificaciones.Notificador;
+//import ar.edu.unq.po2.tpIntegrador.notificaciones.Notificador;
 import ar.edu.unq.po2.tpIntegrador.pago.MetodoDePago;
 import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.Sistema;
  
@@ -27,7 +27,7 @@ class BorradorTest {
  
 		pedido = new Pedido(usuario, new ArrayList<IItem>());
 
-		pedido.setNotificador(new Notificador());
+	//	pedido.setNotificador(new Notificador());
 	}
  
 	@Test

@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.IItem;
 import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.Sucursal;
 import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.Usuario;
-import ar.edu.unq.po2.tpIntegrador.notificaciones.Notificador;
+//import ar.edu.unq.po2.tpIntegrador.notificaciones.Notificador;
 import ar.edu.unq.po2.tpIntegrador.state.Pedido;
  
 class EnvioTest {
@@ -33,7 +33,6 @@ class EnvioTest {
 		items.add(itemMock);
  
 		pedido = new Pedido(usuario, items);
-		pedido.setNotificador(new Notificador());
 	}
  
 	// Envio Estandar

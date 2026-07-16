@@ -1,9 +1,8 @@
 package ar.edu.unq.po2.tpIntegrador.notificaciones;
 
-import ar.edu.unq.po2.tpIntegrador.state.Cancelado;
 import ar.edu.unq.po2.tpIntegrador.state.Pedido;
 
-public class Fidelizacion implements ISuscriptora {
+public class Fidelizacion implements IObservador {
 	
 	private IMailSender mailsender;
 	
@@ -13,10 +12,17 @@ public class Fidelizacion implements ISuscriptora {
 
 	@Override
 	public void actualizar(Pedido pedido) {
-		if (pedido.getEstado() instanceof Cancelado) {
-			String direccionDestino = pedido.getUsuario().getEmail();
+		
+			if(pedido.infoEstadoActual().equals("Cancelado")) {
 			
-			mailsender.enviarMail(direccionDestino, "¡DESCUENTO!", "Si compras en las proximas 24 horas, tenes un descuento del 5%");
-		}
+				String direccionDestino = pedido.getUsuario().getEmail();
+				CuponDescuento cupon5PorCiento = new CuponDescuento(5.00);
+				
+				mailsender.enviarMail(direccionDestino, 
+									"Su pedido se ha cancelado. Oportunidad ¡DESCUENTO! si compra en las prox 24hs", 
+									"Si compras en las proximas 24 horas, tenes un descuento del 5%", 
+									cupon5PorCiento);	
+			}
+		
 	}
 }

@@ -2,7 +2,7 @@ package ar.edu.unq.po2.tpIntegrador.notificaciones;
 
 import java.time.LocalDate;
 
-public class ComprobanteFiscal {
+public class ComprobanteFiscal implements IAdjunto{
 	
 	private String tipoDeComprobante;
 	private int numeroDeComprobante;
@@ -17,6 +17,11 @@ public class ComprobanteFiscal {
 		this.fecha = fecha;
 		this.CUIT = cuit;
 		this.montoTotal = montoTotal;
+	}
+	
+	@Override
+	public String descripcion() {
+		return "Comprobante Fiscal";
 	}
 
 	public int getNumeroDeComprobante() {
@@ -58,4 +63,6 @@ public class ComprobanteFiscal {
 	public void setTipoDeComprobante(String tipoDeComprobante) {
 		this.tipoDeComprobante = tipoDeComprobante;
 	}
+
+
 }
