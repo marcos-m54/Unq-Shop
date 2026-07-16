@@ -16,9 +16,12 @@ public class Fidelizacion implements IObservador {
 			if(pedido.infoEstadoActual().equals("Cancelado")) {
 			
 				String direccionDestino = pedido.getUsuario().getEmail();
+				CuponDescuento cupon5PorCiento = new CuponDescuento(5.00);
 				
-				mailsender.enviarMail(direccionDestino, "Su pedido se ha cancelado. Oportunidad ¡DESCUENTO! si compra en las prox 24hs", "Si compras en las proximas 24 horas, tenes un descuento del 5%");
-					
+				mailsender.enviarMail(direccionDestino, 
+									"Su pedido se ha cancelado. Oportunidad ¡DESCUENTO! si compra en las prox 24hs", 
+									"Si compras en las proximas 24 horas, tenes un descuento del 5%", 
+									cupon5PorCiento);	
 			}
 		
 	}

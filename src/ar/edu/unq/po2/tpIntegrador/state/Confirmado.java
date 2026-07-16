@@ -33,6 +33,7 @@ public class Confirmado implements IEstado {
 	@Override
 	public void cancelarPedido() {
 		pedido.setEstado(new Cancelado(pedido));
+		pedido.notificar();
 		pedido.incrementarStockItems();
 	}
 

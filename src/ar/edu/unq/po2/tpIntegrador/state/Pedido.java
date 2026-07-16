@@ -10,7 +10,7 @@ import ar.edu.unq.po2.tpIntegrador.creacionDeProductos.Venta;
 import ar.edu.unq.po2.tpIntegrador.envio.IFormaDeEnvio;
 import ar.edu.unq.po2.tpIntegrador.notificaciones.INotificador;
 import ar.edu.unq.po2.tpIntegrador.notificaciones.IObservador;
-import ar.edu.unq.po2.tpIntegrador.notificaciones.Notificador;
+//import ar.edu.unq.po2.tpIntegrador.notificaciones.Notificador;
 import ar.edu.unq.po2.tpIntegrador.pago.Comprobante;
 import ar.edu.unq.po2.tpIntegrador.pago.MetodoDePago;
 
@@ -24,7 +24,7 @@ public class Pedido implements INotificador {
 	private IFormaDeEnvio formaDeEnvio;
 	private MetodoDePago metodoDePago;
 	private Comprobante comprobanteDePago;
-	private Notificador notificador;
+	//private Notificador notificador;
 	//visitor
 	private Sistema sistema;
 
@@ -56,8 +56,6 @@ public class Pedido implements INotificador {
 	
 	public void setEstado(IEstado estado) {
 		this.estado = estado;
-		//notificador.notificarASuscriptores(this);
-		this.notificar();
 	}
 	
 	public void agregarItemACarrito(IItem item) {
